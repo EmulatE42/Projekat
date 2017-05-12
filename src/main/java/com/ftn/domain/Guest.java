@@ -1,22 +1,26 @@
 package com.ftn.domain;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-
-@Entity
 public class Guest extends User {
 
-    @Column(name = "confirmReg")
-    private Boolean confirmReg;
+    private boolean online;
 
-
-    public Guest(String email, String password, String firstName, String lastName)
+    public Guest()
     {
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.confirmReg = false;
+
+
+    }
+
+    public Guest(String first_name, String last_name, String email, String password, boolean online) {
+        super(first_name, last_name, email, password);
+        this.online = online;
+    }
+
+    public boolean isOnline() {
+        return online;
+    }
+
+    public void setOnline(boolean online) {
+        this.online = online;
     }
 }
