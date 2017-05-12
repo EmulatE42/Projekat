@@ -8,7 +8,7 @@ import static javax.persistence.InheritanceType.TABLE_PER_CLASS;
 @Inheritance(strategy=TABLE_PER_CLASS)
 
 public abstract class User {
-
+//bla
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "user_id")
