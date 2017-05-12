@@ -2,10 +2,12 @@ package com.ftn.domain;
 
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 
+@Entity
 public class Guest extends User {
 
-    @Column(name = "guest_enabled")
+    @Column(name = "confirmReg")
     private Boolean confirmReg;
 
 
