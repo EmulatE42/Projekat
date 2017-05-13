@@ -9,7 +9,7 @@ import com.ftn.domain.User;
 public interface UserService {
  // ovde su moje u rep su postojece kom
     User findOne(Integer id);
-    User save(User user) throws Exception;
+    Guest save(Guest guest);
     Guest login(String email, String password);
 
 }

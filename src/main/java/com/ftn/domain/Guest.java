@@ -14,7 +14,6 @@ public class Guest extends User {
     public Guest()
     {
 
-
     }
 
     public Guest(String first_name, String last_name, String email, String password, boolean online) {

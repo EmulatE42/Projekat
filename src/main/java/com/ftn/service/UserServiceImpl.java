@@ -22,19 +22,19 @@ public class UserServiceImpl implements UserService {
        return user;
     }
     @Override
-    public User save(User user) throws Exception {
-        return userRepository.save(user);
+    public Guest save(Guest guest)  {
+        return userRepository.save(guest);
     }
 
     @Override
-    public Guest login(String email, String password) {
+    public Guest login(String email, String password)  {
         System.out.println("Email: " + email);
+        save(new Guest("momir", "kostic", "mail", "pass", false)); //ovo sam dodao posto jos uvek nismo napravili formu za registraciju gosta
         Guest guest = userRepository.findAllByEmailAndPassword(email, password);
 
         if(guest != null)
             return guest;
         else {
-            System.out.println("Nista nije nasao!");
             return null;
         }
     }
