@@ -3,14 +3,14 @@ package com.ftn.domain;
 import javax.persistence.*;
 
 @Entity
-@PrimaryKeyJoinColumn(name="id")
-
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id" , unique = true, nullable = false)
     private Integer id;
+
     @Column(name = "first_name" , unique = true, nullable = false)
     private String first_name;
 
@@ -19,6 +19,7 @@ public class User {
 
     @Column(name = "email" , unique = true, nullable = false)
     private String email;
+
     @Column(name = "password" , unique = true, nullable = false)
     private String password;
 

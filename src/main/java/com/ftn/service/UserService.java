@@ -1,5 +1,6 @@
 package com.ftn.service;
 
+import com.ftn.domain.Guest;
 import com.ftn.domain.User;
 
 /**
@@ -9,5 +10,6 @@ public interface UserService {
  // ovde su moje u rep su postojece kom
     User findOne(Integer id);
     User save(User user) throws Exception;
+    Guest login(String email, String password);
 
 }

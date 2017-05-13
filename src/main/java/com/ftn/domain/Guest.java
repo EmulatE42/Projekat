@@ -1,8 +1,14 @@
 package com.ftn.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "guest")
 public class Guest extends User {
 
+    @Column(name = "online")
     private boolean online;
 
     public Guest()

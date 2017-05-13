@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ProbaService} from '../proba.service';
-import {User} from '../model';
+import {User} from '../models';
 @Component({
   moduleId: module.id,
   selector: 'app-proba',

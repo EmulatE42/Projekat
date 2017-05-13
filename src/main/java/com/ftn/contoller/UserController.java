@@ -1,5 +1,6 @@
-package com.ftn.com.ftn.contoller;
+package com.ftn.contoller;
 
+import com.ftn.domain.Guest;
 import com.ftn.domain.User;
 import com.ftn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
  * Created by EmulatE on 10-May-17.
  */
 @RestController
+@RequestMapping(value = "/guest")
 public class UserController {
     @Autowired
     UserService userService;
@@ -24,5 +26,12 @@ public class UserController {
         User vracen = userService.save(user);
         System.out.println("OVDEEEE");
         return  new ResponseEntity<User>(vracen, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Guest> login(@RequestBody Guest g) {
+        System.out.println("Password: " + g.getPassword());
+        Guest guest =  this.userService.login(g.getEmail(), g.getPassword());
+        return new ResponseEntity(guest != null ? guest : "{}", HttpStatus.OK);
     }
 }

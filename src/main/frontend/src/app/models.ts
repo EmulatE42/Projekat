@@ -1,6 +1,5 @@
 export class User
 {
-
   constructor( public id: number,
                public first_name : string,
                public last_name : string,
@@ -11,3 +10,12 @@ export class User
 }
 
 
+export class Guest{
+
+  id: number;
+  first_name: string;
+  last_name: string;
+  email: string;
+  password: string;
+  online: boolean;
+}

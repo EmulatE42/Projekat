@@ -1,0 +1,24 @@
+<div align="center">
+  <img src="http://i64.tinypic.com/21143kl.png" alt="Logo" width="304" height="236"/> <br> <br> <br>
+
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label class="control-label col-sm-4" for="email">Email:</label>
+      <div class="col-sm-4">
+        <input type="email" class="form-control"  [(ngModel)]="email" name = "email" id="email" placeholder="Enter email" required/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-4" for="password">Password:</label>
+      <div class="col-sm-4">
+        <input type="password" class="form-control" [(ngModel)]="password" name = "password" id="password" placeholder="Enter password" required/>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-4 col-sm-4">
+        <button type="submit" class="btn btn-primary btn-block" (click) = "login()">Login</button>
+      </div>
+    </div>
+  </form>
+  <div id = "login"> </div>
+</div>

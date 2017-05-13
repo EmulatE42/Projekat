@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Http, Headers} from '@angular/http';
-import {User} from './model';
+import {User} from './models';
 import 'rxjs/add/operator/map'
 @Injectable()
 export class ProbaService {
