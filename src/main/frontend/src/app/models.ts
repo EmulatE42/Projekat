@@ -19,3 +19,13 @@ export class Guest{
   password: string;
   online: boolean;
 }
+
+export class Restaurant{
+
+  id: number;
+  name: string;
+  distance: number;
+  rating: number;
+  friendRating: number;
+  reservation: boolean;
+}

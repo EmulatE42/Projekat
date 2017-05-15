@@ -1,8 +1,9 @@
-package com.ftn.service;
+package com.ftn.service.implementation;
 
 import com.ftn.domain.Guest;
 import com.ftn.domain.User;
 import com.ftn.repository.UserRepository;
+import com.ftn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

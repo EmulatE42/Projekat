@@ -25,7 +25,7 @@ export class LoginGuest{
   com(): void
   {
     if(JSON.stringify(this.guest) !== '{}')
-      this.router.navigate(['../welcome']);
+      this.router.navigate(['../']);
     else
       document.getElementById("login").innerHTML = "<div class=\"alert alert-danger col-sm-offset-4 col-sm-4\"> Wrong email/password! </div>";
   }

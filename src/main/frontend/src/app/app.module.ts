@@ -8,14 +8,14 @@ import { ProbaComponent } from './proba/proba.component';
 import {LoginGuest} from "./components/user/loginGuest/loginGuest.component";
 import {RouterModule} from "@angular/router";
 import {BasicGuestView} from "./components/user/basicGuestView/basicGuestView.component";
-import {Restaurants} from "./components/restaurant/listOfRestaurants.component";
+import {StarComponent} from "./shared/star.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginGuest,
     BasicGuestView,
-    Restaurants,
+    StarComponent,
     ProbaComponent
   ],
   imports: [
@@ -24,8 +24,7 @@ import {Restaurants} from "./components/restaurant/listOfRestaurants.component";
     HttpModule,
     RouterModule.forRoot([
       {path: 'guest/login', component: LoginGuest},
-      {path: 'restaurants', component: Restaurants, outlet: 'mark1'},
-      {path: 'welcome', component: BasicGuestView}
+      {path: '', component: BasicGuestView}
     ])
   ],
   providers: [],
