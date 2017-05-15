@@ -36,4 +36,12 @@ public class UserController {
 
         return new ResponseEntity(guest != null ? guest : "{}", HttpStatus.OK);
     }
+
+    @CrossOrigin
+    @RequestMapping(value = "/register", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Guest> register(@RequestBody Guest g) {
+        Guest guest =  this.userService.register(g.getFirst_name(), g.getLast_name(), g.getEmail(), g.getPassword());
+
+        return new ResponseEntity(guest != null ? guest : "{}", HttpStatus.OK);
+    }
 }

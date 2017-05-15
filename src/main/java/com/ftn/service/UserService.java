@@ -11,5 +11,6 @@ public interface UserService {
     User findOne(Integer id);
     Guest save(Guest guest);
     Guest login(String email, String password);
+    Guest register(String firstname, String lastname, String email, String password);
 
 }

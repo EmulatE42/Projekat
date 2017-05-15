@@ -10,11 +10,13 @@ import {RouterModule} from "@angular/router";
 import {BasicGuestView} from "./components/user/basicGuestView/basicGuestView.component";
 import {StarComponent} from "./shared/star.component";
 import {GuestLoginGuard} from "./services/user/GuestLoginGuard";
+import {RegisterGuest} from "./components/user/registerGuest/registerGuest.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginGuest,
+    RegisterGuest,
     BasicGuestView,
     StarComponent,
     ProbaComponent
@@ -25,6 +27,7 @@ import {GuestLoginGuard} from "./services/user/GuestLoginGuard";
     HttpModule,
     RouterModule.forRoot([
       {path: 'guest/login', component: LoginGuest},
+      {path: 'guest/register', component: RegisterGuest},
       {path: '', canActivate: [GuestLoginGuard], component: BasicGuestView}
     ])
   ],

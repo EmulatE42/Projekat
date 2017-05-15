@@ -8,7 +8,7 @@ export class GuestLoginGuard implements CanActivate
 
     canActivate(): boolean
     {
-      if(localStorage.getItem("loginGuest") != null)
+      if(sessionStorage.getItem("loginGuest") != null)
         return true;
       else {
         this.router.navigate(['/guest/login']);

@@ -9,9 +9,8 @@ import {Guest, User} from "../../models";
 @Injectable()
 export class UserService
 {
-  private rootUserUrl = 'http://localhost:8080/api/users';
   private loginUrl = 'http://localhost:8090/guest/login';
-  private addUrl = 'http://localhost:8080/api/add';
+  private registerUrl = 'http://localhost:8090/guest/register';
 
   constructor(private http: Http) { }
 
@@ -27,6 +26,18 @@ export class UserService
       .catch(this.handleError);
   }
 
+  register(firstname: string, lastname: string, email: string, password: string): Observable<Guest>{
+
+    var guest = {id: null, first_name: firstname, last_name: lastname, email: email, password: password, online: null};
+    var params = JSON.stringify(guest);
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post(this.registerUrl, params, options).map(this.extractGuest)
+      .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+  }
+
   private extractGuest(res: Response) {
     let body = <Guest> res.json();
     console.log(body);
@@ -37,11 +48,5 @@ export class UserService
   {
     console.log(error);
     return Observable.throw(error.json().error || 'Server error');
-  }
-
-  add(): Observable<Guest> {
-    return this.http.get(this.addUrl).map((response: Response) => <Guest> response.json())
-      .do(data => console.log(JSON.stringify(data)))
-      .catch(this.handleError);
   }
 }

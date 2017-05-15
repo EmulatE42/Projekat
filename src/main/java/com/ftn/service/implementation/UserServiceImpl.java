@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Guest login(String email, String password)  {
         System.out.println("Email: " + email);
-        save(new Guest("momir", "kostic", "mail", "pass", false)); //ovo sam dodao posto jos uvek nismo napravili formu za registraciju gosta
+        //save(new Guest("momir", "kostic", "mail", "pass", false)); //ovo sam dodao posto jos uvek nismo napravili formu za registraciju gosta
         Guest guest = userRepository.findAllByEmailAndPassword(email, password);
 
         if(guest != null)
@@ -40,5 +40,17 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public Guest register(String firstname, String lastname, String email, String password) {
+        Guest guest = userRepository.findByEmail(email);
 
+        if(guest == null)
+        {
+            Guest registerGuest = new Guest(firstname, lastname, email, password, false);
+            save(registerGuest);
+            return registerGuest;
+        }
+        else
+            return null;
+    }
 }

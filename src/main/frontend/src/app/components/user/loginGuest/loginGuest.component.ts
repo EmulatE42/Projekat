@@ -25,7 +25,7 @@ export class LoginGuest{
   com(): void
   {
     if(JSON.stringify(this.guest) !== '{}') {
-      localStorage.setItem('loginGuest', JSON.stringify(this.guest));
+      sessionStorage.setItem('loginGuest', JSON.stringify(this.guest));
       this.router.navigate(['../']);
     }
     else
