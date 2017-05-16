@@ -10,4 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface UserRepository extends JpaRepository<User,Integer> {
     Guest findAllByEmailAndPassword(String email, String password);
     Guest findByEmail(String email);
+    Integer deleteUserByEmail(String email);
 }

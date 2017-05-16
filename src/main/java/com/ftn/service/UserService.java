@@ -8,8 +8,9 @@ import com.ftn.domain.User;
  */
 public interface UserService {
  // ovde su moje u rep su postojece kom
-    User findOne(Integer id);
+    //User findOne(Integer id);
     Guest save(Guest guest);
+    Integer deleteUserByEmail(String email);
     Guest login(String email, String password);
     Guest register(String firstname, String lastname, String email, String password);
 

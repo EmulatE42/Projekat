@@ -17,14 +17,16 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Override
-    public User findOne(Integer id) {
-       User user = userRepository.findOne(id);
-       return user;
-    }
+
     @Override
     public Guest save(Guest guest)  {
         return userRepository.save(guest);
+    }
+
+    @Override
+    public Integer deleteUserByEmail(String email) {
+        Integer a = userRepository.deleteUserByEmail(email);
+        return a;
     }
 
     @Override
