@@ -14,7 +14,7 @@ export class RestaurantService
 
   getAll(): Observable<Restaurant[]>{
 
-    return this.http.get('http://localhost:8090/restaurants').map((response: Response) => <Restaurant[]> response.json())
+    return this.http.get('http://localhost:8080/restaurants').map((response: Response) => <Restaurant[]> response.json())
       .do(data => console.log(JSON.stringify(data)))
       .catch(this.handleError);
   }

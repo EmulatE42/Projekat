@@ -9,8 +9,8 @@ import {Guest, User} from "../../models";
 @Injectable()
 export class UserService
 {
-  private loginUrl = 'http://localhost:8090/guest/login';
-  private registerUrl = 'http://localhost:8090/guest/register';
+  private loginUrl = 'http://localhost:8080/guest/login';
+  private registerUrl = 'http://localhost:8080/guest/register';
 
   constructor(private http: Http) { }
 

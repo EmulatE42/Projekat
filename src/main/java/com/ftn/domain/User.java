@@ -11,16 +11,16 @@ public abstract class User {
     @Column(name = "id" , unique = true, nullable = false)
     private Integer id;
 
-    @Column(name = "first_name" , unique = true, nullable = false)
+    @Column(name = "first_name" , unique = false, nullable = false)
     private String first_name;
 
-    @Column(name = "last_name" , unique = true, nullable = false)
+    @Column(name = "last_name" , unique = false, nullable = false)
     private String last_name;
 
     @Column(name = "email" , unique = true, nullable = false)
     private String email;
 
-    @Column(name = "password" , unique = true, nullable = false)
+    @Column(name = "password" , unique = false, nullable = false)
     private String password;
 
     public User()
