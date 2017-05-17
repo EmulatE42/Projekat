@@ -30,6 +30,9 @@ public class Restaurant {
     @Column(name = "reservation" , unique = true, nullable = false)
     private boolean reservation;
 
+    @Column(name = "description")
+    private String description;
+
     public Restaurant() {}
 
     public Restaurant(String name, int distance, double rating, double friendRating, boolean reservation) {
@@ -56,6 +59,8 @@ public class Restaurant {
         return friendRating;
     }
 
+    public String getDescription(){ return description; }
+
     public boolean isReservation() {
         return reservation;
     }
@@ -78,5 +83,9 @@ public class Restaurant {
 
     public void setReservation(boolean reservation) {
         this.reservation = reservation;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
