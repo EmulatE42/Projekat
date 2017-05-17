@@ -1,8 +1,6 @@
 package com.ftn.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.ArrayList;
 
 /**
@@ -11,6 +9,11 @@ import java.util.ArrayList;
 @Entity
 @Table(name = "menu")
 public class Menu {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
+    @Column(name = "id" , unique = true, nullable = false)
+    private Integer id;
 
     @Column(name = "foods")
     private ArrayList<Food> foods;

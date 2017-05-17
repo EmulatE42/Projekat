@@ -5,26 +5,27 @@ import javax.persistence.*;
 /**
  * Created by Bane on 17/5/2017.
  */
+
 @Entity
-@Table(name = "food")
-public class Food {
+@Table(name = "drink")
+public class Drink {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     @Column(name = "id" , unique = true, nullable = false)
     private Integer id;
 
-    @Column(name = "name", nullable =false)
+    @Column(name = "name", unique = true,nullable =false)
     private  String name;
 
     @Column(name = "description")
-    private String foodDescription;
+    private String drinkDescription;
 
     @Column(name = "price")
     private double price;
 
-    public Food(String name, String desc, double price){
+    public Drink(String name, String desc, double price){
         this.name=name;
-        this.foodDescription=desc;
+        this.drinkDescription=desc;
         this.price=price;
     }
     public double getPrice() {
@@ -32,7 +33,7 @@ public class Food {
     }
 
     public String getFoodDescription() {
-        return foodDescription;
+        return drinkDescription;
     }
 
     public String getName() {
@@ -40,7 +41,7 @@ public class Food {
     }
 
     public void setFoodDescription(String foodDescription) {
-        this.foodDescription = foodDescription;
+        this.drinkDescription = foodDescription;
     }
 
     public void setName(String name) {
