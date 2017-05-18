@@ -1,13 +1,18 @@
 package com.ftn.service.implementation;
 
-import com.ftn.domain.Guest;
-import com.ftn.domain.User;
+import com.ftn.domain.*;
 import com.ftn.repository.UserRepository;
 import com.ftn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import static com.ftn.domain.Role.GOST;
 
 /**
  * Created by EmulatE on 10-May-17.
@@ -30,29 +35,72 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Guest login(String email, String password)  {
+    public User login(String email, String password)  {
         System.out.println("Email: " + email);
-        //save(new Guest("momir", "kostic", "mail", "pass", false)); //ovo sam dodao posto jos uvek nismo napravili formu za registraciju gosta
-        Guest guest = userRepository.findAllByEmailAndPassword(email, password);
 
-        if(guest != null)
-            return guest;
-        else {
-            return null;
+        ///////HARDCODE
+        if(this.userRepository.getWaiters().size() == 0) {
+            System.out.println("Usao ovde!");
+            String str_date="11-June-16";
+            DateFormat formatter ;
+            Date date ;
+            formatter = new SimpleDateFormat("dd-MMM-yy");
+            try {
+                date = formatter.parse(str_date);
+
+                Waiter waiter = new Waiter("Pera", "Peric", "pera@gmail.com", "pass", Role.KONOBAR, date, 23, 45);
+                Cook cook = new Cook("Mika", "Mikic", "mika@gmail.com", "pass", Role.KUVAR, date, 23, 45);
+                Bartender bartender = new Bartender("Laza", "Lazic", "laza@gmail.com", "pass", Role.SANKER, date, 23, 45);
+
+
+                this.userRepository.save(waiter);
+                this.userRepository.save(cook);
+                this.userRepository.save(bartender);
+
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
         }
+        System.out.println("Tabela ima " + this.userRepository.getWaiters().size());
+        ///////HARDCODE
+
+        Object user = userRepository.findAllByEmailAndPassword(email, password);
+        if(user != null) {
+            switch (((User) user).getRole()) {
+                case GOST: {
+                    return (Guest) user;
+                }
+                case KONOBAR: {
+                    return (Waiter) user;
+                }
+                case KUVAR: {
+                    return (Cook) user;
+                }
+
+                case SANKER: {
+                    return (Bartender) user;
+                }
+                default:
+                    return null;
+            }
+        }
+        return null;
     }
 
     @Override
     public Guest register(String firstname, String lastname, String email, String password) {
-        Guest guest = userRepository.findByEmail(email);
+        Guest guest = (Guest) userRepository.findByEmail(email);
 
         if(guest == null)
         {
-            Guest registerGuest = new Guest(firstname, lastname, email, password, false);
+            Guest registerGuest = new Guest(firstname, lastname, email, password, GOST, false);
             save(registerGuest);
             return registerGuest;
         }
         else
             return null;
     }
+
 }

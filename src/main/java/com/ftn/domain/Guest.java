@@ -1,5 +1,7 @@
 package com.ftn.domain;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -16,8 +18,8 @@ public class Guest extends User {
 
     }
 
-    public Guest(String first_name, String last_name, String email, String password, boolean online) {
-        super(first_name, last_name, email, password);
+    public Guest(String first_name, String last_name, String email, String password, Role role, boolean online) {
+        super(first_name, last_name, email, password, role);
         this.online = online;
     }
 

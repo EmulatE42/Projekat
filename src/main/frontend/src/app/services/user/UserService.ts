@@ -14,9 +14,9 @@ export class UserService
 
   constructor(private http: Http) { }
 
-  login(email: string, password: string): Observable<Guest>{
+  login(email: string, password: string): Observable<User>{
 
-    var guest = {id: null, first_name: null, last_name: null, email: email, password: password, online: null};
+    var guest = {id: null, first_name: null, last_name: null, email: email, password: password, role: null};
     var params = JSON.stringify(guest);
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
@@ -39,7 +39,7 @@ export class UserService
   }
 
   private extractGuest(res: Response) {
-    let body = <Guest> res.json();
+    let body = <User> res.json();
     console.log(body);
     return body || { };
   }

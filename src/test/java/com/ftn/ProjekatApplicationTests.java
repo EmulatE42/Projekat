@@ -26,7 +26,7 @@ public class ProjekatApplicationTests {
 	public void testReg() {
 
 		userServiceimpl.register("Pera","Peric","peki@gmail.com","pera123");
-		Guest temp = userRepository.findAllByEmailAndPassword("peki@gmail.com","pera123");
+		Guest temp = (Guest) userRepository.findAllByEmailAndPassword("peki@gmail.com","pera123");
 		System.out.println("Vratio sam " + temp.getEmail());
 		assertEquals(temp.getEmail(),"peki@gmail.com");
 
@@ -37,9 +37,9 @@ public class ProjekatApplicationTests {
 	public void testLog() {
 
 		userServiceimpl.register("Mika","Mikic","miki@gmail.com","miki123");
-		Guest temp = userRepository.findAllByEmailAndPassword("miki@gmail.com","miki123");
+		Guest temp = (Guest) userRepository.findAllByEmailAndPassword("miki@gmail.com","miki123");
 		System.out.println("Vratio sam LOG " + temp.getEmail());
-		Guest rez = userServiceimpl.login(temp.getEmail(),temp.getPassword());
+		Guest rez = (Guest) userServiceimpl.login(temp.getEmail(),temp.getPassword());
 		System.out.println("Vratio sam LOG2 " + rez.getEmail());
 		assertEquals(rez.getEmail(),temp.getEmail());
 

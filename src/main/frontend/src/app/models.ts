@@ -1,23 +1,34 @@
+export enum  Role {
+  GOST, KUVAR, KONOBAR, SANKER
+
+};
+
+
+
 export class User
 {
   constructor( public id: number,
                public first_name : string,
                public last_name : string,
                public email : string,
-               public password : string
+               public password : string,
+               public role: Role
 
   ) {}
 }
 
 
-export class Guest{
-
-  id: number;
-  first_name: string;
-  last_name: string;
-  email: string;
-  password: string;
-  online: boolean;
+export class Guest extends User{
+  constructor(public id: number,
+              public first_name : string,
+              public last_name : string,
+              public email : string,
+              public password : string,
+              public role: Role,
+              public online: boolean)
+  {
+    super(id, first_name, last_name, email, password, role);
+  }
 }
 
 export class Restaurant{

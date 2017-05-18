@@ -1,6 +1,15 @@
 package com.ftn.domain;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import javax.persistence.*;
+
+
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
@@ -23,16 +32,21 @@ public abstract class User {
     @Column(name = "password" , unique = false, nullable = false)
     private String password;
 
+    @Column(name = "role" , unique = false, nullable = false)
+    @Enumerated(EnumType.ORDINAL)
+    private Role role;
+
     public User()
     {
 
     }
 
-    public User(String first_name, String last_name, String email, String password) {
+    public User(String first_name, String last_name, String email, String password, Role role) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public Integer getId() {
@@ -55,7 +69,11 @@ public abstract class User {
         return password;
     }
 
-    public void setId(int id) {
+    public Role getRole() {
+        return role;
+    }
+
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -73,5 +91,9 @@ public abstract class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

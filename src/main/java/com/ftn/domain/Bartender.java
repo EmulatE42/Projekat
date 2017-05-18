@@ -25,8 +25,8 @@ public class Bartender extends User{
     public Bartender() {}
 
 
-    public Bartender(String first_name, String last_name, String email, String password, Date birth, int dressSize, int shoeSize) {
-        super(first_name, last_name, email, password);
+    public Bartender(String first_name, String last_name, String email, String password, Role role, Date birth, int dressSize, int shoeSize) {
+        super(first_name, last_name, email, password, role);
         this.birth = birth;
         this.dressSize = dressSize;
         this.shoeSize = shoeSize;

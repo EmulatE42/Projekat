@@ -1,5 +1,6 @@
 package com.ftn.contoller;
 
+import com.ftn.domain.DTO.UserDTO;
 import com.ftn.domain.Guest;
 import com.ftn.domain.User;
 import com.ftn.service.UserService;
@@ -30,11 +31,11 @@ public class UserController {
 
     @CrossOrigin
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Guest> login(@RequestBody Guest g) {
+    public ResponseEntity<UserDTO> login(@RequestBody UserDTO g) {
         System.out.println("Password: " + g.getPassword());
-        Guest guest =  this.userService.login(g.getEmail(), g.getPassword());
+        User user =  this.userService.login(g.getEmail(), g.getPassword());
 
-        return new ResponseEntity(guest != null ? guest : "{}", HttpStatus.OK);
+        return new ResponseEntity(user != null ? user : "{}", HttpStatus.OK);
     }
 
     @CrossOrigin
