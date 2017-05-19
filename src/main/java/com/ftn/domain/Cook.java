@@ -22,14 +22,18 @@ public class Cook extends User {
     @Column(name = "shoeSize" , unique = false, nullable = false)
     private int shoeSize;
 
+    @Column(name = "firstTimeLogin" , unique = false, nullable = false)
+    private boolean firstTimeLogin;
+
     public Cook() {}
 
 
-    public Cook(String first_name, String last_name, String email, String password, Role role, Date birth, int dressSize, int shoeSize) {
+    public Cook(String first_name, String last_name, String email, String password, Role role, Date birth, int dressSize, int shoeSize, boolean firstTimeLogin) {
         super(first_name, last_name, email, password, role);
         this.birth = birth;
         this.dressSize = dressSize;
         this.shoeSize = shoeSize;
+        this.firstTimeLogin = firstTimeLogin;
     }
 
     public Date getBirth() {
@@ -54,5 +58,13 @@ public class Cook extends User {
 
     public void setShoeSize(int shoeSize) {
         this.shoeSize = shoeSize;
+    }
+
+    public boolean isFirstTimeLogin() {
+        return firstTimeLogin;
+    }
+
+    public void setFirstTimeLogin(boolean firstTimeLogin) {
+        this.firstTimeLogin = firstTimeLogin;
     }
 }

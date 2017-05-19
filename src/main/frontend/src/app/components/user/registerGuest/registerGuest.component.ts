@@ -28,7 +28,7 @@ export class RegisterGuest{
   com(): void
   {
     if(JSON.stringify(this.guest) !== '{}') {
-      this.router.navigate(['../guest/login']);
+      this.router.navigate(['../login']);
     }
     else
       document.getElementById("login").innerHTML = "<div class=\"alert alert-danger col-sm-offset-4 col-sm-4\"> Enter email alredy exists!  </div>";

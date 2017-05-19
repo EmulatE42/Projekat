@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
  * Created by EmulatE on 10-May-17.
  */
 @RestController
-@RequestMapping(value = "/guest")
 public class UserController {
     @Autowired
     UserService userService;
@@ -44,5 +43,29 @@ public class UserController {
         Guest guest =  this.userService.register(g.getFirst_name(), g.getLast_name(), g.getEmail(), g.getPassword());
 
         return new ResponseEntity(guest != null ? guest : "{}", HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/waiter/change/password", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserDTO> changeWaiterPassword(@RequestBody UserDTO g) {
+        User user =  this.userService.updateWaiterPassword(g.getEmail(), g.getPassword());
+
+        return new ResponseEntity(user != null ? user : "{}", HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/cook/change/password", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserDTO> changeCookPassword(@RequestBody UserDTO g) {
+        User user =  this.userService.updateCookPassword(g.getEmail(), g.getPassword());
+
+        return new ResponseEntity(user != null ? user : "{}", HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/bartender/change/password", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserDTO> changeBartenderPassword(@RequestBody UserDTO g) {
+        User user =  this.userService.updateBartenderPassword(g.getEmail(), g.getPassword());
+
+        return new ResponseEntity(user != null ? user : "{}", HttpStatus.OK);
     }
 }

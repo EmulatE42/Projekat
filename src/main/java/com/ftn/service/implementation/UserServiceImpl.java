@@ -19,6 +19,7 @@ import static com.ftn.domain.Role.GOST;
  */
 @Service
 public class UserServiceImpl implements UserService {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -48,9 +49,9 @@ public class UserServiceImpl implements UserService {
             try {
                 date = formatter.parse(str_date);
 
-                Waiter waiter = new Waiter("Pera", "Peric", "pera@gmail.com", "pass", Role.KONOBAR, date, 23, 45);
-                Cook cook = new Cook("Mika", "Mikic", "mika@gmail.com", "pass", Role.KUVAR, date, 23, 45);
-                Bartender bartender = new Bartender("Laza", "Lazic", "laza@gmail.com", "pass", Role.SANKER, date, 23, 45);
+                Waiter waiter = new Waiter("Pera", "Peric", "pera@gmail.com", "pass", Role.KONOBAR, date, 23, 45, false);
+                Cook cook = new Cook("Mika", "Mikic", "mika@gmail.com", "pass", Role.KUVAR, date, 23, 45, false);
+                Bartender bartender = new Bartender("Laza", "Lazic", "laza@gmail.com", "pass", Role.SANKER, date, 23, 45, false);
 
 
                 this.userRepository.save(waiter);
@@ -102,5 +103,27 @@ public class UserServiceImpl implements UserService {
         else
             return null;
     }
+
+    @Override
+    public User updateWaiterPassword(String email, String password) {
+        this.userRepository.updateWaiterPassword(email, password);
+        User user = userRepository.findAllByEmailAndPassword(email, password);
+        return user;
+    }
+
+    @Override
+    public User updateCookPassword(String email, String password) {
+        this.userRepository.updateCookPassword(email, password);
+        User user = userRepository.findAllByEmailAndPassword(email, password);
+        return user;
+    }
+
+    @Override
+    public User updateBartenderPassword(String email, String password) {
+        this.userRepository.updateBartenderPassword(email, password);
+        User user = userRepository.findAllByEmailAndPassword(email, password);
+        return user;
+    }
+
 
 }

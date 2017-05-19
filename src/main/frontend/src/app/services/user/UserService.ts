@@ -9,8 +9,11 @@ import {Guest, User} from "../../models";
 @Injectable()
 export class UserService
 {
-  private loginUrl = 'http://localhost:8080/guest/login';
-  private registerUrl = 'http://localhost:8080/guest/register';
+  private loginUrl = 'http://localhost:8080/login';
+  private registerUrl = 'http://localhost:8080/register';
+  private updateWaiterPasswordUrl = 'http://localhost:8080/waiter/change/password';
+  private updateCookPasswordUrl = 'http://localhost:8080/cook/change/password';
+  private updateBartenderPasswordUrl = 'http://localhost:8080/bartender/change/password';
 
   constructor(private http: Http) { }
 
@@ -34,6 +37,42 @@ export class UserService
     let options = new RequestOptions({ headers: headers });
 
     return this.http.post(this.registerUrl, params, options).map(this.extractGuest)
+      .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+  }
+
+  updateWaiterPassword(email: string, password: string): Observable<User>{
+
+    var user = {id: null, first_name: null, last_name: null, email: email, password: password, role: null};
+    var params = JSON.stringify(user);
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put(this.updateWaiterPasswordUrl, params, options).map(this.extractGuest)
+      .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+  }
+
+  updateCookPassword(email: string, password: string): Observable<User>{
+
+    var user = {id: null, first_name: null, last_name: null, email: email, password: password, role: null};
+    var params = JSON.stringify(user);
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put(this.updateCookPasswordUrl, params, options).map(this.extractGuest)
+      .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+  }
+
+  updateBartenderPassword(email: string, password: string): Observable<User>{
+
+    var user = {id: null, first_name: null, last_name: null, email: email, password: password, role: null};
+    var params = JSON.stringify(user);
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put(this.updateBartenderPasswordUrl, params, options).map(this.extractGuest)
       .do(data => console.log(JSON.stringify(data)))
       .catch(this.handleError);
   }

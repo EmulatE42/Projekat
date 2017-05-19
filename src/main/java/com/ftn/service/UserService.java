@@ -13,5 +13,8 @@ public interface UserService {
     Integer deleteUserByEmail(String email);
     User login(String email, String password);
     Guest register(String firstname, String lastname, String email, String password);
+    User updateWaiterPassword(String email, String password);
+    User updateCookPassword(String email, String password);
+    User updateBartenderPassword(String email, String password);
 
 }

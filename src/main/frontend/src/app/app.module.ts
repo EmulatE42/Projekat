@@ -13,6 +13,8 @@ import {RegisterGuest} from "./components/user/registerGuest/registerGuest.compo
 import {BasicWaiterView} from "./components/user/basicWaiterView/basicWaiterView.component";
 import {BasicCookView} from "./components/user/basicCookView/basicCookView.component";
 import {BasicBartenderView} from "./components/user/basicBartenderView/basicBartenderView.component";
+import {EmployeeFirstLoginGuard} from "./services/user/EmployeeFirstLoginGuard";
+import {EmployeeChangePassword} from "./components/user/employeeChangePassword/employeeChangePassword.component";
 
 @NgModule({
   declarations: [
@@ -23,22 +25,24 @@ import {BasicBartenderView} from "./components/user/basicBartenderView/basicBart
     StarComponent,
     BasicWaiterView,
     BasicCookView,
-    BasicBartenderView
+    BasicBartenderView,
+    EmployeeChangePassword
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
-      {path: 'guest/login', component: LoginGuest},
-      {path: 'guest/register', component: RegisterGuest},
+      {path: 'login', component: LoginGuest},
+      {path: 'register', component: RegisterGuest},
       {path: '', canActivate: [GuestLoginGuard], component: BasicGuestView},
-      {path: 'waiter/account', component: BasicWaiterView},
-      {path: 'cook/account', component: BasicCookView},
-      {path: 'bartender/account', component: BasicBartenderView}
+      {path: 'waiter/account', canActivate: [EmployeeFirstLoginGuard], component: BasicWaiterView},
+      {path: 'cook/account', canActivate: [EmployeeFirstLoginGuard], component: BasicCookView},
+      {path: 'bartender/account', canActivate: [EmployeeFirstLoginGuard], component: BasicBartenderView},
+      {path: 'change/password', component: EmployeeChangePassword}
     ])
   ],
-  providers: [GuestLoginGuard],
+  providers: [GuestLoginGuard, EmployeeFirstLoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
