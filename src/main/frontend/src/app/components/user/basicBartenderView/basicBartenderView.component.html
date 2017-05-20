@@ -5,8 +5,67 @@
     <a [routerLink]="['/bartender/account']"> Moj nalog </a>
   </div>
 
-  <div class='panel-body'>
+  <div class='panel-body '>
+    <div class="row">
+      <div class="border-img col-sm-2">
+        <img src="http://180dc.org/wp-content/uploads/2016/08/default-profile.png" alt="Logo" width="180" height="180"/>
+      </div>
 
+      <div class="col-sm-4">
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="firstname">Firstname:</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" [disabled]="edit"  [(ngModel)]="firstname" name = "firstname" id="firstname"  required/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="lastname">Lastname:</label>
+            <div class="col-sm-8">
+              <input type="text" class="form-control" [disabled]="edit" [(ngModel)]="lastname" name = "lastname" id="lastname" required/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="birth">Birth:</label>
+            <div class="col-sm-8">
+              <input type="date" class="form-control" [disabled]="edit"  [(ngModel)]="birth" name = "birth" id="birth" required/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="dressSize">Dress size:</label>
+            <div class="col-sm-8">
+              <input type="number" class="form-control" [disabled]="edit"  [(ngModel)]="dressSize" name = "dressSize" id="dressSize"  required/>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-4" for="shoeSize">Shoe size:</label>
+            <div class="col-sm-8">
+              <input type="number" class="form-control" [disabled]="edit"  [(ngModel)]="shoeSize" name = "shoeSize" id="shoeSize" required/>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8" *ngIf = "!edit">
+              <div class="col-sm-6">
+                <button type="submit" class="btn btn-primary btn-block" (click) = "update()">Save changes</button>
+              </div>
+
+              <div class="col-sm-6">
+                <button type="submit" class="btn btn-primary btn-block" (click) = "cancle()">Cancel</button>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="col-sm-4">
+        <div class="col-sm-offset-2 col-sm-5">
+          <button type="button" class="btn btn-primary btn-block" [disabled]="!edit" (click) = "isEdit()">Edit profile</button> <br>
+          <button type="button" class="btn btn-primary btn-block" [disabled]="!edit" (click) = "changePassword()">Change password</button>
+        </div>
+      </div>
+    </div>
 
   </div>
 

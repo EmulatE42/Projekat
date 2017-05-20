@@ -1,8 +1,7 @@
 package com.ftn.contoller;
 
+import com.ftn.domain.*;
 import com.ftn.domain.DTO.UserDTO;
-import com.ftn.domain.Guest;
-import com.ftn.domain.User;
 import com.ftn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,9 +31,10 @@ public class UserController {
     @RequestMapping(value = "/login", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<UserDTO> login(@RequestBody UserDTO g) {
         System.out.println("Password: " + g.getPassword());
-        User user =  this.userService.login(g.getEmail(), g.getPassword());
+        User user = this.userService.login(g.getEmail(), g.getPassword());
+        UserDTO userDTO = converte(user);
 
-        return new ResponseEntity(user != null ? user : "{}", HttpStatus.OK);
+        return new ResponseEntity(userDTO != null ? userDTO : "{}", HttpStatus.OK);
     }
 
     @CrossOrigin
@@ -42,7 +42,7 @@ public class UserController {
     public ResponseEntity<Guest> register(@RequestBody Guest g) {
         Guest guest =  this.userService.register(g.getFirst_name(), g.getLast_name(), g.getEmail(), g.getPassword());
 
-        return new ResponseEntity(guest != null ? guest : "{}", HttpStatus.OK);
+        return new ResponseEntity(guest != null ? guest : "{}", HttpStatus.CREATED);
     }
 
     @CrossOrigin
@@ -67,5 +67,59 @@ public class UserController {
         User user =  this.userService.updateBartenderPassword(g.getEmail(), g.getPassword());
 
         return new ResponseEntity(user != null ? user : "{}", HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/waiter/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Waiter> updateWaiter(@RequestBody Waiter w) {
+        Waiter waiter = this.userService.updateWaiter(w.getId(), w.getFirst_name(), w.getLast_name(), w.getBirth(), w.getDressSize(), w.getShoeSize());
+
+        return new ResponseEntity(waiter, HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/cook/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Cook> updateCook(@RequestBody Cook w) {
+        Cook cook = this.userService.updateCook(w.getId(), w.getFirst_name(), w.getLast_name(), w.getBirth(), w.getDressSize(), w.getShoeSize());
+
+        return new ResponseEntity(cook, HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/bartender/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Bartender> updateBartedner(@RequestBody Bartender w) {
+        Bartender bartender = this.userService.updateBartender(w.getId(), w.getFirst_name(), w.getLast_name(), w.getBirth(), w.getDressSize(), w.getShoeSize());
+
+        return new ResponseEntity(bartender, HttpStatus.OK);
+    }
+
+    public UserDTO converte(User user)
+    {
+        UserDTO userDTO = null;
+
+        if(user != null) {
+            switch (((User) user).getRole()) {
+                case GOST: {
+                    userDTO = new UserDTO((Guest) user);
+                    return userDTO;
+                }
+                case KONOBAR: {
+                    userDTO = new UserDTO((Waiter) user);
+                    return userDTO;
+                }
+                case KUVAR: {
+                    userDTO = new UserDTO((Cook) user);
+                    return userDTO;
+                }
+
+                case SANKER: {
+                    userDTO = new UserDTO((Bartender) user);
+                    return userDTO;
+                }
+                default:
+                    return null;
+            }
+        }
+        return null;
     }
 }
