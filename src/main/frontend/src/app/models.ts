@@ -12,7 +12,8 @@ export abstract class User
                public last_name : string,
                public email : string,
                public password : string,
-               public role: Role
+               public role: Role,
+               public avatar: string
 
   ) {}
 }
@@ -25,6 +26,7 @@ export class SuperUser
                public email : string,
                public password : string,
                public role: Role,
+               public avatar: string,
                public online: boolean,
                public birth: string,
                public dressSize: number,
@@ -40,9 +42,10 @@ export class Guest extends User{
               public email : string,
               public password : string,
               public role: Role,
+              public avatar: string,
               public online: boolean)
   {
-    super(id, first_name, last_name, email, password, role);
+    super(id, first_name, last_name, email, password, role, avatar);
   }
 }
 
@@ -53,12 +56,13 @@ export class Waiter extends User{
               public email : string,
               public password : string,
               public role: Role,
+              public avatar: string,
               public birth: string,
               public dressSize: number,
               public shoeSize: number,
               public firstTimeLogin: boolean)
   {
-    super(id, first_name, last_name, email, password, role);
+    super(id, first_name, last_name, email, password, role, avatar);
   }
 }
 
@@ -69,12 +73,13 @@ export class Cook extends User{
               public email : string,
               public password : string,
               public role: Role,
+              public avatar: string,
               public birth: string,
               public dressSize: number,
               public shoeSize: number,
               public firstTimeLogin: boolean)
   {
-    super(id, first_name, last_name, email, password, role);
+    super(id, first_name, last_name, email, password, role, avatar);
   }
 }
 
@@ -85,12 +90,13 @@ export class Bartender extends User{
               public email : string,
               public password : string,
               public role: Role,
+              public avatar: string,
               public birth: string,
               public dressSize: number,
               public shoeSize: number,
               public firstTimeLogin: boolean)
   {
-    super(id, first_name, last_name, email, password, role);
+    super(id, first_name, last_name, email, password, role, avatar);
   }
 }
 

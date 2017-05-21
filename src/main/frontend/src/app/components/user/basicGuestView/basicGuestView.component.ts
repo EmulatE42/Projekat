@@ -5,6 +5,7 @@ import {RestaurantService} from "../../../services/restaurant/RestaurantService"
 
 @Component({
   templateUrl: './basicGuestView.component.html',
+  styleUrls: ['./basicGuestView.component.css'],
   providers: [RestaurantService]
 })
 

@@ -27,6 +27,8 @@ public class UserDTO implements Serializable {
 
     private Role role;
 
+    private String avatar;
+
     private boolean online;
 
     private Date birth;
@@ -47,6 +49,7 @@ public class UserDTO implements Serializable {
         this.email = guest.getEmail();
         this.password = guest.getPassword();
         this.role = guest.getRole();
+        this.avatar = guest.getAvatar();
         this.birth = null;
         this.dressSize = -1;
         this.shoeSize = -1;
@@ -61,6 +64,7 @@ public class UserDTO implements Serializable {
         this.email = waiter.getEmail();
         this.password = waiter.getPassword();
         this.role = waiter.getRole();
+        this.avatar = waiter.getAvatar();
         this.birth = waiter.getBirth();
         this.dressSize = waiter.getDressSize();
         this.shoeSize = waiter.getShoeSize();
@@ -75,6 +79,7 @@ public class UserDTO implements Serializable {
         this.email = cook.getEmail();
         this.password = cook.getPassword();
         this.role = cook.getRole();
+        this.avatar = cook.getAvatar();
         this.birth = cook.getBirth();
         this.dressSize = cook.getDressSize();
         this.shoeSize = cook.getShoeSize();
@@ -89,24 +94,34 @@ public class UserDTO implements Serializable {
         this.email = bartender.getEmail();
         this.password = bartender.getPassword();
         this.role = bartender.getRole();
+        this.avatar = bartender.getAvatar();
         this.birth = bartender.getBirth();
         this.dressSize = bartender.getDressSize();
         this.shoeSize = bartender.getShoeSize();
         this.firstTimeLogin = bartender.isFirstTimeLogin();
     }
 
-    public UserDTO(Integer id, String first_name, String last_name, String email, String password, Role role, boolean online, Date birth, int dressSize, int shoeSize, boolean firstTimeLogin) {
+    public UserDTO(Integer id, String first_name, String last_name, String email, String password, Role role, String avatar, boolean online, Date birth, int dressSize, int shoeSize, boolean firstTimeLogin) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
         this.password = password;
         this.role = role;
+        this.avatar = avatar;
         this.online = online;
         this.birth = birth;
         this.dressSize = dressSize;
         this.shoeSize = shoeSize;
         this.firstTimeLogin = firstTimeLogin;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public Integer getId() {

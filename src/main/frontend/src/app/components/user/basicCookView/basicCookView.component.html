@@ -7,9 +7,17 @@
 
   <div class='panel-body'>
     <div class="row">
-      <div class="border-img col-sm-2">
-        <img src="http://180dc.org/wp-content/uploads/2016/08/default-profile.png" alt="Logo" width="180" height="180" />
+      <div class="col-sm-2">
+        <div class="border-img">
+          <img [src]="avatar" alt="Profile picture" />
+        </div> <br>
+          <label class="upload-group" (change)="previewFile()">
+            Upload image
+            <input type="file" class="upload-group" id="file">
+          </label>
       </div>
+
+
 
       <div class="col-sm-4">
         <form class="form-horizontal">

@@ -15,6 +15,12 @@ import {BasicCookView} from "./components/user/basicCookView/basicCookView.compo
 import {BasicBartenderView} from "./components/user/basicBartenderView/basicBartenderView.component";
 import {EmployeeFirstLoginGuard} from "./services/user/EmployeeFirstLoginGuard";
 import {EmployeeChangePassword} from "./components/user/employeeChangePassword/employeeChangePassword.component";
+import {ImageUploadModule} from "angular2-image-upload";
+import {AngularFireModule} from "angularfire2";
+import {firebaseConfig} from "../environments/firebase.config";
+import * as firebase from 'firebase';
+
+firebase.initializeApp(firebaseConfig);
 
 @NgModule({
   declarations: [
@@ -40,9 +46,12 @@ import {EmployeeChangePassword} from "./components/user/employeeChangePassword/e
       {path: 'cook/account', canActivate: [EmployeeFirstLoginGuard], component: BasicCookView},
       {path: 'bartender/account', canActivate: [EmployeeFirstLoginGuard], component: BasicBartenderView},
       {path: 'change/password', component: EmployeeChangePassword}
-    ])
+    ]),
+    ImageUploadModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [GuestLoginGuard, EmployeeFirstLoginGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+

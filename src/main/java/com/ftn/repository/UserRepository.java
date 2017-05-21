@@ -50,17 +50,17 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     @Modifying
     @Transactional
-    @Query("Update Waiter w SET w.first_name=:first_name, w.last_name = :last_name, w.birth = :birth, w.dressSize = :dressSize, w.shoeSize = :shoeSize WHERE w.id=:id")
-    void updateWaiter(@Param("id") int id, @Param("first_name") String first_name, @Param("last_name") String last_name, @Param("birth") Date birth, @Param("dressSize") int dressSize, @Param("shoeSize") int shoeSize);
+    @Query("Update Waiter w SET w.first_name=:first_name, w.last_name = :last_name, w.avatar = :avatar, w.birth = :birth, w.dressSize = :dressSize, w.shoeSize = :shoeSize WHERE w.id=:id")
+    void updateWaiter(@Param("id") int id, @Param("first_name") String first_name, @Param("last_name") String last_name, @Param("avatar") String avatar, @Param("birth") Date birth, @Param("dressSize") int dressSize, @Param("shoeSize") int shoeSize);
 
     @Modifying
     @Transactional
-    @Query("Update Cook w SET w.first_name=:first_name, w.last_name = :last_name, w.birth = :birth, w.dressSize = :dressSize, w.shoeSize = :shoeSize WHERE w.id=:id")
-    void updateCook(@Param("id") int id, @Param("first_name") String first_name, @Param("last_name") String last_name, @Param("birth") Date birth, @Param("dressSize") int dressSize, @Param("shoeSize") int shoeSize);
+    @Query("Update Cook w SET w.first_name=:first_name, w.last_name = :last_name, w.avatar = :avatar, w.birth = :birth, w.dressSize = :dressSize, w.shoeSize = :shoeSize WHERE w.id=:id")
+    void updateCook(@Param("id") int id, @Param("first_name") String first_name, @Param("last_name") String last_name, @Param("avatar") String avatar, @Param("birth") Date birth, @Param("dressSize") int dressSize, @Param("shoeSize") int shoeSize);
 
     @Modifying
     @Transactional
-    @Query("Update Bartender w SET w.first_name=:first_name, w.last_name = :last_name, w.birth = :birth, w.dressSize = :dressSize, w.shoeSize = :shoeSize WHERE w.id=:id")
-    void updateBartender(@Param("id") int id, @Param("first_name") String first_name, @Param("last_name") String last_name, @Param("birth") Date birth, @Param("dressSize") int dressSize, @Param("shoeSize") int shoeSize);
+    @Query("Update Bartender w SET w.first_name=:first_name, w.last_name = :last_name, w.avatar = :avatar, w.birth = :birth, w.dressSize = :dressSize, w.shoeSize = :shoeSize WHERE w.id=:id")
+    void updateBartender(@Param("id") int id, @Param("first_name") String first_name, @Param("last_name") String last_name, @Param("avatar") String avatar, @Param("birth") Date birth, @Param("dressSize") int dressSize, @Param("shoeSize") int shoeSize);
 
 }

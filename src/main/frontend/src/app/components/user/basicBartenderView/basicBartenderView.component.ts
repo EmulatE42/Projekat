@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {Bartender, Guest, Restaurant} from "../../../models";
 import {RestaurantService} from "../../../services/restaurant/RestaurantService";
 import {UserService} from "../../../services/user/UserService";
+import * as firebase from 'firebase'
 
 @Component({
   templateUrl: './basicBartenderView.component.html',
@@ -26,6 +27,7 @@ export class BasicBartenderView implements OnInit{
   shoeSize_save: number;
 
   edit: boolean = true;
+  avatar: string;
 
 
 
@@ -37,6 +39,16 @@ export class BasicBartenderView implements OnInit{
     this.formatDate(this.bartender.birth);
     this.dressSize = this.bartender.dressSize;
     this.shoeSize = this.bartender.shoeSize;
+
+    if(this.bartender.avatar === null)
+    {
+      const storageRef = firebase.storage().ref().child('images/default-profile.png');
+      storageRef.getDownloadURL().then(url => this.avatar = url);
+    }
+    else {
+      const storageRef = firebase.storage().ref().child('images/' + this.bartender.avatar);
+      storageRef.getDownloadURL().then(url => this.avatar = url);
+    }
 
     this.saveData()
 
@@ -100,6 +112,44 @@ export class BasicBartenderView implements OnInit{
     this.birth_save = this.birth;
     this.dressSize_save = this.dressSize;
     this.shoeSize_save = this.shoeSize;
+  }
+
+
+  previewFile(): void {
+
+    var preview = document.querySelector('img'); //selects the query named img
+    var file = (<HTMLInputElement>document.querySelector('input[type=file]')).files[0]; //sames as here
+
+    var reader  = new FileReader();
+    var image;
+
+    reader.onloadend = function () {
+      preview.src = reader.result;
+    }
+
+    if (file) {
+      reader.readAsDataURL(file);
+
+      var filename = file.name;
+      var storageRef = firebase.storage().ref('/images/' + filename);
+      var uploadTask = storageRef.put(file);
+
+      this.bartender.avatar = filename;
+      sessionStorage.setItem('loginUser', JSON.stringify(this.bartender));
+      this.userService.updateBartender(this.bartender).subscribe(bartender => console.log(bartender));
+
+      uploadTask.on('state_changed', function(snapshot){
+
+      }, function(error){
+
+      }, function () {
+
+        const storageRef = firebase.storage().ref().child('images/' + filename);
+        storageRef.getDownloadURL().then(url => this.avatar = url);
+
+      });
+
+    }
   }
 
 

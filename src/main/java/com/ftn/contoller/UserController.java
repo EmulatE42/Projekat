@@ -72,7 +72,7 @@ public class UserController {
     @CrossOrigin
     @RequestMapping(value = "/waiter/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Waiter> updateWaiter(@RequestBody Waiter w) {
-        Waiter waiter = this.userService.updateWaiter(w.getId(), w.getFirst_name(), w.getLast_name(), w.getBirth(), w.getDressSize(), w.getShoeSize());
+        Waiter waiter = this.userService.updateWaiter(w.getId(), w.getFirst_name(), w.getLast_name(), w.getAvatar(), w.getBirth(), w.getDressSize(), w.getShoeSize());
 
         return new ResponseEntity(waiter, HttpStatus.OK);
     }
@@ -80,7 +80,7 @@ public class UserController {
     @CrossOrigin
     @RequestMapping(value = "/cook/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Cook> updateCook(@RequestBody Cook w) {
-        Cook cook = this.userService.updateCook(w.getId(), w.getFirst_name(), w.getLast_name(), w.getBirth(), w.getDressSize(), w.getShoeSize());
+        Cook cook = this.userService.updateCook(w.getId(), w.getFirst_name(), w.getLast_name(), w.getAvatar(), w.getBirth(), w.getDressSize(), w.getShoeSize());
 
         return new ResponseEntity(cook, HttpStatus.OK);
     }
@@ -88,7 +88,7 @@ public class UserController {
     @CrossOrigin
     @RequestMapping(value = "/bartender/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Bartender> updateBartedner(@RequestBody Bartender w) {
-        Bartender bartender = this.userService.updateBartender(w.getId(), w.getFirst_name(), w.getLast_name(), w.getBirth(), w.getDressSize(), w.getShoeSize());
+        Bartender bartender = this.userService.updateBartender(w.getId(), w.getFirst_name(), w.getLast_name(), w.getAvatar(), w.getBirth(), w.getDressSize(), w.getShoeSize());
 
         return new ResponseEntity(bartender, HttpStatus.OK);
     }

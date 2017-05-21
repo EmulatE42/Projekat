@@ -82,7 +82,7 @@ export class UserService
 
   updateWaiter(waiter: Waiter): Observable<User>{
 
-    var guest = {id: waiter.id, first_name: waiter.first_name, last_name: waiter.last_name, birth: waiter.birth, dressSize: waiter.dressSize, shoeSize: waiter.shoeSize};
+    var guest = {id: waiter.id, first_name: waiter.first_name, last_name: waiter.last_name, avatar: waiter.avatar, birth: waiter.birth, dressSize: waiter.dressSize, shoeSize: waiter.shoeSize};
     var params = JSON.stringify(guest);
     console.log(params);
     let headers = new Headers({ 'Content-Type': 'application/json'});
@@ -95,7 +95,7 @@ export class UserService
 
   updateCook(cook: Cook): Observable<User>{
 
-    var guest = {id: cook.id, first_name: cook.first_name, last_name: cook.last_name, birth: cook.birth, dressSize: cook.dressSize, shoeSize: cook.shoeSize};
+    var guest = {id: cook.id, first_name: cook.first_name, last_name: cook.last_name, avatar: cook.avatar, birth: cook.birth, dressSize: cook.dressSize, shoeSize: cook.shoeSize};
     var params = JSON.stringify(guest);
     console.log(params);
     let headers = new Headers({ 'Content-Type': 'application/json'});
@@ -108,7 +108,7 @@ export class UserService
 
   updateBartender(bartender: Bartender): Observable<User>{
 
-    var guest = {id: bartender.id, first_name: bartender.first_name, last_name: bartender.last_name, birth: bartender.birth, dressSize: bartender.dressSize, shoeSize: bartender.shoeSize};
+    var guest = {id: bartender.id, first_name: bartender.first_name, last_name: bartender.last_name, avatar: bartender.avatar, birth: bartender.birth, dressSize: bartender.dressSize, shoeSize: bartender.shoeSize};
     var params = JSON.stringify(guest);
     console.log(params);
     let headers = new Headers({ 'Content-Type': 'application/json'});

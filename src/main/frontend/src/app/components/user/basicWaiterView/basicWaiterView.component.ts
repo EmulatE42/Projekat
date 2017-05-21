@@ -1,8 +1,11 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, Inject, OnInit} from "@angular/core";
 import { Router } from '@angular/router';
 import {Guest, Restaurant, Waiter} from "../../../models";
 import {RestaurantService} from "../../../services/restaurant/RestaurantService";
 import {UserService} from "../../../services/user/UserService";
+import * as firebase from 'firebase'
+
+
 
 @Component({
   templateUrl: './basicWaiterView.component.html',
@@ -26,10 +29,12 @@ export class BasicWaiterView implements OnInit{
   shoeSize_save: number;
 
   edit: boolean = true;
+  avatar: string;
 
 
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router) {}
+
 
   ngOnInit(): void {
     this.firstname = this.waiter.first_name;
@@ -37,6 +42,16 @@ export class BasicWaiterView implements OnInit{
     this.formatDate(this.waiter.birth);
     this.dressSize = this.waiter.dressSize;
     this.shoeSize = this.waiter.shoeSize;
+
+    if(this.waiter.avatar === null)
+    {
+      const storageRef = firebase.storage().ref().child('images/default-profile.png');
+      storageRef.getDownloadURL().then(url => this.avatar = url);
+    }
+    else {
+      const storageRef = firebase.storage().ref().child('images/' + this.waiter.avatar);
+      storageRef.getDownloadURL().then(url => this.avatar = url);
+    }
 
     this.saveData();
 
@@ -100,6 +115,43 @@ export class BasicWaiterView implements OnInit{
     this.birth_save = this.birth;
     this.dressSize_save = this.dressSize;
     this.shoeSize_save = this.shoeSize;
+  }
+
+  previewFile(): void {
+
+    var preview = document.querySelector('img'); //selects the query named img
+    var file = (<HTMLInputElement>document.querySelector('input[type=file]')).files[0]; //sames as here
+
+    var reader  = new FileReader();
+    var image;
+
+    reader.onloadend = function () {
+      preview.src = reader.result;
+    }
+
+    if (file) {
+      reader.readAsDataURL(file);
+
+      var filename = file.name;
+      var storageRef = firebase.storage().ref('/images/' + filename);
+      var uploadTask = storageRef.put(file);
+
+      this.waiter.avatar = filename;
+      sessionStorage.setItem('loginUser', JSON.stringify(this.waiter));
+      this.userService.updateWaiter(this.waiter).subscribe(waiter => console.log(waiter));
+
+      uploadTask.on('state_changed', function(snapshot){
+
+      }, function(error){
+
+      }, function () {
+
+        const storageRef = firebase.storage().ref().child('images/' + filename);
+        storageRef.getDownloadURL().then(url => this.avatar = url);
+
+      });
+
+    }
   }
 
 

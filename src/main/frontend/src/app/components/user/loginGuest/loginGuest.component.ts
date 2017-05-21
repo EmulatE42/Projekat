@@ -55,19 +55,19 @@ export class LoginGuest{
     if(JSON.stringify(user) !== '{}') {
 
       if( Role[user.role] == Role.GOST.toString()) {
-        this.guest = new Guest(user.id, user.first_name, user.last_name, user.email, user.password, user.role, user.online);
+        this.guest = new Guest(user.id, user.first_name, user.last_name, user.email, user.password, user.role, user.avatar, user.online);
         sessionStorage.setItem('loginUser', JSON.stringify(this.guest));
       }
       else if( Role[user.role] == Role.KONOBAR.toString()) {
-        this.waiter = new Waiter(user.id, user.first_name, user.last_name, user.email, user.password, user.role, user.birth, user.dressSize, user.shoeSize, user.firstTimeLogin);
+        this.waiter = new Waiter(user.id, user.first_name, user.last_name, user.email, user.password, user.role, user.avatar, user.birth, user.dressSize, user.shoeSize, user.firstTimeLogin);
         sessionStorage.setItem('loginUser', JSON.stringify(this.waiter));
       }
       else if( Role[user.role] == Role.KUVAR.toString()) {
-        this.cook = new Cook(user.id, user.first_name, user.last_name, user.email, user.password, user.role, user.birth, user.dressSize, user.shoeSize, user.firstTimeLogin);
+        this.cook = new Cook(user.id, user.first_name, user.last_name, user.email, user.password, user.role, user.avatar, user.birth, user.dressSize, user.shoeSize, user.firstTimeLogin);
         sessionStorage.setItem('loginUser', JSON.stringify(this.cook));
       }
       else if( Role[user.role] == Role.SANKER.toString()) {
-        this.bartender = new Bartender(user.id, user.first_name, user.last_name, user.email, user.password, user.role, user.birth, user.dressSize, user.shoeSize, user.firstTimeLogin);
+        this.bartender = new Bartender(user.id, user.first_name, user.last_name, user.email, user.password, user.role, user.avatar, user.birth, user.dressSize, user.shoeSize, user.firstTimeLogin);
         sessionStorage.setItem('loginUser', JSON.stringify(this.bartender));
       }
     }

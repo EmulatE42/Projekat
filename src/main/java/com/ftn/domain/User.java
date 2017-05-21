@@ -36,6 +36,9 @@ public abstract class User {
     @Enumerated(EnumType.ORDINAL)
     private Role role;
 
+    @Column(name = "avatar" , unique = false, nullable = true)
+    private String avatar;
+
     public User()
     {
 
@@ -47,6 +50,14 @@ public abstract class User {
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public Integer getId() {

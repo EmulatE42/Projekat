@@ -131,8 +131,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Waiter updateWaiter(int id, String firstname, String lastname, Date birth, int dressSize, int shoeSize) {
-        userRepository.updateWaiter(id, firstname, lastname, birth, dressSize, shoeSize);
+    public Waiter updateWaiter(int id, String firstname, String lastname, String avatar, Date birth, int dressSize, int shoeSize) {
+        userRepository.updateWaiter(id, firstname, lastname, avatar, birth, dressSize, shoeSize);
         Waiter waiter = userRepository.findById(id);
 
         return waiter;
@@ -140,16 +140,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Cook updateCook(int id, String firstname, String lastname, Date birth, int dressSize, int shoeSize) {
-        userRepository.updateCook(id, firstname, lastname, birth, dressSize, shoeSize);
+    public Cook updateCook(int id, String firstname, String lastname, String avatar, Date birth, int dressSize, int shoeSize) {
+        userRepository.updateCook(id, firstname, lastname, avatar, birth, dressSize, shoeSize);
         Cook cook = userRepository.getCook(id);
 
         return cook;
     }
 
     @Override
-    public Bartender updateBartender(int id, String firstname, String lastname, Date birth, int dressSize, int shoeSize) {
-        userRepository.updateBartender(id, firstname, lastname, birth, dressSize, shoeSize);
+    public Bartender updateBartender(int id, String firstname, String lastname, String avatar, Date birth, int dressSize, int shoeSize) {
+        userRepository.updateBartender(id, firstname, lastname, avatar, birth, dressSize, shoeSize);
         Bartender bartender = userRepository.getBartender(id);
 
         return bartender;
