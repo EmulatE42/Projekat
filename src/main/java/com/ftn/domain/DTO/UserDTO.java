@@ -101,6 +101,19 @@ public class UserDTO implements Serializable {
         this.firstTimeLogin = bartender.isFirstTimeLogin();
     }
 
+    public UserDTO(Supplier supplier) {
+
+        this.id = supplier.getId();
+        this.first_name = supplier.getFirst_name();
+        this.last_name = supplier.getLast_name();
+        this.email = supplier.getEmail();
+        this.password = supplier.getPassword();
+        this.role = supplier.getRole();
+        this.avatar = supplier.getAvatar();
+        this.birth = supplier.getBirth();
+        this.firstTimeLogin = supplier.isFirstTimeLogin();
+    }
+
     public UserDTO(Integer id, String first_name, String last_name, String email, String password, Role role, String avatar, boolean online, Date birth, int dressSize, int shoeSize, boolean firstTimeLogin) {
         this.id = id;
         this.first_name = first_name;

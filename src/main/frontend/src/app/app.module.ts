@@ -19,6 +19,9 @@ import {ImageUploadModule} from "angular2-image-upload";
 import {AngularFireModule} from "angularfire2";
 import {firebaseConfig} from "../environments/firebase.config";
 import * as firebase from 'firebase';
+import {CalendarComponent} from "ap-angular2-fullcalendar";
+import {MyComponent} from "app/components/user/waiterWorkShedulesView/waiterWorkShedulesView.component";
+import {BasicSupplierView} from "./components/user/basicSupplierView/basicSupplierView.component";
 
 firebase.initializeApp(firebaseConfig);
 
@@ -32,7 +35,10 @@ firebase.initializeApp(firebaseConfig);
     BasicWaiterView,
     BasicCookView,
     BasicBartenderView,
-    EmployeeChangePassword
+    BasicSupplierView,
+    EmployeeChangePassword,
+    MyComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -43,8 +49,10 @@ firebase.initializeApp(firebaseConfig);
       {path: 'register', component: RegisterGuest},
       {path: '', canActivate: [GuestLoginGuard], component: BasicGuestView},
       {path: 'waiter/account', canActivate: [EmployeeFirstLoginGuard], component: BasicWaiterView},
+      {path: 'waiter/work', component: MyComponent},
       {path: 'cook/account', canActivate: [EmployeeFirstLoginGuard], component: BasicCookView},
       {path: 'bartender/account', canActivate: [EmployeeFirstLoginGuard], component: BasicBartenderView},
+      {path: 'supplier/account', canActivate: [EmployeeFirstLoginGuard], component: BasicSupplierView},
       {path: 'change/password', component: EmployeeChangePassword}
     ]),
     ImageUploadModule.forRoot(),

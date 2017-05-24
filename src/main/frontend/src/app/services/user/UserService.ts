@@ -4,19 +4,21 @@ import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/do'
 import 'rxjs/add/operator/catch'
-import {Cook, Guest, User, Waiter, Bartender} from "../../models";
+import {Cook, Guest, User, Waiter, Bartender, Supplier} from "../../models";
 
 @Injectable()
 export class UserService
 {
-  private loginUrl = 'http://localhost:8080/login';
-  private registerUrl = 'http://localhost:8080/register';
-  private updateWaiterPasswordUrl = 'http://localhost:8080/waiter/change/password';
-  private updateCookPasswordUrl = 'http://localhost:8080/cook/change/password';
-  private updateBartenderPasswordUrl = 'http://localhost:8080/bartender/change/password';
-  private updateWaiterUrl = 'http://localhost:8080/waiter/update';
-  private updateCookUrl = 'http://localhost:8080/cook/update';
-  private updateBartenderUrl = 'http://localhost:8080/bartender/update';
+  private loginUrl = 'http://localhost:8090/login';
+  private registerUrl = 'http://localhost:8090/register';
+  private updateWaiterPasswordUrl = 'http://localhost:8090/waiter/change/password';
+  private updateCookPasswordUrl = 'http://localhost:8090/cook/change/password';
+  private updateBartenderPasswordUrl = 'http://localhost:8090/bartender/change/password';
+  private updateSupplierPasswordUrl = 'http://localhost:8090/supplier/change/password';
+  private updateWaiterUrl = 'http://localhost:8090/waiter/update';
+  private updateCookUrl = 'http://localhost:8090/cook/update';
+  private updateBartenderUrl = 'http://localhost:8090/bartender/update';
+  private updateSupplierUrl = 'http://localhost:8090/supplier/update';
 
   constructor(private http: Http) { }
 
@@ -80,6 +82,18 @@ export class UserService
       .catch(this.handleError);
   }
 
+  updateSupplierPassword(email: string, password: string): Observable<User>{
+
+    var user = {id: null, first_name: null, last_name: null, email: email, password: password, role: null};
+    var params = JSON.stringify(user);
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put(this.updateSupplierPasswordUrl, params, options).map(this.extractGuest)
+      .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+  }
+
   updateWaiter(waiter: Waiter): Observable<User>{
 
     var guest = {id: waiter.id, first_name: waiter.first_name, last_name: waiter.last_name, avatar: waiter.avatar, birth: waiter.birth, dressSize: waiter.dressSize, shoeSize: waiter.shoeSize};
@@ -115,6 +129,19 @@ export class UserService
     let options = new RequestOptions({ headers: headers });
 
     return this.http.put(this.updateBartenderUrl, params, options).map(this.extractGuest)
+      .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+  }
+
+  updateSupplier(supplier: Supplier): Observable<User>{
+
+    var guest = {id: supplier.id, first_name: supplier.first_name, last_name: supplier.last_name, avatar: supplier.avatar, birth: supplier.birth};
+    var params = JSON.stringify(guest);
+    console.log(params);
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put(this.updateSupplierUrl, params, options).map(this.extractGuest)
       .do(data => console.log(JSON.stringify(data)))
       .catch(this.handleError);
   }

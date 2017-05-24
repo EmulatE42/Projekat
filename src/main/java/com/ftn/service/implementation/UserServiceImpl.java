@@ -50,11 +50,13 @@ public class UserServiceImpl implements UserService {
                 Waiter waiter = new Waiter("Pera", "Peric", "pera@gmail.com", "pass", Role.KONOBAR, date, 23, 45, false);
                 Cook cook = new Cook("Mika", "Mikic", "mika@gmail.com", "pass", Role.KUVAR, date, 23, 45, false);
                 Bartender bartender = new Bartender("Laza", "Lazic", "laza@gmail.com", "pass", Role.SANKER, date, 23, 45, false);
+                Supplier supplier = new Supplier("Paja", "Patak", "paja@gmail.com", "pass", Role.PONUDJAC, date, false);
 
 
                 this.userRepository.save(waiter);
                 this.userRepository.save(cook);
                 this.userRepository.save(bartender);
+                this.userRepository.save(supplier);
 
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -80,6 +82,10 @@ public class UserServiceImpl implements UserService {
 
                 case SANKER: {
                     return (Bartender) user;
+                }
+                case PONUDJAC: {
+                    System.out.println("Ponudjac : " + ((User) user).getFirst_name());
+                    return (Supplier) user;
                 }
                 default:
                     return null;
@@ -131,6 +137,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User updateSupplierPassword(String email, String password) {
+        this.userRepository.updateSupplierPassword(email, password);
+        User user = userRepository.findAllByEmailAndPassword(email, password);
+        return user;
+    }
+
+    @Override
     public Waiter updateWaiter(int id, String firstname, String lastname, String avatar, Date birth, int dressSize, int shoeSize) {
         userRepository.updateWaiter(id, firstname, lastname, avatar, birth, dressSize, shoeSize);
         Waiter waiter = userRepository.findById(id);
@@ -153,6 +166,14 @@ public class UserServiceImpl implements UserService {
         Bartender bartender = userRepository.getBartender(id);
 
         return bartender;
+    }
+
+    @Override
+    public Supplier updateSupplier(int id, String firstname, String lastname, String avatar, Date birth) {
+        userRepository.updateSupplier(id, firstname, lastname, avatar, birth);
+        Supplier supplier = userRepository.getSupplier(id);
+
+        return supplier;
     }
 
 

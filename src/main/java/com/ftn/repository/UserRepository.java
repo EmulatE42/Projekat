@@ -33,6 +33,9 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     @Query("SELECT b FROM Bartender b WHERE b.id = :id")
     Bartender getBartender(@Param("id") int id);
 
+    @Query("SELECT c FROM Supplier c WHERE c.id = :id")
+    Supplier getSupplier( @Param("id") int id);
+
     @Modifying
     @Transactional
     @Query("Update Waiter w SET w.email=:email, w.password = :password, w.firstTimeLogin = true WHERE w.email=:email")
@@ -50,6 +53,11 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     @Modifying
     @Transactional
+    @Query("Update Supplier b SET b.email=:email, b.password = :password, b.firstTimeLogin = true WHERE b.email=:email")
+    void updateSupplierPassword(@Param("email") String email, @Param("password") String password);
+
+    @Modifying
+    @Transactional
     @Query("Update Waiter w SET w.first_name=:first_name, w.last_name = :last_name, w.avatar = :avatar, w.birth = :birth, w.dressSize = :dressSize, w.shoeSize = :shoeSize WHERE w.id=:id")
     void updateWaiter(@Param("id") int id, @Param("first_name") String first_name, @Param("last_name") String last_name, @Param("avatar") String avatar, @Param("birth") Date birth, @Param("dressSize") int dressSize, @Param("shoeSize") int shoeSize);
 
@@ -62,5 +70,10 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     @Transactional
     @Query("Update Bartender w SET w.first_name=:first_name, w.last_name = :last_name, w.avatar = :avatar, w.birth = :birth, w.dressSize = :dressSize, w.shoeSize = :shoeSize WHERE w.id=:id")
     void updateBartender(@Param("id") int id, @Param("first_name") String first_name, @Param("last_name") String last_name, @Param("avatar") String avatar, @Param("birth") Date birth, @Param("dressSize") int dressSize, @Param("shoeSize") int shoeSize);
+
+    @Modifying
+    @Transactional
+    @Query("Update Supplier w SET w.first_name=:first_name, w.last_name = :last_name, w.avatar = :avatar, w.birth = :birth WHERE w.id=:id")
+    void updateSupplier(@Param("id") int id, @Param("first_name") String first_name, @Param("last_name") String last_name, @Param("avatar") String avatar, @Param("birth") Date birth);
 
 }

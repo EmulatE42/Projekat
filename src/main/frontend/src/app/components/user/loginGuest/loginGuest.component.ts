@@ -1,7 +1,7 @@
 import {Component, OnInit} from "@angular/core";
 import { Router } from '@angular/router';
 import {UserService} from "../../../services/user/UserService";
-import {Bartender, Cook, Guest, Role, SuperUser, User, Waiter} from "../../../models";
+import {Bartender, Cook, Guest, Role, SuperUser, Supplier, User, Waiter} from "../../../models";
 
 @Component({
   templateUrl: './loginGuest.component.html',
@@ -17,6 +17,7 @@ export class LoginGuest{
   waiter: Waiter;
   cook: Cook;
   bartender: Bartender;
+  supplier: Supplier;
 
   constructor(
     private userService: UserService,
@@ -44,6 +45,9 @@ export class LoginGuest{
       else if( Role[this.user.role] == Role.SANKER.toString()) {
         this.router.navigate(['../bartender/account']);
       }
+      else if( Role[this.user.role] == Role.PONUDJAC.toString()) {
+        this.router.navigate(['../supplier/account']);
+      }
     }
     else
       document.getElementById("login").innerHTML = "<div class=\"alert alert-danger col-sm-offset-4 col-sm-4\"> Wrong email/password! </div>";
@@ -69,6 +73,10 @@ export class LoginGuest{
       else if( Role[user.role] == Role.SANKER.toString()) {
         this.bartender = new Bartender(user.id, user.first_name, user.last_name, user.email, user.password, user.role, user.avatar, user.birth, user.dressSize, user.shoeSize, user.firstTimeLogin);
         sessionStorage.setItem('loginUser', JSON.stringify(this.bartender));
+      }
+      else if( Role[user.role] == Role.PONUDJAC.toString()) {
+        this.supplier = new Supplier(user.id, user.first_name, user.last_name, user.email, user.password, user.role, user.avatar, user.birth, user.firstTimeLogin);
+        sessionStorage.setItem('loginUser', JSON.stringify(this.supplier));
       }
     }
     else

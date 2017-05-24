@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from "@angular/core";
 import { Router } from '@angular/router';
-import {Guest, Restaurant, Waiter} from "../../../models";
+import {Guest, Restaurant, Supplier, Waiter} from "../../../models";
 import {RestaurantService} from "../../../services/restaurant/RestaurantService";
 import {UserService} from "../../../services/user/UserService";
 import * as firebase from 'firebase'
@@ -9,25 +9,22 @@ import {$WebSocket} from 'angular2-websocket/angular2-websocket'
 
 
 @Component({
-  templateUrl: './basicWaiterView.component.html',
-  styleUrls: ['./basicWaiterView.component.css'],
+  templateUrl: './basicSupplierView.component.html',
+  styleUrls: ['./basicSupplierView.component.css'],
   providers: [UserService]
 })
 
-export class BasicWaiterView implements OnInit{
+export class BasicSupplierView implements OnInit{
 
-  waiter: Waiter = JSON.parse(sessionStorage.getItem("loginUser"));
+  supplier: Supplier = JSON.parse(sessionStorage.getItem("loginUser"));
   firstname: string;
   lastname: string;
   birth: string;
-  dressSize: number;
-  shoeSize: number;
+
 
   firstname_save: string;
   lastname_save: string;
   birth_save: string ;
-  dressSize_save: number;
-  shoeSize_save: number;
 
   edit: boolean = true;
   avatar: string;
@@ -38,54 +35,44 @@ export class BasicWaiterView implements OnInit{
 
 
   ngOnInit(): void {
-    this.firstname = this.waiter.first_name;
-    this.lastname = this.waiter.last_name;
-    this.formatDate(this.waiter.birth);
-    this.dressSize = this.waiter.dressSize;
-    this.shoeSize = this.waiter.shoeSize;
+    this.firstname = this.supplier.first_name;
+    this.lastname = this.supplier.last_name;
+    this.formatDate(this.supplier.birth);
 
-    if(this.waiter.avatar === null)
+
+    if(this.supplier.avatar === null)
     {
       const storageRef = firebase.storage().ref().child('images/default-profile.png');
       storageRef.getDownloadURL().then(url => this.avatar = url);
     }
     else {
-      const storageRef = firebase.storage().ref().child('images/' + this.waiter.avatar);
+      const storageRef = firebase.storage().ref().child('images/' + this.supplier.avatar);
       storageRef.getDownloadURL().then(url => this.avatar = url);
     }
 
     this.saveData();
-    var ws = new $WebSocket("ws://localhost:8090/counter");
-
-    ws.onOpen(event)
-    {
-      alert("Usao");
-    }
-
 
   }
 
   update(): void {
-    this.waiter.first_name = this.firstname;
-    this.waiter.last_name = this.lastname;
-    this.waiter.birth = this.birth;
-    this.waiter.dressSize = this.dressSize;
-    this.waiter.shoeSize = this.shoeSize;
+    this.supplier.first_name = this.firstname;
+    this.supplier.last_name = this.lastname;
+    this.supplier.birth = this.birth;
 
-    this.userService.updateWaiter(this.waiter).subscribe(waiter => console.log(waiter));
-    sessionStorage.setItem("loginUser", JSON.stringify(this.waiter));
+    this.userService.updateSupplier(this.supplier).subscribe(waiter => console.log(waiter));
+    sessionStorage.setItem("loginUser", JSON.stringify(this.supplier));
     this.isEdit();
     this.saveData();
   }
 
   formatDate(date): void {
-  var d = new Date(date),
-    month = '' + (d.getMonth() + 1),
-    day = '' + d.getDate(),
-    year = d.getFullYear();
+    var d = new Date(date),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear();
 
-  if (month.length < 2) month = '0' + month;
-  if (day.length < 2) day = '0' + day;
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
 
     this.birth = [year, month, day].join('-');
   }
@@ -104,8 +91,6 @@ export class BasicWaiterView implements OnInit{
     this.firstname = this.firstname_save;
     this.lastname = this.lastname_save;
     this.birth = this.birth_save;
-    this.dressSize = this.dressSize_save;
-    this.shoeSize = this.shoeSize_save;
 
     //alert("Nova vrednost: " + this.firstname_save);
     this.isEdit();
@@ -121,8 +106,6 @@ export class BasicWaiterView implements OnInit{
     this.firstname_save = this.firstname;
     this.lastname_save = this.lastname;
     this.birth_save = this.birth;
-    this.dressSize_save = this.dressSize;
-    this.shoeSize_save = this.shoeSize;
   }
 
   previewFile(): void {
@@ -144,9 +127,9 @@ export class BasicWaiterView implements OnInit{
       var storageRef = firebase.storage().ref('/images/' + filename);
       var uploadTask = storageRef.put(file);
 
-      this.waiter.avatar = filename;
-      sessionStorage.setItem('loginUser', JSON.stringify(this.waiter));
-      this.userService.updateWaiter(this.waiter).subscribe(waiter => console.log(waiter));
+      this.supplier.avatar = filename;
+      sessionStorage.setItem('loginUser', JSON.stringify(this.supplier));
+      this.userService.updateSupplier(this.supplier).subscribe(waiter => console.log(waiter));
 
       uploadTask.on('state_changed', function(snapshot){
 

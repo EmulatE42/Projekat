@@ -70,6 +70,14 @@ public class UserController {
     }
 
     @CrossOrigin
+    @RequestMapping(value = "/supplier/change/password", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<UserDTO> changeSupplierPassword(@RequestBody UserDTO g) {
+        User user =  this.userService.updateSupplierPassword(g.getEmail(), g.getPassword());
+
+        return new ResponseEntity(user != null ? user : "{}", HttpStatus.OK);
+    }
+
+    @CrossOrigin
     @RequestMapping(value = "/waiter/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Waiter> updateWaiter(@RequestBody Waiter w) {
         Waiter waiter = this.userService.updateWaiter(w.getId(), w.getFirst_name(), w.getLast_name(), w.getAvatar(), w.getBirth(), w.getDressSize(), w.getShoeSize());
@@ -93,6 +101,14 @@ public class UserController {
         return new ResponseEntity(bartender, HttpStatus.OK);
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "/supplier/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Supplier> updateSupplier(@RequestBody Supplier w) {
+        Supplier supplier = this.userService.updateSupplier(w.getId(), w.getFirst_name(), w.getLast_name(), w.getAvatar(), w.getBirth());
+
+        return new ResponseEntity(supplier, HttpStatus.OK);
+    }
+
     public UserDTO converte(User user)
     {
         UserDTO userDTO = null;
@@ -114,6 +130,10 @@ public class UserController {
 
                 case SANKER: {
                     userDTO = new UserDTO((Bartender) user);
+                    return userDTO;
+                }
+                case PONUDJAC: {
+                    userDTO = new UserDTO((Supplier) user);
                     return userDTO;
                 }
                 default:

@@ -17,8 +17,11 @@ public interface UserService {
     User updateWaiterPassword(String email, String password);
     User updateCookPassword(String email, String password);
     User updateBartenderPassword(String email, String password);
+    User updateSupplierPassword(String email, String password);
     Waiter updateWaiter(int id, String firstname, String lastname, String avatar, Date birth, int dressSize, int shoeSize);
     Cook updateCook(int id, String firstname, String lastname, String avatar, Date birth, int dressSize, int shoeSize);
     Bartender updateBartender(int id, String firstname, String lastname, String avatar, Date birth, int dressSize, int shoeSize);
+    Supplier updateSupplier(int id, String firstname, String lastname, String avatar, Date birth);
+
 
 }
