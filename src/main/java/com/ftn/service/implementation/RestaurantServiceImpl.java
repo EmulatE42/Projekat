@@ -23,7 +23,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     public List<Restaurant> getRestaurants() {
 
         //inicijalizacija, posto jos uvek nemamo fromu za unos restorana
-        Restaurant r1 = new Restaurant("Krkanluk", 750, 4.5, 4.2,false);
+        Restaurant r1 = new Restaurant("Perla", 750, 4.5, 4.2,false);
         Restaurant r2 = new Restaurant("Ispod saca", 250, 4.8, 5,false);
 
         List<Restaurant> restaurants = new ArrayList<>();

@@ -11,9 +11,11 @@ public interface UserService {
  // ovde su moje u rep su postojece kom
     //User findOne(Integer id);
     Guest save(Guest guest);
+    User findByEmail(String email);
     Integer deleteUserByEmail(String email);
     User login(String email, String password);
     Guest register(String firstname, String lastname, String email, String password);
+    User updateGuestPassword(String email, String password);
     User updateWaiterPassword(String email, String password);
     User updateCookPassword(String email, String password);
     User updateBartenderPassword(String email, String password);
@@ -21,4 +23,5 @@ public interface UserService {
     Cook updateCook(int id, String firstname, String lastname, String avatar, Date birth, int dressSize, int shoeSize);
     Bartender updateBartender(int id, String firstname, String lastname, String avatar, Date birth, int dressSize, int shoeSize);
 
+    Guest updateGuest(Integer id, String first_name, String last_name, String avatar, String adresa);
 }

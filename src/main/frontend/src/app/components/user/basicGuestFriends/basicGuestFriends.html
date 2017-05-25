@@ -1,0 +1,31 @@
+<div class='panel panel-default'>
+  <div class='panel-heading' style='font-size:large'>
+    <a [routerLink]="['/guest/account']"> Moj nalog  </a> &nbsp; &nbsp; &nbsp;
+    <a [routerLink]="['/guest/friends']"> Prijatelji </a> &nbsp; &nbsp; &nbsp;
+    <a [routerLink]="['/guest/restaurants']"> Restorani </a>
+  </div>
+
+
+  <div class='panel-body'>
+    <div class='table-responsive'>
+      <table class='table table-striped' *ngIf='guests && guests.length'>
+        <thead>
+        <tr>
+          <th>Ime Prijatelja</th>
+          <th>Prezime</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor='let guest of guests'>
+          <td>
+            {{guest.first_name}}
+          </td>
+          <td>{{ guest.last_name}}</td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

@@ -24,16 +24,19 @@ export class LoginGuest{
 
   login(): void
   {
+
     this.userService.login(this.email, this.password).subscribe(user => this.converte(<SuperUser> user), error => alert(error), () => this.com());
   }
 
   com(): void
   {
+
     this.user = JSON.parse(sessionStorage.getItem("loginUser"));
     if(JSON.stringify(this.user) !== '{}') {
-
+      console.log("mozda");
       if( Role[this.user.role] == Role.GOST.toString()) {
-        this.router.navigate(['../']);
+        console.log("USAO");
+        this.router.navigate(['../guest/account']);
       }
       else if( Role[this.user.role] == Role.KONOBAR.toString()) {
         this.router.navigate(['../waiter/account']);
@@ -55,7 +58,8 @@ export class LoginGuest{
     if(JSON.stringify(user) !== '{}') {
 
       if( Role[user.role] == Role.GOST.toString()) {
-        this.guest = new Guest(user.id, user.first_name, user.last_name, user.email, user.password, user.role, user.avatar, user.online);
+        console.log("DODACU " + user.adresa);
+        this.guest = new Guest(user.id, user.first_name, user.last_name, user.email, user.password, user.role, user.avatar, user.enabled,user.adresa);
         sessionStorage.setItem('loginUser', JSON.stringify(this.guest));
       }
       else if( Role[user.role] == Role.KONOBAR.toString()) {

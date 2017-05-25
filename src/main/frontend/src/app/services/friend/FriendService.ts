@@ -7,14 +7,14 @@ import 'rxjs/add/operator/catch'
 import {Guest, Restaurant} from "../../models";
 
 @Injectable()
-export class RestaurantService
+export class FriendService
 {
 
   constructor(private http: Http) { }
 
-  getAll(): Observable<Restaurant[]>{
+  getAll(): Observable<Guest[]>{
 
-    return this.http.get('http://localhost:8090/restaurants').map((response: Response) => <Restaurant[]> response.json())
+    return this.http.get('http://localhost:8090/friends').map((response: Response) => <Guest[]> response.json())
       .do(data => console.log(JSON.stringify(data)))
       .catch(this.handleError);
   }

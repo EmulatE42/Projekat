@@ -20,6 +20,8 @@ export abstract class User
 
 export class SuperUser
 {
+
+
   constructor( public id: number,
                public first_name : string,
                public last_name : string,
@@ -27,11 +29,12 @@ export class SuperUser
                public password : string,
                public role: Role,
                public avatar: string,
-               public online: boolean,
                public birth: string,
                public dressSize: number,
                public shoeSize: number,
-               public firstTimeLogin: boolean) {}
+               public firstTimeLogin: boolean,
+               public enabled: boolean,
+               public adresa: string) {}
 }
 
 
@@ -43,7 +46,8 @@ export class Guest extends User{
               public password : string,
               public role: Role,
               public avatar: string,
-              public online: boolean)
+              public enabled: boolean,
+              public adresa: string)
   {
     super(id, first_name, last_name, email, password, role, avatar);
   }

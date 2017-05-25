@@ -37,8 +37,10 @@ public class UserDTO implements Serializable {
 
     private int shoeSize;
 
-    private boolean firstTimeLogin;
+    private String adresa;
 
+    private boolean firstTimeLogin;
+    private boolean enabled;
     public UserDTO() {}
 
     public UserDTO(Guest guest) {
@@ -54,6 +56,8 @@ public class UserDTO implements Serializable {
         this.dressSize = -1;
         this.shoeSize = -1;
         this.firstTimeLogin = false;
+        this.adresa = guest.getAdresa();
+        this.enabled = guest.isEnabled();
     }
 
     public UserDTO(Waiter waiter) {
@@ -101,7 +105,7 @@ public class UserDTO implements Serializable {
         this.firstTimeLogin = bartender.isFirstTimeLogin();
     }
 
-    public UserDTO(Integer id, String first_name, String last_name, String email, String password, Role role, String avatar, boolean online, Date birth, int dressSize, int shoeSize, boolean firstTimeLogin) {
+    public UserDTO(Integer id, String first_name, String last_name, String email, String password, Role role, String avatar, boolean online, Date birth, int dressSize, int shoeSize, boolean firstTimeLogin, String adresa) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -114,6 +118,15 @@ public class UserDTO implements Serializable {
         this.dressSize = dressSize;
         this.shoeSize = shoeSize;
         this.firstTimeLogin = firstTimeLogin;
+        this.adresa = adresa;
+    }
+
+    public String getAdresa() {
+        return adresa;
+    }
+
+    public void setAdresa(String adresa) {
+        this.adresa = adresa;
     }
 
     public String getAvatar() {

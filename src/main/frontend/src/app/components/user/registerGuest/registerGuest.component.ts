@@ -2,7 +2,11 @@ import {Component, OnInit} from "@angular/core";
 import { Router } from '@angular/router';
 import {UserService} from "../../../services/user/UserService";
 import {Guest} from "../../../models";
+import * as firebase from 'firebase'
 
+
+// email : isamrs123@gmail.com
+// pass : deda1234
 @Component({
   templateUrl: './registerGuest.component.html',
   providers: [UserService],
