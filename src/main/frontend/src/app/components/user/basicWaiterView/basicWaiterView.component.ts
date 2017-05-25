@@ -4,7 +4,7 @@ import {Guest, Restaurant, Waiter} from "../../../models";
 import {RestaurantService} from "../../../services/restaurant/RestaurantService";
 import {UserService} from "../../../services/user/UserService";
 import * as firebase from 'firebase'
-import {$WebSocket} from 'angular2-websocket/angular2-websocket'
+//import {$WebSocket} from 'angular2-websocket/angular2-websocket'
 
 
 
@@ -55,12 +55,12 @@ export class BasicWaiterView implements OnInit{
     }
 
     this.saveData();
-    var ws = new $WebSocket("ws://localhost:8090/counter");
+    //var ws = new $WebSocket("ws://localhost:8090/counter");
 
-    ws.onOpen(event)
+    /*ws.onOpen(event)
     {
       alert("Usao");
-    }
+    }*/
 
 
   }

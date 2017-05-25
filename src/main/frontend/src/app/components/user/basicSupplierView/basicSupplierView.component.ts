@@ -4,7 +4,7 @@ import {Guest, Restaurant, Supplier, Waiter} from "../../../models";
 import {RestaurantService} from "../../../services/restaurant/RestaurantService";
 import {UserService} from "../../../services/user/UserService";
 import * as firebase from 'firebase'
-import {$WebSocket} from 'angular2-websocket/angular2-websocket'
+//import {$WebSocket} from 'angular2-websocket/angular2-websocket'
 
 
 

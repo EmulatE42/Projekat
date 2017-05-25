@@ -23,6 +23,9 @@ import {UserService} from "./services/user/UserService";
 import { BasicGuestFriendsComponent } from './components/user/basicGuestFriends/basicGuestFriends';
 
 import {FriendService} from "./services/friend/FriendService";
+import {BasicSupplierView} from "./components/user/basicSupplierView/basicSupplierView.component";
+import {MyComponent} from "app/components/user/waiterWorkShedulesView/waiterWorkShedulesView.component";
+import {CalendarComponent} from "ap-angular2-fullcalendar";
 
 firebase.initializeApp(firebaseConfig);
 
@@ -38,7 +41,13 @@ firebase.initializeApp(firebaseConfig);
     BasicBartenderView,
     EmployeeChangePassword,
     BasicGuestRestaurants,
-    BasicGuestFriendsComponent
+    BasicGuestFriendsComponent,
+    BasicSupplierView,
+        MyComponent,
+        CalendarComponent
+
+
+
   ],
   imports: [
     BrowserModule,
@@ -54,7 +63,11 @@ firebase.initializeApp(firebaseConfig);
       {path: 'waiter/account', canActivate: [EmployeeFirstLoginGuard], component: BasicWaiterView},
       {path: 'cook/account', canActivate: [EmployeeFirstLoginGuard], component: BasicCookView},
       {path: 'bartender/account', canActivate: [EmployeeFirstLoginGuard], component: BasicBartenderView},
-      {path: 'change/password', component: EmployeeChangePassword}
+      {path: 'change/password', component: EmployeeChangePassword},
+      {path: 'supplier/account', canActivate: [EmployeeFirstLoginGuard], component: BasicSupplierView},
+      {path: 'waiter/work', component: MyComponent}
+
+
     ]),
     AngularFireModule.initializeApp(firebaseConfig)
   ],

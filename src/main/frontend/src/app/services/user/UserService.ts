@@ -20,15 +20,8 @@ export class UserService
   private updateGuestUrl = 'http://localhost:8090/guest/update';
   private updateGuestPasswordUrl = 'http://localhost:8090/guest/change/password';
 
-  private loginUrl = 'http://localhost:8090/login';
-  private registerUrl = 'http://localhost:8090/register';
-  private updateWaiterPasswordUrl = 'http://localhost:8090/waiter/change/password';
-  private updateCookPasswordUrl = 'http://localhost:8090/cook/change/password';
-  private updateBartenderPasswordUrl = 'http://localhost:8090/bartender/change/password';
   private updateSupplierPasswordUrl = 'http://localhost:8090/supplier/change/password';
-  private updateWaiterUrl = 'http://localhost:8090/waiter/update';
-  private updateCookUrl = 'http://localhost:8090/cook/update';
-  private updateBartenderUrl = 'http://localhost:8090/bartender/update';
+
   private updateSupplierUrl = 'http://localhost:8090/supplier/update';
 
   constructor(private http: Http) { }
