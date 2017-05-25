@@ -1,23 +1,22 @@
 <div class='panel panel-default'>
   <div class='panel-heading' style='font-size:large'>
-    <a href="#"> Raspored rada </a> &nbsp; &nbsp; &nbsp;
-    <a href="#"> Lista porudzbina jela</a> &nbsp; &nbsp; &nbsp;
-    <a [routerLink]="['/cook/account']"> Moj nalog </a>
+    <a href="#"> Spisak porudzbina </a> &nbsp; &nbsp; &nbsp;
+    <a [routerLink]="['/supplier/account']"> Moj nalog </a>
   </div>
 
   <div class='panel-body'>
+
     <div class="row">
+
       <div class="col-sm-2">
-        <div>
-          <img [src]="avatar" class="img-rounded" alt="Profile picture" />
+        <div class="border-img">
+          <img [src]="avatar" alt="Profile picture" />
         </div> <br>
-          <label class="upload-group" (change)="previewFile()">
-            Upload image
-            <input type="file" class="upload-group" id="file">
-          </label>
+        <label class="btn upload-group" (change)="previewFile()">
+          Upload image
+          <input type="file" class="upload-group" id="file">
+        </label>
       </div>
-
-
 
       <div class="col-sm-4">
         <form class="form-horizontal">
@@ -30,25 +29,15 @@
           <div class="form-group">
             <label class="control-label col-sm-4" for="lastname">Lastname:</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" [disabled]="edit" [(ngModel)]="lastname" name = "lastname" id="lastname" required/>
+              <span style="cursor:grab">
+                <input type="text" class="form-control" [disabled]="edit" [(ngModel)]="lastname" name = "lastname" id="lastname" required/>
+              </span>
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-4" for="birth">Birth:</label>
             <div class="col-sm-8">
               <input type="date" class="form-control" [disabled]="edit"  [(ngModel)]="birth" name = "birth" id="birth" required/>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-4" for="dressSize">Dress size:</label>
-            <div class="col-sm-8">
-              <input type="number" class="form-control" [disabled]="edit"  [(ngModel)]="dressSize" name = "dressSize" id="dressSize"  required/>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="control-label col-sm-4" for="shoeSize">Shoe size:</label>
-            <div class="col-sm-8">
-              <input type="number" class="form-control" [disabled]="edit"  [(ngModel)]="shoeSize" name = "shoeSize" id="shoeSize" required/>
             </div>
           </div>
 
@@ -74,6 +63,7 @@
         </div>
       </div>
     </div>
+
   </div>
 
 </div>

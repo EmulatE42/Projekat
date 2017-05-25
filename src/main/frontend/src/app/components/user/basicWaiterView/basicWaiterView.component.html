@@ -1,6 +1,6 @@
 <div class='panel panel-default'>
   <div class='panel-heading' style='font-size:large'>
-    <a href="#"> Raspored rada </a> &nbsp; &nbsp; &nbsp;
+    <a [routerLink]="['/waiter/work']"> Raspored rada </a> &nbsp; &nbsp; &nbsp;
     <a href="#"> Graficki prikaz stolova </a> &nbsp; &nbsp; &nbsp;
     <a href="#"> Lista porudzbina </a> &nbsp; &nbsp; &nbsp;
     <a [routerLink]="['/waiter/account']"> Moj nalog </a>
@@ -14,7 +14,7 @@
         <div class="border-img">
           <img [src]="avatar" alt="Profile picture" />
         </div> <br>
-        <label class="upload-group" (change)="previewFile()">
+        <label class="btn upload-group" (change)="previewFile()">
           Upload image
           <input type="file" class="upload-group" id="file">
         </label>
@@ -31,7 +31,9 @@
           <div class="form-group">
             <label class="control-label col-sm-4" for="lastname">Lastname:</label>
             <div class="col-sm-8">
-              <input type="text" class="form-control" [disabled]="edit" [(ngModel)]="lastname" name = "lastname" id="lastname" required/>
+              <span style="cursor:grab">
+                <input type="text" class="form-control" [disabled]="edit" [(ngModel)]="lastname" name = "lastname" id="lastname" required/>
+              </span>
             </div>
           </div>
           <div class="form-group">

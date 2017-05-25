@@ -41,6 +41,9 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     @Query("Update Guest g SET g.email=:email, g.password = :password WHERE g.email=:email")
     void updateGuestPassword(@Param("email") String email, @Param("password") String password);
 
+    @Query("SELECT c FROM Supplier c WHERE c.id = :id")
+    Supplier getSupplier( @Param("id") int id);
+
     @Modifying
     @Transactional
     @Query("Update Waiter w SET w.email=:email, w.password = :password, w.firstTimeLogin = true WHERE w.email=:email")
@@ -55,6 +58,11 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     @Transactional
     @Query("Update Bartender b SET b.email=:email, b.password = :password, b.firstTimeLogin = true WHERE b.email=:email")
     void updateBartenderPassword(@Param("email") String email, @Param("password") String password);
+
+    @Modifying
+    @Transactional
+    @Query("Update Supplier b SET b.email=:email, b.password = :password, b.firstTimeLogin = true WHERE b.email=:email")
+    void updateSupplierPassword(@Param("email") String email, @Param("password") String password);
 
     @Modifying
     @Transactional
@@ -76,5 +84,10 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     @Query("Update Guest g SET g.first_name=:first_name, g.last_name = :last_name, g.avatar = :avatar, g.adresa = :adresa WHERE g.id=:id")
     void updateGuest(@Param("id") Integer id,@Param("first_name") String first_name, @Param("last_name") String last_name, @Param("avatar") String avatar,@Param("adresa") String adresa);
 
+
+    @Modifying
+    @Transactional
+    @Query("Update Supplier w SET w.first_name=:first_name, w.last_name = :last_name, w.avatar = :avatar, w.birth = :birth WHERE w.id=:id")
+    void updateSupplier(@Param("id") int id, @Param("first_name") String first_name, @Param("last_name") String last_name, @Param("avatar") String avatar, @Param("birth") Date birth);
 
 }
