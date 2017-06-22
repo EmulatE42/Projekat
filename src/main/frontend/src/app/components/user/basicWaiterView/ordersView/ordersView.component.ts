@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from "@angular/core";
 import { Router } from '@angular/router';
 import * as firebase from 'firebase'
-import {$WebSocket} from 'angular2-websocket/angular2-websocket'
 import {UserService} from "../../../../services/user/UserService";
 import {Drink, Food, Waiter} from "../../../../models";
 import {OrderService} from "../../../../services/order/OrderService";
