@@ -18,6 +18,13 @@ export abstract class User
   ) {}
 }
 
+export class Friendship {
+  constructor( public id: number,
+               public koSalje: string,
+               public komeSeSalje: string) {}
+}
+
+
 export class SuperUser
 {
 
@@ -127,4 +134,5 @@ export class Restaurant{
   rating: number;
   friendRating: number;
   reservation: boolean;
+  description : string;
 }

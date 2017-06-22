@@ -14,4 +14,5 @@ public interface VerificationTokenRepository  extends JpaRepository<Verification
     VerificationGuest findByToken(String verificationTokenValue);
     @Query("SELECT vt.token FROM VerificationGuest vt WHERE vt.email = :email")
     String findTokenByUserEmail(@Param("email") String email);
+
 }

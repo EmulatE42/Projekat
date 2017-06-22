@@ -27,6 +27,8 @@ export class RegisterGuest{
   register(): void
   {
     this.userService.register(this.firstname, this.lastname, this.email, this.password1).subscribe(guest => this.guest = guest, error => alert(error), () => this.com());
+
+
   }
 
   com(): void

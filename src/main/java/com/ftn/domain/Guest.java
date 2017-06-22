@@ -30,7 +30,7 @@ public class Guest extends User {
     }
 
     public void setEnabled(boolean online) {
-        //System.out.println("EHREEEEEEEEEE POSTAAVIOOOOOO"); this.enabled = online;
+        System.out.println("EHREEEEEEEEEE POSTAAVIOOOOOO"); this.enabled = online;
     }
     public String getAdresa() {
         return adresa;

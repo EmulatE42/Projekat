@@ -40,7 +40,7 @@ public class UserDTO implements Serializable {
     private String adresa;
 
     private boolean firstTimeLogin;
-    private boolean enabled;
+    public boolean enabled;
     public UserDTO() {}
 
     public UserDTO(Guest guest) {

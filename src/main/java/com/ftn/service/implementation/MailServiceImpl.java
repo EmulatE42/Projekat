@@ -51,7 +51,7 @@ public class MailServiceImpl implements MailService {
         System.out.println("TOKEN JEEEEEEEEEEEE " + token);
         String messageText = "Hello " + guest.getFirst_name() + " " + guest.getLast_name()  + ",\n\n" +
                 "To activate your account please click the following link: " +
-                "http://localhost:4200/guest/" + guest.getEmail() + "/" + token ;
+                "http://localhost:8090/guest/" + guest.getEmail() + "/" + token ;
 
         return getPreparator(guest.getEmail(), messageText, "Activation email");
     }

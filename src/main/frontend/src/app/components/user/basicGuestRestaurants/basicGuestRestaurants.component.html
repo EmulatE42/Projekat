@@ -7,11 +7,15 @@
 
 
   <div class='panel-body'>
+    <button type="submit" (click) = "sortiraj()">Sortiraj po imenu</button>
+    <button type="submit" (click) = "sortiraj3()">Sortiraj po vrsti</button>
+    <button type="submit" (click) = "sortiraj2()">Sortiraj po udaljenosti</button>
     <div class='table-responsive'>
       <table class='table table-striped' *ngIf='restaurants && restaurants.length'>
         <thead>
         <tr>
           <th>Ime restorana</th>
+          <th>Vrsta restorana</th>
           <th>Udaljenost</th>
           <th>Rejting</th>
           <th>Prijatelji</th>
@@ -23,8 +27,8 @@
           <td>
             {{restaurant.name}}
           </td>
+          <td>{{ restaurant.description}}</td>
           <td>{{ restaurant.distance}}</td>
-
           <td>
             <ai-star [rating]='restaurant.rating' (ratingClicked)='onRatingClicked($event)'>
             </ai-star>

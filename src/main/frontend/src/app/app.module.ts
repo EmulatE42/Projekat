@@ -26,6 +26,9 @@ import {FriendService} from "./services/friend/FriendService";
 import {BasicSupplierView} from "./components/user/basicSupplierView/basicSupplierView.component";
 import {MyComponent} from "app/components/user/waiterWorkShedulesView/waiterWorkShedulesView.component";
 import {CalendarComponent} from "ap-angular2-fullcalendar";
+import { FilterPipe } from './filter.pipe';
+import { Filter2Pipe } from './filter2.pipe';
+import { AddFriendComponent } from './components/user/add-friend/add-friend.component';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -44,7 +47,11 @@ firebase.initializeApp(firebaseConfig);
     BasicGuestFriendsComponent,
     BasicSupplierView,
         MyComponent,
-        CalendarComponent
+        CalendarComponent,
+        FilterPipe,
+        Filter2Pipe,
+        AddFriendComponent,
+
 
 
 
@@ -65,7 +72,9 @@ firebase.initializeApp(firebaseConfig);
       {path: 'bartender/account', canActivate: [EmployeeFirstLoginGuard], component: BasicBartenderView},
       {path: 'change/password', component: EmployeeChangePassword},
       {path: 'supplier/account', canActivate: [EmployeeFirstLoginGuard], component: BasicSupplierView},
-      {path: 'waiter/work', component: MyComponent}
+      {path: 'waiter/work', component: MyComponent},
+      {path: 'guest/friends/add', component: AddFriendComponent}
+
 
 
     ]),

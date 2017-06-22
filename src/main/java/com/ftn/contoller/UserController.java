@@ -1,5 +1,6 @@
 package com.ftn.contoller;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.ftn.domain.*;
 import com.ftn.domain.DTO.UserDTO;
 import com.ftn.service.MailService;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 /**
  * Created by EmulatE on 10-May-17.
@@ -40,8 +42,27 @@ public class UserController {
         System.out.println("Password: " + g.getPassword());
         User user = this.userService.login(g.getEmail(), g.getPassword());
         UserDTO userDTO = converte(user);
-
+        //System.out.println("ZA LOGIN ENABLED JE " + userDTO.enabled);
         return new ResponseEntity(userDTO != null ? userDTO : "{}", HttpStatus.OK);
+    }
+
+
+    @CrossOrigin
+    @RequestMapping(value = "/proveri", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> proveri(@RequestBody String e) {
+
+        e = e.replaceAll("\"","");
+        String tok = verificationGuestService.getTokenByUserEmail(e);
+
+        if (tok != null){
+            System.out.println( "ZA OVAJ EMAIL " + e + " vracam " + tok );
+        return new ResponseEntity(tok, HttpStatus.OK);
+        }
+        else
+        {
+            System.out.println( "ZA OVAJ EMAIL U ELSE " + e + " vracam " + tok );
+            return new ResponseEntity(null, HttpStatus.OK);
+        }
     }
 
     @CrossOrigin
@@ -56,17 +77,18 @@ public class UserController {
     }
 
 
+//guest/lol/6f2ebe44-5f3a-4cc3-a335-d0b776672dde
+//@RequestMapping(value = "/guest/lol/6f2ebe44-5f3a-4cc3-a335-d0b776672dde",
+    @RequestMapping(value = "/guest/{email}/{verificationTokenValue}",
 
-
-    @RequestMapping(value = "/{email}/{verificationTokenValue}",
             method = RequestMethod.GET)
-    public ResponseEntity activateUser(@PathVariable("email") String email,
-                                       @PathVariable("token") String token)
+    public ResponseEntity activateUser(@PathVariable String email,
+                                       @PathVariable String verificationTokenValue)
     {
         if (userService.findByEmail(email) == null)
             return new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
-
-        verificationGuestService.activateGuest(email,token);
+        System.out.println("POZVAO ACTIVATE USER");
+        verificationGuestService.activateGuest(email,verificationTokenValue);
         return new ResponseEntity(HttpStatus.OK);
     }
 

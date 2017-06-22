@@ -12,19 +12,23 @@ export class LoginGuest{
   email: string;
   password: string;
 
+  provera: boolean;
+
   user: User;
   guest: Guest;
   waiter: Waiter;
   cook: Cook;
   bartender: Bartender;
   supplier: Supplier;
-
+  tok : String;
   constructor(
     private userService: UserService,
     private router: Router) { }
 
   login(): void
   {
+    this.userService.proveri(this.email).subscribe(data => this.tok = data);
+
 
     this.userService.login(this.email, this.password).subscribe(user => this.converte(<SuperUser> user), error => alert(error), () => this.com());
   }
@@ -33,10 +37,15 @@ export class LoginGuest{
   {
 
     this.user = JSON.parse(sessionStorage.getItem("loginUser"));
-    if(JSON.stringify(this.user) !== '{}') {
-      console.log("mozda");
+    if(JSON.stringify(this.user) !== '{}') {  // OVDE BABA
+
       if( Role[this.user.role] == Role.GOST.toString()) {
         console.log("USAO");
+       if (this.provera == false)
+       {
+         document.getElementById("login").innerHTML = "<div class=\"alert alert-danger col-sm-offset-4 col-sm-4\"> Please verify your account  </div>";
+         return;
+       }
         this.router.navigate(['../guest/account']);
       }
       else if( Role[this.user.role] == Role.KONOBAR.toString()) {
@@ -62,8 +71,9 @@ export class LoginGuest{
     if(JSON.stringify(user) !== '{}') {
 
       if( Role[user.role] == Role.GOST.toString()) {
-        console.log("DODACU " + user.adresa);
+       // console.log("DODACU  ena " + user.enabled);
         this.guest = new Guest(user.id, user.first_name, user.last_name, user.email, user.password, user.role, user.avatar, user.enabled,user.adresa);
+        this.provera = user.enabled;
         sessionStorage.setItem('loginUser', JSON.stringify(this.guest));
       }
       else if( Role[user.role] == Role.KONOBAR.toString()) {

@@ -35,12 +35,13 @@ public class Restaurant {
 
     public Restaurant() {}
 
-    public Restaurant(String name, int distance, double rating, double friendRating, boolean reservation) {
+    public Restaurant(String name, String description, int distance, double rating, double friendRating, boolean reservation) {
         this.name = name;
         this.distance = distance;
         this.rating = rating;
         this.friendRating = friendRating;
         this.reservation = reservation;
+        this.description = description;
     }
 
     public String getName() {
