@@ -1,0 +1,34 @@
+<div class='panel panel-default'>
+  <div class='panel-heading' style='font-size:large'>
+    <a [routerLink]="['/guest/friends']"> Prijatelji </a>
+
+  </div>
+
+  <div class='panel-body'>
+    <form >
+      <label> Broj prijatelja za dodavanje:  {{potencijalni.length}}  </label>
+      <table class='table table-striped' *ngIf='potencijalni && potencijalni.length'>
+        <thead>
+        <tr>
+          <th>Ime Prijatelja</th>
+          <th>Prezime</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor='let guest of potencijalni'>
+          <td>
+            {{guest.first_name}}
+          </td>
+          <td>{{ guest.last_name}}</td>
+          <td>
+            <button (click)="dodaj(guest)" type="button" >Dodaj</button>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+    </form>
+
+  </div>
+
+</div>
