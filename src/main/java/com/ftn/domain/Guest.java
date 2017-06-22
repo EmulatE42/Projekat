@@ -10,24 +10,33 @@ import javax.persistence.Table;
 @Table(name = "guest")
 public class Guest extends User {
 
-    @Column(name = "online")
-    private boolean online;
-
+    @Column(name = "enabled")
+    private boolean enabled;
+    @Column(name = "adresa")
+    private String adresa;
     public Guest()
     {
 
     }
 
-    public Guest(String first_name, String last_name, String email, String password, Role role, boolean online) {
+    public Guest(String first_name, String last_name, String email, String password, Role role, boolean enabled,String adresa) {
         super(first_name, last_name, email, password, role);
-        this.online = online;
+        this.enabled = false;
+        this.adresa = adresa;
     }
 
-    public boolean isOnline() {
-        return online;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setOnline(boolean online) {
-        this.online = online;
+    public void setEnabled(boolean online) {
+        System.out.println("EHREEEEEEEEEE POSTAAVIOOOOOO"); this.enabled = online;
+    }
+    public String getAdresa() {
+        return adresa;
+    }
+
+    public void setAdresa(String s) {
+        this.adresa = s;
     }
 }

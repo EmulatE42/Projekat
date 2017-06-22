@@ -24,6 +24,17 @@ import {MyComponent} from "app/components/user/waiterWorkShedulesView/waiterWork
 import {BasicSupplierView} from "./components/user/basicSupplierView/basicSupplierView.component";
 import {OrdersWaiterView} from "./components/user/basicWaiterView/ordersView/ordersView.component";
 
+//import { FilterPipe } from './filter.pipe';
+//import { Filter2Pipe } from './filter2.pipe';
+//import { AddFriendComponent } from './components/user/add-friend/add-friend.component';
+
+import { BasicGuestRestaurants } from './components/user/basicGuestRestaurants/basicGuestRestaurants.component';
+import {UserService} from "./services/user/UserService";
+import { BasicGuestFriendsComponent } from './components/user/basicGuestFriends/basicGuestFriends';
+
+import {FriendService} from "./services/friend/FriendService";
+
+
 firebase.initializeApp(firebaseConfig);
 
 @NgModule({
@@ -38,6 +49,18 @@ firebase.initializeApp(firebaseConfig);
     BasicBartenderView,
     BasicSupplierView,
     EmployeeChangePassword,
+    BasicGuestRestaurants,
+    BasicGuestFriendsComponent,
+    BasicSupplierView,
+        MyComponent,
+        CalendarComponent,
+        //FilterPipe,
+       // Filter2Pipe,
+       // AddFriendComponent,
+
+
+
+
     MyComponent,
     OrdersWaiterView,
     CalendarComponent
@@ -50,18 +73,25 @@ firebase.initializeApp(firebaseConfig);
       {path: 'login', component: LoginGuest},
       {path: 'register', component: RegisterGuest},
       {path: '', canActivate: [GuestLoginGuard], component: BasicGuestView},
+      {path: 'guest/account', canActivate: [GuestLoginGuard], component: BasicGuestView},
+      {path: 'guest/restaurants', component: BasicGuestRestaurants},
+      {path: 'guest/friends', component: BasicGuestFriendsComponent},
       {path: 'waiter/account', canActivate: [EmployeeFirstLoginGuard], component: BasicWaiterView},
       {path: 'waiter/work', component: MyComponent},
       {path: 'waiter/orders', component: OrdersWaiterView},
       {path: 'cook/account', canActivate: [EmployeeFirstLoginGuard], component: BasicCookView},
       {path: 'bartender/account', canActivate: [EmployeeFirstLoginGuard], component: BasicBartenderView},
-      {path: 'supplier/account', canActivate: [EmployeeFirstLoginGuard], component: BasicSupplierView},
-      {path: 'change/password', component: EmployeeChangePassword}
+      {path: 'change/password', component: EmployeeChangePassword},
+      {path: 'supplier/account', canActivate: [EmployeeFirstLoginGuard], component: BasicSupplierView}
+      //{path: 'guest/friends/add', component: AddFriendComponent}
+
+
+
     ]),
     ImageUploadModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [GuestLoginGuard, EmployeeFirstLoginGuard],
+  providers: [GuestLoginGuard, EmployeeFirstLoginGuard,UserService,FriendService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

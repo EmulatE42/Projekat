@@ -23,12 +23,16 @@ public class RestaurantServiceImpl implements RestaurantService {
     public List<Restaurant> getRestaurants() {
 
         //inicijalizacija, posto jos uvek nemamo fromu za unos restorana
-        Restaurant r1 = new Restaurant("Krkanluk", 750, 4.5, 4.2,false);
-        Restaurant r2 = new Restaurant("Ispod saca", 250, 4.8, 5,false);
-
+        Restaurant r1 = new Restaurant("Perla", "Vegan", 750, 4.5, 4.2,false);
+        Restaurant r2 = new Restaurant("Ispod saca","Kineski", 250, 4.8, 5,false);
+        Restaurant r3 = new Restaurant("Aman", "Italijanski", 1000, 4.8, 5,false);
+        Restaurant r4 = new Restaurant("Baba", "Domaci", 300, 4.8, 5,false);
         List<Restaurant> restaurants = new ArrayList<>();
         restaurants.add(r1);
         restaurants.add(r2);
+        restaurants.add(r3);
+        restaurants.add(r4);
+
 
 
         //List<Restaurant> restaurants = restaurantRepository.getAll();

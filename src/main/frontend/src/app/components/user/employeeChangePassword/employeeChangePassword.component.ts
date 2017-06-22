@@ -18,6 +18,7 @@ export class EmployeeChangePassword{
   waiter: Waiter;
   cook: Cook;
   bartender: Bartender;
+  guest : Guest;
   supplier: Supplier;
 
   constructor(
@@ -64,6 +65,15 @@ export class EmployeeChangePassword{
         sessionStorage.setItem("loginUser", JSON.stringify(this.supplier));
         this.userService.updateSupplierPassword(this.supplier.email, this.newPassword1).subscribe(user => this.user = user, error => alert(error))
         this.router.navigate(['../supplier/account']);
+      }
+      else if ( Role[this.user.role] == Role.GOST.toString())
+      {
+        this.guest = <Guest> this.user;
+        sessionStorage.setItem("loginUser", JSON.stringify(this.guest));
+        console.log("EDA");
+        this.userService.updateGuestPassword(this.guest.email, this.newPassword1).subscribe(user => this.user = user, error => alert(error))
+        console.log("DEDA");
+        this.router.navigate(['../guest/account']);
       }
     }
     else {

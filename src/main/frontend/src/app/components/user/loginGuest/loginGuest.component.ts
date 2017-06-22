@@ -12,6 +12,8 @@ export class LoginGuest implements OnInit{
   email: string;
   password: string;
 
+  provera: boolean;
+
   user: User;
   guest: Guest;
   waiter: Waiter;
@@ -20,6 +22,7 @@ export class LoginGuest implements OnInit{
   supplier: Supplier;
 
 
+  tok : String;
   constructor(
     private userService: UserService,
     private router: Router) { }
@@ -31,26 +34,26 @@ export class LoginGuest implements OnInit{
 
   login(): void
   {
+    this.userService.proveri(this.email).subscribe(data => this.tok = data);
+
+
     this.userService.login(this.email, this.password).subscribe(user => this.converte(<SuperUser> user), error => alert(error), () => this.com());
   }
 
   com(): void
   {
+
     this.user = JSON.parse(sessionStorage.getItem("loginUser"));
-    if(JSON.stringify(this.user) !== '{}') {
+    if(JSON.stringify(this.user) !== '{}') {  // OVDE BABA
 
       if( Role[this.user.role] == Role.GOST.toString()) {
-        var sing_up = document.getElementById("sing_up");
-        var login = document.getElementById("login");
-
-        if(sing_up != null && login != null)
-        {
-          this.removeChild(sing_up);
-          this.removeChild(login);
-        }
-
-        document.getElementById("icon").innerHTML = "<a class=\"dropdown-toggle\"data-toggle=\"dropdown\" href=\"#\"><img width=\"26\" height=\"26\" class=\"img-circle\" src=\"https://gitlab.com/uploads/user/avatar/887661/avatar.png\" alt=\"Avatar\"><span class=\"caret\"></span></a><ul class=\"dropdown-menu\"><li><a id=\"logout\" href=\"#\">Log out</a></li></ul>";
-        this.router.navigate(['../']);
+        console.log("USAO");
+       if (this.provera == false)
+       {
+         document.getElementById("login").innerHTML = "<div class=\"alert alert-danger col-sm-offset-4 col-sm-4\"> Please verify your account  </div>";
+         return;
+       }
+        this.router.navigate(['../guest/account']);
       }
       else if( Role[this.user.role] == Role.KONOBAR.toString()) {
         this.router.navigate(['../waiter/account']);
@@ -75,7 +78,9 @@ export class LoginGuest implements OnInit{
     if(JSON.stringify(user) !== '{}') {
 
       if( Role[user.role] == Role.GOST.toString()) {
-        this.guest = new Guest(user.id, user.first_name, user.last_name, user.email, user.password, user.role, user.avatar, user.online);
+       // console.log("DODACU  ena " + user.enabled);
+        this.guest = new Guest(user.id, user.first_name, user.last_name, user.email, user.password, user.role, user.avatar, user.enabled,user.adresa);
+        this.provera = user.enabled;
         sessionStorage.setItem('loginUser', JSON.stringify(this.guest));
       }
       else if( Role[user.role] == Role.KONOBAR.toString()) {
@@ -97,13 +102,6 @@ export class LoginGuest implements OnInit{
     }
     else
       sessionStorage.setItem('loginUser', JSON.stringify({}));
-  }
-
-  removeChild(node): void{
-    while(node.hasChildNodes())
-    {
-      node.removeChild(node.firstChild);
-    }
   }
 
 }

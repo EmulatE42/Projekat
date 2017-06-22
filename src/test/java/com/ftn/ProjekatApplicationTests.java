@@ -1,9 +1,7 @@
 package com.ftn;
 
 import com.ftn.domain.Guest;
-import com.ftn.domain.User;
 import com.ftn.repository.UserRepository;
-import com.ftn.service.UserService;
 import com.ftn.service.implementation.UserServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;

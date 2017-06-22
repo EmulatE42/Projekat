@@ -2,6 +2,7 @@ package com.ftn.service.implementation;
 
 import com.ftn.domain.*;
 import com.ftn.repository.UserRepository;
+import com.ftn.repository.VerificationTokenRepository;
 import com.ftn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,12 @@ public class UserServiceImpl implements UserService {
     public Guest save(Guest guest)  {
         return userRepository.save(guest);
     }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+
 
     @Override
     public Integer deleteUserByEmail(String email) {
@@ -101,7 +108,7 @@ public class UserServiceImpl implements UserService {
 
             if(guest == null)
             {
-                Guest registerGuest = new Guest(firstname, lastname, email, password, GOST, false);
+                Guest registerGuest = new Guest(firstname, lastname, email, password, GOST, false,null);
                 save(registerGuest);
                 return registerGuest;
             }
@@ -115,6 +122,13 @@ public class UserServiceImpl implements UserService {
 
     }
 
+
+    @Override
+    public User updateGuestPassword(String email, String password) {
+        this.userRepository.updateGuestPassword(email, password);
+        User user = userRepository.findAllByEmailAndPassword(email, password);
+        return user;
+    }
     @Override
     public User updateWaiterPassword(String email, String password) {
         this.userRepository.updateWaiterPassword(email, password);
@@ -146,7 +160,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Waiter updateWaiter(int id, String firstname, String lastname, String avatar, Date birth, int dressSize, int shoeSize) {
         userRepository.updateWaiter(id, firstname, lastname, avatar, birth, dressSize, shoeSize);
-        Waiter waiter = userRepository.findById(id);
+        Waiter waiter = (Waiter) userRepository.findById(id);
 
         return waiter;
 
@@ -166,6 +180,14 @@ public class UserServiceImpl implements UserService {
         Bartender bartender = userRepository.getBartender(id);
 
         return bartender;
+    }
+
+    @Override
+    public Guest updateGuest(Integer id, String first_name, String last_name, String avatar, String adresa) {
+        userRepository.updateGuest(id, first_name, last_name, avatar, adresa);
+        Guest guest = userRepository.getGuest(id);
+
+        return guest;
     }
 
     @Override

@@ -1,0 +1,44 @@
+<div class='panel panel-default'>
+  <div class='panel-heading' style='font-size:large'>
+    <a [routerLink]="['/guest/account']"> Moj nalog  </a> &nbsp; &nbsp; &nbsp;
+    <a [routerLink]="['/guest/friends']"> Prijatelji </a> &nbsp; &nbsp; &nbsp;
+    <a [routerLink]="['/guest/restaurants']"> Restorani </a>
+  </div>
+
+
+  <div class='panel-body'>
+    <form id ="filter">
+      <label> Pretraga ime: </label>
+      <input type="text" [ngModelOptions]="{standalone:true}" [(ngModel)]="term"/>
+    </form>
+    <form id ="filter2">
+      <label> Pretraga prezime: </label>
+      <input type="text" [ngModelOptions]="{standalone:true}" [(ngModel)]="term2"/>
+    </form>
+    <button (click)="prebaciNaDodavanje()" type="button" >Dodaj prijatelja</button>
+
+    <div class='table-responsive'>
+      <table class='table table-striped' *ngIf='guests && guests.length'>
+        <thead>
+        <tr>
+          <th>Ime Prijatelja</th>
+          <th>Prezime</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor='let guest of guests | filter:term | filter2:term2'>
+          <td>
+            {{guest.first_name}}
+          </td>
+          <td>{{ guest.last_name}}</td>
+          <td>
+            <button (click)="delete(guest)" type="button" >Obrisi</button>
+          </td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>

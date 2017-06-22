@@ -1,0 +1,52 @@
+<div class='panel panel-default'>
+  <div class='panel-heading' style='font-size:large'>
+    <a [routerLink]="['/guest/account']"> Moj nalog  </a> &nbsp; &nbsp; &nbsp;
+    <a [routerLink]="['/guest/friends']"> Prijatelji </a> &nbsp; &nbsp; &nbsp;
+    <a [routerLink]="['/guest/restaurants']"> Restorani </a>
+  </div>
+
+
+  <div class='panel-body'>
+    <button type="submit" (click) = "sortiraj()">Sortiraj po imenu</button>
+    <button type="submit" (click) = "sortiraj3()">Sortiraj po vrsti</button>
+    <button type="submit" (click) = "sortiraj2()">Sortiraj po udaljenosti</button>
+    <div class='table-responsive'>
+      <table class='table table-striped' *ngIf='restaurants && restaurants.length'>
+        <thead>
+        <tr>
+          <th>Ime restorana</th>
+          <th>Vrsta restorana</th>
+          <th>Udaljenost</th>
+          <th>Rejting</th>
+          <th>Prijatelji</th>
+          <th>Rezervacija</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor='let restaurant of restaurants'>
+          <td>
+            {{restaurant.name}}
+          </td>
+          <td>{{ restaurant.description}}</td>
+          <td>{{ restaurant.distance}}</td>
+          <td>
+            <ai-star [rating]='restaurant.rating' (ratingClicked)='onRatingClicked($event)'>
+            </ai-star>
+          </td>
+
+          <td>
+            <ai-star [rating]='restaurant.friendRating' (ratingClicked)='onRatingClicked($event)'>
+            </ai-star>
+          </td>
+          <td>
+            <div class="radio">
+              <label><input type="radio" name="reservation"></label>
+            </div>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
