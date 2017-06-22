@@ -1,0 +1,106 @@
+<ul class="nav nav-tabs">
+  <li> <a [routerLink]="['/waiter/work']"> Raspored rada </a> </li>
+  <li> <a href="#"> Graficki prikaz stolova </a> </li>
+  <li class="active"> <a [routerLink]="['/waiter/orders']"> Lista porudzbina </a> </li>
+  <li> <a [routerLink]="['/waiter/account']"> Moj nalog </a> </li>
+</ul>
+
+<div class="tab-content">
+  <br>
+  <div class="row">
+    <div class="col-md-4">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div class="btn-group pull-right">
+            <button (click)="addOrder()" class="btn btn-success">Add order</button>
+          </div>
+          <h4>Orders</h4>
+        </div>
+        <div id="order" class="panel-body">Panel Content</div>
+      </div>
+
+    </div>
+    <div class="col-md-8">
+      <div clas="row">
+        <div [hidden] = "!add_order" class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>Food</h4>
+            </div>
+            <div id="p1" class="panel-body">
+              <ul class="list-group" *ngFor="let food of foods">
+                <li class="list-group-item">{{ food.name }}
+                  <div class="pull-right action-buttons">
+                    <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" (click) = "addFood(food.name)" ><span class="glyphicon glyphicon-plus"></span></button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div [hidden] = "!add_order" class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>Drink</h4>
+            </div>
+            <div id="p2" class="panel-body">
+              <ul class="list-group" *ngFor="let drink of drinks">
+                <li class="list-group-item">{{ drink.name }}
+                  <div class="pull-right action-buttons">
+                    <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" (click) = "addDrink(drink.name)" ><span class="glyphicon glyphicon-plus"></span></button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div [hidden] = "!add_order" class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>Selected foods</h4>
+            </div>
+            <div id="p3" class="panel-body">
+              <ul id="foods_id" class="list-group">
+                <li class="list-group-item" *ngFor="let food of selectedFoods">{{ food.name }}
+                  <div class="pull-right action-buttons">
+                    <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" ><span class="glyphicon glyphicon-plus"></span></button>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div [hidden] = "!add_order" class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>Selected drinks</h4>
+              <div class="btn-group pull-right">
+                <select class="form-control" title="Select bartender">
+                  <option>Mustard</option>
+                  <option>Ketchup</option>
+                  <option>Relish</option>
+                </select>
+              </div>
+            </div>
+            <div id="p4" class="panel-body">
+              <ul id="drinks_id" class="list-group" *ngFor="let drink of drinks">
+
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+

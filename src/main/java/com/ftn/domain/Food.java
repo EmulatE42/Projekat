@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Food {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(name = "id" , unique = true, nullable = false)
+    @Column(name = "food_id" , unique = true, nullable = false)
     private Integer id;
 
     @Column(name = "name", nullable =false)
@@ -21,6 +21,9 @@ public class Food {
 
     @Column(name = "price")
     private double price;
+
+    @ManyToOne(optional = false)
+    private OrderFoodItem orderFoodItem;
 
     public Food(String name, String desc, double price){
         this.name=name;

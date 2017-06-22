@@ -22,6 +22,7 @@ import * as firebase from 'firebase';
 import {CalendarComponent} from "ap-angular2-fullcalendar";
 import {MyComponent} from "app/components/user/waiterWorkShedulesView/waiterWorkShedulesView.component";
 import {BasicSupplierView} from "./components/user/basicSupplierView/basicSupplierView.component";
+import {OrdersWaiterView} from "./components/user/basicWaiterView/ordersView/ordersView.component";
 
 firebase.initializeApp(firebaseConfig);
 
@@ -38,6 +39,7 @@ firebase.initializeApp(firebaseConfig);
     BasicSupplierView,
     EmployeeChangePassword,
     MyComponent,
+    OrdersWaiterView,
     CalendarComponent
   ],
   imports: [
@@ -50,6 +52,7 @@ firebase.initializeApp(firebaseConfig);
       {path: '', canActivate: [GuestLoginGuard], component: BasicGuestView},
       {path: 'waiter/account', canActivate: [EmployeeFirstLoginGuard], component: BasicWaiterView},
       {path: 'waiter/work', component: MyComponent},
+      {path: 'waiter/orders', component: OrdersWaiterView},
       {path: 'cook/account', canActivate: [EmployeeFirstLoginGuard], component: BasicCookView},
       {path: 'bartender/account', canActivate: [EmployeeFirstLoginGuard], component: BasicBartenderView},
       {path: 'supplier/account', canActivate: [EmployeeFirstLoginGuard], component: BasicSupplierView},

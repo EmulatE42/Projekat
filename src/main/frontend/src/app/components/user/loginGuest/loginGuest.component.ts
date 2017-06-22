@@ -8,7 +8,7 @@ import {Bartender, Cook, Guest, Role, SuperUser, Supplier, User, Waiter} from ".
   providers: [UserService],
 })
 
-export class LoginGuest{
+export class LoginGuest implements OnInit{
   email: string;
   password: string;
 
@@ -19,9 +19,15 @@ export class LoginGuest{
   bartender: Bartender;
   supplier: Supplier;
 
+
   constructor(
     private userService: UserService,
     private router: Router) { }
+
+  ngOnInit()
+  {
+
+  }
 
   login(): void
   {
@@ -34,6 +40,16 @@ export class LoginGuest{
     if(JSON.stringify(this.user) !== '{}') {
 
       if( Role[this.user.role] == Role.GOST.toString()) {
+        var sing_up = document.getElementById("sing_up");
+        var login = document.getElementById("login");
+
+        if(sing_up != null && login != null)
+        {
+          this.removeChild(sing_up);
+          this.removeChild(login);
+        }
+
+        document.getElementById("icon").innerHTML = "<a class=\"dropdown-toggle\"data-toggle=\"dropdown\" href=\"#\"><img width=\"26\" height=\"26\" class=\"img-circle\" src=\"https://gitlab.com/uploads/user/avatar/887661/avatar.png\" alt=\"Avatar\"><span class=\"caret\"></span></a><ul class=\"dropdown-menu\"><li><a id=\"logout\" href=\"#\">Log out</a></li></ul>";
         this.router.navigate(['../']);
       }
       else if( Role[this.user.role] == Role.KONOBAR.toString()) {
@@ -81,6 +97,13 @@ export class LoginGuest{
     }
     else
       sessionStorage.setItem('loginUser', JSON.stringify({}));
+  }
+
+  removeChild(node): void{
+    while(node.hasChildNodes())
+    {
+      node.removeChild(node.firstChild);
+    }
   }
 
 }

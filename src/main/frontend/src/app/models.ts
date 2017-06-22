@@ -115,6 +115,22 @@ export class Supplier extends User{
   }
 }
 
+export class Food{
+
+  id: number;
+  name: string;
+  foodDescription: string;
+  price: number;
+}
+
+export class Drink{
+
+  id: number;
+  name: string;
+  drinkDescription: string;
+  price: number;
+}
+
 export class Restaurant{
 
   id: number;

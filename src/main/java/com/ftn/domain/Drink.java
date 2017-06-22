@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Drink {
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
-    @Column(name = "id" , unique = true, nullable = false)
+    @Column(name = "drink_id" , unique = true, nullable = false)
     private Integer id;
 
     @Column(name = "name", unique = true,nullable =false)
@@ -22,6 +22,9 @@ public class Drink {
 
     @Column(name = "price")
     private double price;
+
+    @ManyToOne(optional = false)
+    private OrderDrinkItem orderDrinkItem;
 
     public Drink(String name, String desc, double price){
         this.name=name;
