@@ -1,0 +1,21 @@
+<ul class="nav nav-tabs">
+  <li> <a [routerLink]="['/waiter/work']"> Raspored rada </a> </li>
+  <li class="active"> <a [routerLink]="['/waiter/schedule_table']"> Graficki prikaz stolova </a> </li>
+  <li > <a [routerLink]="['/waiter/orders']"> Lista porudzbina </a> </li>
+  <li> <a [routerLink]="['/waiter/account']"> Moj nalog </a> </li>
+</ul>
+
+<div class="tab-content">
+  <div class="row">
+    <div class="col-sm-5">
+      <canvas #myCanvas width="500" height="500" style="border:1px solid #d3d3d3;"> </canvas>
+    </div>
+    <div class="col-sm-1">
+      <span class="text-left" class="label label-primary">JA</span>
+    </div>
+  </div>
+
+</div>
+
+
+

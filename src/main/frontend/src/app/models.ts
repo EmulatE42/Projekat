@@ -186,3 +186,9 @@ export class Restaurant{
   reservation: boolean;
   description : string;
 }
+
+export class SchedulerWork {
+  id: number;
+  userId: number;
+  tables: number[];
+}

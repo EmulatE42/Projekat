@@ -38,6 +38,8 @@ import {FoodService} from "./services/food/FoodService";
 import {DrinkService} from "./services/drink/DrinkService";
 import {DrinkItemService} from "./services/drink/DrinkItemService";
 import {VisitService} from "./services/visit/VisitService";
+import {ScheduleTableView} from "./components/user/basicWaiterView/scheduleTableView/scheduleTableView.component";
+import {SchedulerWorkService} from "./services/scheduler_work/SchedulerWorkService";
 
 
 
@@ -69,6 +71,7 @@ firebase.initializeApp(firebaseConfig);
 
     MyComponent,
     OrdersWaiterView,
+    ScheduleTableView,
     CalendarComponent,
     ReserveRestComponent
   ],
@@ -86,6 +89,7 @@ firebase.initializeApp(firebaseConfig);
       {path: 'waiter/account', canActivate: [EmployeeFirstLoginGuard], component: BasicWaiterView},
       {path: 'waiter/work', component: MyComponent},
       {path: 'waiter/orders', component: OrdersWaiterView},
+      {path: 'waiter/schedule_table', component: ScheduleTableView},
       {path: 'cook/account', canActivate: [EmployeeFirstLoginGuard], component: BasicCookView},
       {path: 'bartender/account', canActivate: [EmployeeFirstLoginGuard], component: BasicBartenderView},
       {path: 'change/password', component: EmployeeChangePassword},
@@ -99,7 +103,7 @@ firebase.initializeApp(firebaseConfig);
     ImageUploadModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [GuestLoginGuard, EmployeeFirstLoginGuard,UserService,FriendService,FoodService,DrinkService,DrinkItemService,VisitService],
+  providers: [GuestLoginGuard, EmployeeFirstLoginGuard,UserService,FriendService,FoodService,DrinkService,DrinkItemService,VisitService, SchedulerWorkService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

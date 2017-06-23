@@ -1,6 +1,7 @@
 package com.ftn.service.implementation;
 
 import com.ftn.domain.*;
+import com.ftn.repository.SchedulerWorkRepository;
 import com.ftn.repository.UserRepository;
 import com.ftn.repository.VerificationTokenRepository;
 import com.ftn.service.UserService;
@@ -10,8 +11,7 @@ import org.springframework.stereotype.Service;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import static com.ftn.domain.Role.GOST;
 
@@ -23,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private SchedulerWorkRepository schedulerWorkRepository;
 
 
     @Override
@@ -64,6 +67,15 @@ public class UserServiceImpl implements UserService {
                 this.userRepository.save(cook);
                 this.userRepository.save(bartender);
                 this.userRepository.save(supplier);
+
+                List<Integer> tables = new ArrayList<>();
+                tables.add(1);
+                tables.add(2);
+                tables.add(3);
+
+                User user = this.userRepository.findByEmail("pera@gmail.com");
+                SchedulerWork sw = new SchedulerWork(user.getId(), tables);
+                this.schedulerWorkRepository.save(sw);
 
             } catch (ParseException e) {
                 e.printStackTrace();

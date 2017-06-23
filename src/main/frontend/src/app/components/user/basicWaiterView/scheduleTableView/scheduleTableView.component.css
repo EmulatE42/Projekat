@@ -1,0 +1,8 @@
+.label-primary {
+  background-color: #0000ff;
+}
+.label{
+  display: block;
+  width: 100px;
+  margin-top: 20px;
+}
