@@ -30,7 +30,7 @@ export class OrdersWaiterView implements OnInit{
   constructor(private userService: UserService, private orderService: OrderService, private router: Router)
   {}
 
-
+  //neki komentar
   ngOnInit(): void {
     this.orderService.getFoods().subscribe(
         foods => this.foods = foods,

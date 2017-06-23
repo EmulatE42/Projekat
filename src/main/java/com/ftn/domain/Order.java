@@ -1,5 +1,6 @@
 package com.ftn.domain;
 
+
 import javax.persistence.*;
 import java.util.Set;
 import java.util.Set;
