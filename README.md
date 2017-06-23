@@ -18,3 +18,6 @@ konfiguracija koju je potrebno instalirati u angularu zbog profilnih slika
 Prvo ovo: npm install angularfire2 firebase --save
 Pa onda ovo: npm install promise-polyfill --save-exact
 
+
+Link do mysql skripte i objasnjenja https://pastebin.com/raw/LP9wNPFM
+
