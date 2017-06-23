@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
                 tables.add(3);
 
                 User user = this.userRepository.findByEmail("pera@gmail.com");
-                SchedulerWork sw = new SchedulerWork(user.getId(), tables);
+                SchedulerWork sw = new SchedulerWork(user.getId(), "07:00:00", "16:00:00", tables);
                 this.schedulerWorkRepository.save(sw);
 
             } catch (ParseException e) {

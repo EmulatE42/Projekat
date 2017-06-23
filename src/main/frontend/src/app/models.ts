@@ -190,5 +190,15 @@ export class Restaurant{
 export class SchedulerWork {
   id: number;
   userId: number;
+  start: string;
+  end: string;
   tables: number[];
+}
+
+export class EventScheduler {
+  id: number;
+  title: string;
+  start: string;
+  end: string;
+  day: number;
 }

@@ -20,6 +20,12 @@ public class SchedulerWork {
     @Column(name = "userID" , unique = false, nullable = false)
     private Integer userID;
 
+    @Column(name = "start" , unique = false, nullable = false)
+    private String start;
+
+    @Column(name = "end" , unique = false, nullable = false)
+    private String end;
+
     @Column(name = "tables" , unique = false, nullable = false)
     @ElementCollection
     private List<Integer> tables;
@@ -29,8 +35,10 @@ public class SchedulerWork {
 
     }
 
-    public SchedulerWork(Integer userID, List<Integer> tables) {
+    public SchedulerWork(Integer userID, String start, String end, List<Integer> tables) {
         this.userID = userID;
+        this.start = start;
+        this.end = end;
         this.tables = tables;
     }
 
@@ -56,5 +64,21 @@ public class SchedulerWork {
 
     public void ListTables(List<Integer> tables) {
         this.tables = tables;
+    }
+
+    public String getStart() {
+        return start;
+    }
+
+    public String getEnd() {
+        return end;
+    }
+
+    public void setStart(String start) {
+        this.start = start;
+    }
+
+    public void setEnd(String end) {
+        this.end = end;
     }
 }
