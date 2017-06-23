@@ -22,9 +22,13 @@ public class Food {
     @Column(name = "price")
     private double price;
 
-    @ManyToOne(optional = false)
+    @ManyToOne()
     private OrderFoodItem orderFoodItem;
 
+    public Food()
+    {
+
+    }
     public Food(String name, String desc, double price){
         this.name=name;
         this.foodDescription=desc;

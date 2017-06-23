@@ -11,7 +11,7 @@ import java.util.Set;
 public class OrderFoodItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "order_food_id" , unique = true, nullable = false)
     private Integer id;
 
@@ -22,14 +22,18 @@ public class OrderFoodItem {
     @JoinColumn(referencedColumnName = "user_id", name = "order_cook")
     private Cook cook;
 
+    @Column(name = "nazivRestorana" , nullable = false)
+    private String nazivRestorana;
+
     public OrderFoodItem()
     {
 
     }
 
-    public OrderFoodItem(Set<Food> foods, Cook cook) {
-        //this.foods = foods;
-        this.cook = cook;
+    public OrderFoodItem(Set<Food> foods, String nazivRestorana) {
+        this.foods = foods;
+        this.nazivRestorana = nazivRestorana;
+
     }
 
     public Integer getId() {

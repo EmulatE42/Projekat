@@ -11,23 +11,24 @@ import javax.persistence.*;
 public class Restaurant {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+
     @Column(name = "id" , unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(name = "name" , unique = true, nullable = false)
     private String name;
 
-    @Column(name = "distance" , unique = true, nullable = false)
+    @Column(name = "distance" , nullable = false)
     private int distance;
 
-    @Column(name = "rating" , unique = true, nullable = false)
+    @Column(name = "rating" , nullable = false)
     private double rating;
 
-    @Column(name = "friendRating" , unique = true, nullable = false)
+    @Column(name = "friendRating", nullable = false)
     private double friendRating;
 
-    @Column(name = "reservation" , unique = true, nullable = false)
+    @Column(name = "reservation" , nullable = false)
     private boolean reservation;
 
     @Column(name = "description")

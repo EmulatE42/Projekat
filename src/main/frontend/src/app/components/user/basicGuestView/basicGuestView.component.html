@@ -64,6 +64,31 @@
     </div>
   </div>
 
+
+
+  <label > Broj posete restoranima {{posete.length}}</label>
+  <table class='table table-striped'>
+    <thead>
+    <tr>
+      <th>Ime restorana</th>
+      <th>Datum</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor='let visit of posete'>
+      <td>
+        {{visit.nazivRestorana}}
+      </td>
+      <td>{{ visit.datum}}</td>
+    </tr>
+    </tbody>
+  </table>
+
+
+
+
+
+
 </div>
 
 

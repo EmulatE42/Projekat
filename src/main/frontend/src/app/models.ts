@@ -1,3 +1,4 @@
+import construct = Reflect.construct;
 export enum  Role {
   GOST, KUVAR, KONOBAR, SANKER, PONUDJAC
 
@@ -22,6 +23,15 @@ export class Friendship {
   constructor( public id: number,
                public koSalje: string,
                public komeSeSalje: string) {}
+}
+
+export class Visit {
+
+  constructor( public id: number,
+               public email: string,
+               public nazivRestorana: string,
+                public datum: string) {}
+
 }
 
 
@@ -126,20 +136,44 @@ export class Supplier extends User{
   }
 }
 
+
+
+
+
 export class Food{
 
-  id: number;
-  name: string;
-  foodDescription: string;
-  price: number;
+  //id: number;
+ // name: string;
+  //foodDescription: string;
+ // price: number;
+
+
+  constructor(public id: number,
+              public  name: string,
+              public foodDescription: string,
+              public price: number) {}
+
 }
 
 export class Drink{
 
-  id: number;
-  name: string;
-  drinkDescription: string;
-  price: number;
+
+  constructor(public id: number,
+              public  name: string,
+              public drinkDescription: string,
+              public price: number) {}
+
+}
+
+export class OrderDrinkItem {
+   id: number;  drinks: Drink[] = [];  nazivRestorana: string;
+  constructor(public i: number, public d: Drink[], public nr: string) {
+    this.id = i;
+    console.log("VELICINA LISTE KOJE SETUEJEM JE " + d.length);
+    this.drinks = d;
+    console.log("VELICINA MOJE LISTE NAKON SETOVANJA JE " + this.drinks.length);
+    this.nazivRestorana = nr;
+  }
 }
 
 export class Restaurant{

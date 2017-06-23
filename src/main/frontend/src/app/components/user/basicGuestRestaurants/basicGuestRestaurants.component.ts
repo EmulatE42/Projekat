@@ -1,6 +1,6 @@
 import {Component, OnInit} from "@angular/core";
 import { Router } from '@angular/router';
-import {Guest, Restaurant} from "../../../models";
+import {Food, Guest, Restaurant} from "../../../models";
 import {RestaurantService} from "../../../services/restaurant/RestaurantService";
 
 @Component({
@@ -14,14 +14,15 @@ export class BasicGuestRestaurants implements OnInit{
   private errorMessage: string = "Doslo je do greske!";
   private message: string;
   private restaurants: Restaurant[];
+  private temp : Food;
 
-
-  constructor(private restaurantService: RestaurantService) { }
+  constructor( private restaurantService: RestaurantService, private router: Router) { }
 
   ngOnInit(): void {
     this.restaurantService.getAll()
       .subscribe(restaurants => this.restaurants = restaurants,
-        error => this.errorMessage = <any>error);
+        error => this.errorMessage = <any>error ); //, () => this.ajde());
+
 
   }
 
@@ -79,6 +80,10 @@ export class BasicGuestRestaurants implements OnInit{
       }
     }
 
+  }
+  rezervacija(imeRestorana : string) : void
+  {
+    this.router.navigate(['/guest/restaurants/reserve'] ,{queryParams: {ime_Restorana: imeRestorana}} );
   }
 
 }

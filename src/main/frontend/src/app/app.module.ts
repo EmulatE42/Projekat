@@ -33,6 +33,12 @@ import {UserService} from "./services/user/UserService";
 import { BasicGuestFriendsComponent } from './components/user/basicGuestFriends/basicGuestFriends';
 
 import {FriendService} from "./services/friend/FriendService";
+import { ReserveRestComponent } from './components/user/basicGuestRestaurants/reserve-rest/reserve-rest.component';
+import {FoodService} from "./services/food/FoodService";
+import {DrinkService} from "./services/drink/DrinkService";
+import {DrinkItemService} from "./services/drink/DrinkItemService";
+import {VisitService} from "./services/visit/VisitService";
+
 
 
 firebase.initializeApp(firebaseConfig);
@@ -63,7 +69,8 @@ firebase.initializeApp(firebaseConfig);
 
     MyComponent,
     OrdersWaiterView,
-    CalendarComponent
+    CalendarComponent,
+    ReserveRestComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +90,8 @@ firebase.initializeApp(firebaseConfig);
       {path: 'bartender/account', canActivate: [EmployeeFirstLoginGuard], component: BasicBartenderView},
       {path: 'change/password', component: EmployeeChangePassword},
       {path: 'supplier/account', canActivate: [EmployeeFirstLoginGuard], component: BasicSupplierView},
-      {path: 'guest/friends/add', component: AddFriendComponent}
+      {path: 'guest/friends/add', component: AddFriendComponent},
+      {path: 'guest/restaurants/reserve', component: ReserveRestComponent}
 
 
 
@@ -91,7 +99,7 @@ firebase.initializeApp(firebaseConfig);
     ImageUploadModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [GuestLoginGuard, EmployeeFirstLoginGuard,UserService,FriendService],
+  providers: [GuestLoginGuard, EmployeeFirstLoginGuard,UserService,FriendService,FoodService,DrinkService,DrinkItemService,VisitService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

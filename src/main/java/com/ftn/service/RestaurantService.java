@@ -1,5 +1,7 @@
 package com.ftn.service;
 
+import com.ftn.domain.Drink;
+import com.ftn.domain.Food;
 import com.ftn.domain.Restaurant;
 
 import java.util.List;
@@ -10,4 +12,7 @@ import java.util.List;
 public interface RestaurantService {
 
     List<Restaurant> getRestaurants();
+    Restaurant save(Restaurant r);
+
+
 }

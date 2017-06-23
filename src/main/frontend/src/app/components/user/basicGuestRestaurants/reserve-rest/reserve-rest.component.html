@@ -1,0 +1,102 @@
+<div class='panel panel-default'>
+  <div class='panel-heading' style='font-size:large'>
+    <a [routerLink]="['/guest/restaurants']"> Restorani </a>
+
+  </div>
+
+  <div  id = "p1" class="col-md-8">
+    <label> Odabrali ste restoran :  {{imeRestorana}}  </label>
+    <p > Datum: <input  [(ngModel)]="dat"  value type="text" placeholder="Unesite datum"> </p>
+  <div clas="row">
+    <div class="col-md-6">
+    <div class="panel panel-default">
+      <div  class="panel-heading">
+        <h4>Hrana</h4>
+      </div>
+      <div  class="panel-body">
+        <ul class="list-group" *ngFor="let food of hrana">
+          <li class="list-group-item">{{ food.name }}
+            <div class="pull-right action-buttons">
+              <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" (click) = "dodajFood(food)" ><span class="glyphicon glyphicon-plus"></span></button>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    </div>
+  </div>
+
+</div>
+  <div  id = "p2" class="col-md-8">
+    <div clas="row">
+      <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Pice</h4>
+        </div>
+        <div  class="panel-body">
+          <ul class="list-group" *ngFor="let drink of pica">
+            <li class="list-group-item">{{ drink.name }}
+              <div class="pull-right action-buttons">
+                <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" (click) = "dodajDrink(drink)" ><span class="glyphicon glyphicon-plus"></span></button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    </div>
+
+  </div>
+
+  <div  id = "p3" class="col-md-8">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Selected foods</h4>
+        </div>
+        <div  class="panel-body">
+          <ul id="foods_id" class="list-group">
+            <li class="list-group-item" *ngFor="let food of odabranaHrana">{{ food.name }}
+              <div class="pull-right action-buttons">
+                <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" ><span class="glyphicon glyphicon-plus"></span></button>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div  id = "p4" class="col-md-8">
+    <div  class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Selected drinks</h4>
+        </div>
+        <div  class="panel-body">
+          <ul id="drinks_id" class="list-group">
+
+            <li class="list-group-item" *ngFor="let food of odabranaPica">{{ food.name }}
+              <div class="pull-right action-buttons">
+                <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" ><span class="glyphicon glyphicon-plus"></span></button>
+              </div>
+            </li>
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+    <button type="submit" (click) = "zavrsiPorudzbinu()">Zavrsi</button>
+  </div>
+
+
+
+
+
+
+</div>
+

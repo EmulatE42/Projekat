@@ -79,11 +79,11 @@ export class OrdersWaiterView implements OnInit{
 
   cloneFood(food: Food): Food
   {
-    this.newFood = new Food();
-    this.newFood.name = food.name;
-    this.newFood.foodDescription = food.foodDescription;
-    this.newFood.price = food.price;
-    this.newFood.id = food.id;
+    this.newFood = new Food(food.id, food.name, food.foodDescription, food.price);
+   // this.newFood.name = food.name;
+   // this.newFood.foodDescription = food.foodDescription;
+   // this.newFood.price = food.price;
+   // this.newFood.id = food.id;
 
     return this.newFood;
   }

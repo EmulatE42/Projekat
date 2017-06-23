@@ -1,9 +1,12 @@
 import {Component, OnInit} from "@angular/core";
 import { Router } from '@angular/router';
-import {Guest, Restaurant} from "../../../models";
+import {Guest, Restaurant, Visit} from "../../../models";
 import {RestaurantService} from "../../../services/restaurant/RestaurantService";
 import {UserService} from "../../../services/user/UserService";
+
 import * as firebase from 'firebase'
+import {VisitService} from "../../../services/visit/VisitService";
+
 @Component({
   templateUrl: './basicGuestView.component.html',
   styleUrls: ['./basicGuestView.component.css'],
@@ -27,7 +30,15 @@ export class BasicGuestView implements OnInit{
   edit: boolean = true;
   avatar: string;
 
-  constructor(private userService: UserService, private router: Router) {}
+
+  posete : Visit[] = [];
+
+  constructor(private visitService : VisitService, private userService: UserService, private router: Router) {
+    this.visitService.getAllVisitForOne()
+      .subscribe(guests => this.posete = guests);
+
+
+  }
   ngOnInit(): void {
     this.firstname = this.guest.first_name;
     this.lastname = this.guest.last_name;

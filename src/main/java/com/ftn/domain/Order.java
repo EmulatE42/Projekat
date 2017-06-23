@@ -13,7 +13,7 @@ import java.util.Set;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id" , unique = true, nullable = false)
     private Integer id;
 
@@ -25,10 +25,11 @@ public class Order {
     @JoinColumn(referencedColumnName = "order_food_id", name = "food")
     private OrderFoodItem orderFoodItem;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(referencedColumnName = "user_id", name = "order_waiter")
-    private Waiter waiter;
+    @Column(name = "brojStola" , nullable = false)
+    private Integer brojStola;
 
+    @Column(name = "nazivRestorana" , nullable = false)
+    private String nazivRestorana;
 
     public Order()
     {

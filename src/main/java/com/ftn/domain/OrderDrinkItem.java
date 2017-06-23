@@ -11,25 +11,28 @@ import java.util.Set;
 public class OrderDrinkItem {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "order_drink_id" , unique = true, nullable = false)
     private Integer id;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "orderDrinkItem")
     private Set<Drink> drinks;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(referencedColumnName = "user_id", name = "order_bartender")
     private Bartender bartender;
+
+    @Column(name = "nazivRestorana" , nullable = false)
+    private String nazivRestorana;
 
     public OrderDrinkItem()
     {
 
     }
 
-    public OrderDrinkItem(Set<Drink> drinks, Bartender bartender) {
+    public OrderDrinkItem(Set<Drink> drinks , String nazivRestorana) {
         this.drinks = drinks;
-        this.bartender = bartender;
+        this.nazivRestorana = nazivRestorana;
     }
 
     public Integer getId() {
@@ -43,6 +46,8 @@ public class OrderDrinkItem {
     public Bartender getBartender() {
         return bartender;
     }
+
+    public String getNazivRestorana() {return nazivRestorana;}
 
     public void setId(Integer id) {
         this.id = id;

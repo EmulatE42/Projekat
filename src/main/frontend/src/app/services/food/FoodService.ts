@@ -4,29 +4,24 @@ import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/do'
 import 'rxjs/add/operator/catch'
-import {Food, Guest, Restaurant} from "../../models";
+import {Drink, Food, Guest, Restaurant} from "../../models";
+
+
+
 
 @Injectable()
-export class RestaurantService
+export class FoodService
 {
 
   constructor(private http: Http) { }
 
-  getAll(): Observable<Restaurant[]>{
+  getAllFood(): Observable<Food[]>{
 
-
-
-    return this.http.get('http://localhost:8090/restaurants').map((response: Response) => <Restaurant[]> response.json())
+    return this.http.get('http://localhost:8090/allfoods').map(this.extractFood)
       .do(data => console.log(JSON.stringify(data)))
       .catch(this.handleError);
 
 
-  }
-
-  private extractGuest(res: Response) {
-    let body = <Guest> res.json();
-    console.log(body);
-    return body || { };
   }
 
   private handleError(error: Response)
@@ -34,5 +29,9 @@ export class RestaurantService
     console.log(error);
     return Observable.throw(error.json().error || 'Server error');
   }
-
+  private extractFood(res: Response) {
+    let body = <Food[]> res.json();
+    console.log(body);
+    return body || { };
+  }
 }

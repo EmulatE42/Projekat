@@ -95,20 +95,3 @@ public class FriendsController {
         return new ResponseEntity(g != null ? g : "{}", HttpStatus.OK);
     }
 }
-/* @CrossOrigin
-    @RequestMapping(value = "/friends 22", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Guest> login(@RequestBody String ko) {
-
-        List<Friendship> fs = friendsService.getFriendshipsByEmailPrvog(ko);
-        List<Guest> guests = friendsService.getGuests();
-        List<Guest> g = new ArrayList<Guest>();
-        for (Guest a : guests)
-        {
-            if (a.getEmail().equals(ko))
-            {
-
-            }
-        }
-        //System.out.println("velicina liste je " + fs.size());
-        return new ResponseEntity(g != null ? g : "{}", HttpStatus.OK);
-    }*/
