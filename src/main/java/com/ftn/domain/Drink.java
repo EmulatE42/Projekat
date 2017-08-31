@@ -1,6 +1,8 @@
 package com.ftn.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Bane on 17/5/2017.
@@ -23,16 +25,26 @@ public class Drink {
     @Column(name = "price")
     private double price;
 
-    @ManyToOne()
-    private OrderDrinkItem orderDrinkItem;
+    @ManyToMany()
+    @JoinTable(name="ORDER_DRINK",
+            joinColumns = {@JoinColumn(name = "drink_id")}, inverseJoinColumns = {@JoinColumn(name = "id")})
+    private Set<Order> order;
 
-    public Drink(){}
+    public Drink(){ order = new HashSet<>();}
 
-    public Drink(String name, String desc, double price){
-        this.name=name;
-        this.drinkDescription=desc;
-        this.price=price;
+    public Drink(String name, String drinkDescription, double price) {
+        this.name = name;
+        this.drinkDescription = drinkDescription;
+        this.price = price;
     }
+
+    public Drink(String name, String drinkDescription, double price, HashSet<Order> order) {
+        this.name = name;
+        this.drinkDescription = drinkDescription;
+        this.price = price;
+        this.order = order;
+    }
+
     public double getPrice() {
         return price;
     }

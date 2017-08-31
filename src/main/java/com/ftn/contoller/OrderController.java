@@ -1,10 +1,8 @@
 package com.ftn.contoller;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.ftn.domain.*;
 import com.ftn.domain.DTO.UserDTO;
-import com.ftn.domain.Drink;
-import com.ftn.domain.Food;
-import com.ftn.domain.Order;
-import com.ftn.domain.User;
 import com.ftn.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,4 +38,40 @@ public class OrderController {
 
         return new ResponseEntity(drinks != null ? drinks : "{}", HttpStatus.OK);
     }
+
+
+    @CrossOrigin
+    @RequestMapping(value = "/orders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Set<Order_Food> >getOrders() {
+
+        Set<Order> orders = this.orderService.getOrders();
+
+        Order a = new Order();
+        for (Order o: orders) {
+//            System.out.println("Naziv: " + o.getNazivRestorana());
+//
+//            for (Order_Food of: o.getOrder_foods()) {
+//                if(of.getOrder().getId() == o.getId())
+//                {
+//                    System.out.println("\tHrana: " + of.getFood().getName());
+//                }
+//            }
+
+            a=o;
+        }
+        //System.out.println("IZASAO SAM");
+        return new ResponseEntity(a != null ? a : "{}", HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/save_order", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Order>saveOrder(@RequestBody  Order order) {
+
+        System.out.println("Naziv restorana: " + order.getNazivRestorana());
+        this.orderService.saveOrder(order);
+
+        return new ResponseEntity(order != null ? order : "{}", HttpStatus.OK);
+    }
+
+
 }

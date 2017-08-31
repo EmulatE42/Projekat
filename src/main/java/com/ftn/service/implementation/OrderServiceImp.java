@@ -2,6 +2,7 @@ package com.ftn.service.implementation;
 
 import com.ftn.domain.Drink;
 import com.ftn.domain.Food;
+import com.ftn.domain.Order;
 import com.ftn.repository.OrderRepository;
 import com.ftn.repository.UserRepository;
 import com.ftn.service.OrderService;
@@ -40,5 +41,16 @@ public class OrderServiceImp implements OrderService {
         drinks.add(f1);
         drinks.add(f2);
         return drinks;
+    }
+
+    @Override
+    public Set<Order> getOrders()
+    {
+        return orderRepository.getOrders();
+    }
+
+    @Override
+    public void saveOrder(Order order) {
+        orderRepository.save(order);
     }
 }

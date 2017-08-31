@@ -2,6 +2,7 @@ package com.ftn.service;
 
 import com.ftn.domain.Drink;
 import com.ftn.domain.Food;
+import com.ftn.domain.Order;
 
 import java.util.Set;
 
@@ -11,5 +12,7 @@ import java.util.Set;
 public interface OrderService {
     Set<Food> getFoods();
     Set<Drink> getDrinks();
+    Set<Order> getOrders();
+    void saveOrder(Order order);
 
 }
