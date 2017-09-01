@@ -42,7 +42,7 @@ public class OrderController {
 
     @CrossOrigin
     @RequestMapping(value = "/orders", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<Order_Food> >getOrders() {
+    public ResponseEntity<Set<Order> >getOrders() {
 
         Set<Order> orders = this.orderService.getOrders();
 
@@ -60,7 +60,7 @@ public class OrderController {
             a=o;
         }
         //System.out.println("IZASAO SAM");
-        return new ResponseEntity(a != null ? a : "{}", HttpStatus.OK);
+        return new ResponseEntity(orders != null ? orders : "{}", HttpStatus.OK);
     }
 
     @CrossOrigin

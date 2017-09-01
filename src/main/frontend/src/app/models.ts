@@ -202,3 +202,11 @@ export class EventScheduler {
   end: string;
   day: number;
 }
+
+export class Order
+{
+  id: number;
+  brojStola: number[];
+  nazivRestorana: string;
+  vreme: string;
+}

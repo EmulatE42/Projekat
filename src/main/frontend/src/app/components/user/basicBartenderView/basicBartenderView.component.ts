@@ -138,16 +138,16 @@ export class BasicBartenderView implements OnInit{
       sessionStorage.setItem('loginUser', JSON.stringify(this.bartender));
       this.userService.updateBartender(this.bartender).subscribe(bartender => console.log(bartender));
 
-      uploadTask.on('state_changed', function(snapshot){
+      uploadTask.on('state_changed', { next: function(snapshot){
 
-      }, function(error){
+      }, error: function(error){
 
-      }, function () {
+      }, complete: function () {
 
         const storageRef = firebase.storage().ref().child('images/' + filename);
         storageRef.getDownloadURL().then(url => this.avatar = url);
 
-      });
+      }});
 
     }
   }

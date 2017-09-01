@@ -122,16 +122,16 @@ export class BasicGuestView implements OnInit{
       sessionStorage.setItem('loginUser', JSON.stringify(this.guest));
       this.userService.updateGuest(this.guest).subscribe(guest => console.log(guest));
 
-      uploadTask.on('state_changed', function(snapshot){
+      uploadTask.on('state_changed', { next: function(snapshot){
 
-      }, function(error){
+      }, error: function(error){
 
-      }, function () {
+      }, complete: function () {
 
         const storageRef = firebase.storage().ref().child('images/' + filename);
         storageRef.getDownloadURL().then(url => this.avatar = url);
 
-      });
+      }});
 
     }
   }

@@ -2,7 +2,7 @@ import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from "@
 import { Router } from '@angular/router';
 import * as firebase from 'firebase'
 import {UserService} from "../../../../services/user/UserService";
-import {Drink, Food, Waiter} from "../../../../models";
+import {Drink, Food, Order, Waiter} from "../../../../models";
 import {OrderService} from "../../../../services/order/OrderService";
 import {forEach} from "@angular/router/src/utils/collection";
 
@@ -22,10 +22,12 @@ export class OrdersWaiterView implements OnInit{
   drinks: Drink[] = null;
   selectedFoods: Food[];
   selectedDrinks: Drink[];
+  orders: Order[] = null;
   newFood: Food;
   errorMessage: string;
 
   add_order: boolean = false;
+  redBroj: number;
 
   constructor(private userService: UserService, private orderService: OrderService, private router: Router)
   {}
@@ -40,8 +42,13 @@ export class OrdersWaiterView implements OnInit{
       drinks => this.drinks = drinks,
       error =>  this.errorMessage = <any>error);
 
+    this.orderService.getOrders().subscribe(
+      orders => this.orders = orders,
+      error =>  this.errorMessage = <any>error);
+
     this.selectedFoods = new Array<Food>();
     this.selectedDrinks = new Array<Drink>();
+    this.redBroj = 0;
   }
 
 
@@ -51,7 +58,7 @@ export class OrdersWaiterView implements OnInit{
 
   loadSelect(): void{
     alert('Usao');
-    $('.selectpicker').selectpicker({
+    (<any>$('.selectpicker')).selectpicker({
       style: 'btn-default',
       showIcon: true,
       size: 4
@@ -86,5 +93,10 @@ export class OrdersWaiterView implements OnInit{
    // this.newFood.id = food.id;
 
     return this.newFood;
+  }
+
+  inc(): number
+  {
+    return ++this.redBroj;
   }
 }
