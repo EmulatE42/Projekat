@@ -40,6 +40,9 @@ import {DrinkItemService} from "./services/drink/DrinkItemService";
 import {VisitService} from "./services/visit/VisitService";
 import {ScheduleTableView} from "./components/user/basicWaiterView/scheduleTableView/scheduleTableView.component";
 import {SchedulerWorkService} from "./services/scheduler_work/SchedulerWorkService";
+import { SentRequestsComponent } from './components/user/sent-requests/sent-requests.component';
+import {FriendRequestService} from "./services/friend/FriendRequestService";
+import { ReceivedRequestsComponent } from './components/user/received-requests/received-requests.component';
 
 
 
@@ -73,7 +76,9 @@ firebase.initializeApp(firebaseConfig);
     OrdersWaiterView,
     ScheduleTableView,
     CalendarComponent,
-    ReserveRestComponent
+    ReserveRestComponent,
+    SentRequestsComponent,
+    ReceivedRequestsComponent
   ],
   imports: [
     BrowserModule,
@@ -95,7 +100,9 @@ firebase.initializeApp(firebaseConfig);
       {path: 'change/password', component: EmployeeChangePassword},
       {path: 'supplier/account', canActivate: [EmployeeFirstLoginGuard], component: BasicSupplierView},
       {path: 'guest/friends/add', component: AddFriendComponent},
-      {path: 'guest/restaurants/reserve', component: ReserveRestComponent}
+      {path: 'guest/restaurants/reserve', component: ReserveRestComponent},
+      {path: 'guest/friends/sentRequests', component: SentRequestsComponent},
+      {path: 'guest/receivedRequests', component: ReceivedRequestsComponent},
 
 
 
@@ -103,7 +110,7 @@ firebase.initializeApp(firebaseConfig);
     ImageUploadModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [GuestLoginGuard, EmployeeFirstLoginGuard,UserService,FriendService,FoodService,DrinkService,DrinkItemService,VisitService, SchedulerWorkService],
+  providers: [GuestLoginGuard, EmployeeFirstLoginGuard,UserService,FriendService,FoodService,DrinkService,DrinkItemService,VisitService, SchedulerWorkService,FriendRequestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

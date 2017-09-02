@@ -1,14 +1,12 @@
 <div class='panel panel-default'>
   <div class='panel-heading' style='font-size:large'>
-    <a [routerLink]="['/guest/friends']"> Prijatelji </a> &nbsp; &nbsp; &nbsp;
-    <a [routerLink]="['/guest/friends/sentRequests']"> Poslati zahtevi </a>
+    <a [routerLink]="['/guest/friends/add']"> Nazad </a>
 
   </div>
-
   <div class='panel-body'>
     <form >
-      <label> Broj prijatelja za dodavanje:  {{potencijalni.length}}  </label>
-      <table class='table table-striped' *ngIf='potencijalni && potencijalni.length'>
+      <label> Broj poslatih zahteva:  {{poslatiZahtevi.length}}  </label>
+      <table class='table table-striped' *ngIf='poslatiZahtevi && poslatiZahtevi.length'>
         <thead>
         <tr>
           <th>Ime Prijatelja</th>
@@ -16,13 +14,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor='let guest of potencijalni'>
+        <tr *ngFor='let guest of poslatiZahtevi'>
           <td>
             {{guest.first_name}}
           </td>
           <td>{{ guest.last_name}}</td>
           <td>
-            <button (click)="dodaj(guest)" type="button" >Posalji zahtev</button>
+            <p>Na cekanju...</p>
           </td>
 
         </tr>

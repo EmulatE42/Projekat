@@ -1,0 +1,38 @@
+<div class='panel panel-default'>
+  <div class='panel-heading' style='font-size:large'>
+    <a [routerLink]="['/guest/account']"> Moj nalog  </a> &nbsp; &nbsp; &nbsp;
+    <a [routerLink]="['/guest/friends']"> Prijatelji </a> &nbsp; &nbsp; &nbsp;
+    <a [routerLink]="['/guest/restaurants']"> Restorani </a> &nbsp; &nbsp; &nbsp;
+    <a [routerLink]="['/guest/receivedRequests']"> Zahtevi za prijateljstvo </a>
+
+  </div>
+    <div class='panel-body'>
+      <form >
+        <label> Broj dobijenih zahteva:  {{dobijeni.length}}  </label>
+        <table class='table table-striped' *ngIf='dobijeni && dobijeni.length'>
+          <thead>
+          <tr>
+            <th>Ime Prijatelja</th>
+            <th>Prezime</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor='let guest of dobijeni'>
+            <td>
+              {{guest.first_name}}
+            </td>
+            <td>{{ guest.last_name}}</td>
+            <td>
+              <button (click)="prihvati(guest)" type="button" >Prihvati</button>
+              <button (click)="obrisi(guest)" type="button" >Odbi</button>
+            </td>
+
+          </tr>
+          </tbody>
+        </table>
+      </form>
+
+    </div>
+
+</div>
+

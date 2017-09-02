@@ -25,6 +25,12 @@ export class Friendship {
                public komeSeSalje: string) {}
 }
 
+export class FriendRequest {
+  constructor( public id: number,
+               public uputio: string,
+               public dobio: string) {}
+}
+
 export class Visit {
 
   constructor( public id: number,
