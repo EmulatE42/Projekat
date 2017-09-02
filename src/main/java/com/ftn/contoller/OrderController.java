@@ -64,8 +64,8 @@ public class OrderController {
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/save_order", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Order>saveOrder(@RequestBody  Order order) {
+    @RequestMapping(value = "/add_order",  method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Order> addOrder(@RequestBody  Order order) {
 
         System.out.println("Naziv restorana: " + order.getNazivRestorana());
         this.orderService.saveOrder(order);
@@ -73,5 +73,14 @@ public class OrderController {
         return new ResponseEntity(order != null ? order : "{}", HttpStatus.OK);
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "/provera",  method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> provera(@RequestBody  String order) {
+
+        System.out.println("USAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+        //this.orderService.saveOrder(order);
+
+        return new ResponseEntity(order != null ? order : "{}", HttpStatus.OK);
+    }
 
 }

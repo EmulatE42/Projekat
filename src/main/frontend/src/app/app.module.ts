@@ -43,6 +43,7 @@ import {SchedulerWorkService} from "./services/scheduler_work/SchedulerWorkServi
 import { SentRequestsComponent } from './components/user/sent-requests/sent-requests.component';
 import {FriendRequestService} from "./services/friend/FriendRequestService";
 import { ReceivedRequestsComponent } from './components/user/received-requests/received-requests.component';
+import {AddOrderView} from "./components/user/basicWaiterView/addOrder/addOrder.component";
 
 
 
@@ -78,7 +79,8 @@ firebase.initializeApp(firebaseConfig);
     CalendarComponent,
     ReserveRestComponent,
     SentRequestsComponent,
-    ReceivedRequestsComponent
+    ReceivedRequestsComponent,
+    AddOrderView
   ],
   imports: [
     BrowserModule,
@@ -103,8 +105,7 @@ firebase.initializeApp(firebaseConfig);
       {path: 'guest/restaurants/reserve', component: ReserveRestComponent},
       {path: 'guest/friends/sentRequests', component: SentRequestsComponent},
       {path: 'guest/receivedRequests', component: ReceivedRequestsComponent},
-
-
+      {path: 'waiter/add_order', component: AddOrderView},
 
     ]),
     ImageUploadModule.forRoot(),

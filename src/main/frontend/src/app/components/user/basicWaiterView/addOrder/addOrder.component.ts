@@ -9,12 +9,12 @@ import {forEach} from "@angular/router/src/utils/collection";
 
 
 @Component({
-  templateUrl: './ordersView.component.html',
-  styleUrls: ['./ordersView.component.css'],
+  templateUrl: './addOrder.component.html',
+  styleUrls: ['./addOrder.component.css'],
   providers: [UserService, OrderService]
 })
 
-export class OrdersWaiterView implements OnInit{
+export class AddOrderView implements OnInit{
 
   waiter: Waiter = JSON.parse(sessionStorage.getItem("loginUser"));
 
@@ -25,6 +25,7 @@ export class OrdersWaiterView implements OnInit{
   orders: Order[] = null;
   newFood: Food;
   errorMessage: string;
+  order: Order;
 
   add_order: boolean = false;
   redBroj: number;
@@ -35,8 +36,8 @@ export class OrdersWaiterView implements OnInit{
   //neki komentar
   ngOnInit(): void {
     this.orderService.getFoods().subscribe(
-        foods => this.foods = foods,
-        error =>  this.errorMessage = <any>error);
+      foods => this.foods = foods,
+      error =>  this.errorMessage = <any>error);
 
     this.orderService.getDrinks().subscribe(
       drinks => this.drinks = drinks,
@@ -52,8 +53,12 @@ export class OrdersWaiterView implements OnInit{
   }
 
 
-  addOrder(): void{
-    this.router.navigate(['../waiter/add_order']);
+  addOrderItem(): void{
+    let order = new Order(null, null, "Restoran", null);
+    this.orderService.addOrder(order).subscribe(data => this.order = data,
+      error => console.log("Error: ", error),
+      () => this.router.navigate(['../waiter/orders']) );
+
   }
 
   loadSelect(): void{
@@ -87,10 +92,10 @@ export class OrdersWaiterView implements OnInit{
   cloneFood(food: Food): Food
   {
     this.newFood = new Food(food.id, food.name, food.foodDescription, food.price);
-   // this.newFood.name = food.name;
-   // this.newFood.foodDescription = food.foodDescription;
-   // this.newFood.price = food.price;
-   // this.newFood.id = food.id;
+    // this.newFood.name = food.name;
+    // this.newFood.foodDescription = food.foodDescription;
+    // this.newFood.price = food.price;
+    // this.newFood.id = food.id;
 
     return this.newFood;
   }

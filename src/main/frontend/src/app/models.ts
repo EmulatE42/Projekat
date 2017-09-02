@@ -211,8 +211,8 @@ export class EventScheduler {
 
 export class Order
 {
-  id: number;
-  brojStola: number[];
-  nazivRestorana: string;
-  vreme: string;
+  constructor(public id: number,
+              public  brojStola: number[],
+              public nazivRestorana: string,
+              public vreme: string) {}
 }
