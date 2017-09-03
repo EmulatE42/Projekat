@@ -2,10 +2,11 @@ import {AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild} from "@
 import { Router } from '@angular/router';
 import * as firebase from 'firebase'
 import {UserService} from "../../../../services/user/UserService";
-import {Drink, Food, Order, Waiter, OrderFood} from "../../../../models";
+import {Drink, Food, Order, Waiter, OrderFood, OrderDrink} from "../../../../models";
 import {OrderService} from "../../../../services/order/OrderService";
 import {forEach} from "@angular/router/src/utils/collection";
 import {FoodService} from "../../../../services/food/FoodService";
+import {DrinkService} from "../../../../services/drink/DrinkService";
 
 
 
@@ -28,11 +29,12 @@ export class AddOrderView implements OnInit{
   errorMessage: string;
   order: Order;
   order_food: OrderFood;
+  order_drink: OrderDrink;
 
   add_order: boolean = false;
   redBroj: number;
 
-  constructor(private userService: UserService, private orderService: OrderService, private foodService: FoodService, private router: Router)
+  constructor(private userService: UserService, private orderService: OrderService, private foodService: FoodService, private drinkService: DrinkService, private router: Router)
   {}
 
   //neki komentar
@@ -41,7 +43,7 @@ export class AddOrderView implements OnInit{
       foods => this.foods = foods,
       error =>  this.errorMessage = <any>error);
 
-    this.orderService.getDrinks().subscribe(
+    this.drinkService.getAllDrink().subscribe(
       drinks => this.drinks = drinks,
       error =>  this.errorMessage = <any>error);
 
@@ -70,8 +72,18 @@ export class AddOrderView implements OnInit{
       var order_food = new OrderFood(null, this.selectedFoods[i], this.order);
       this.orderService.addOrderFood(order_food).subscribe(data => this.order_food = data);
     }
+    this.addOrderDrink();
+  }
 
-    this.router.navigate(['../waiter/orders'])
+  addOrderDrink(): void
+  {
+    for(var i = 0; i < this.selectedDrinks.length; i++)
+    {
+      var order_drink = new OrderDrink(null, this.selectedDrinks[i], this.order);
+      this.orderService.addOrderDrink(order_drink).subscribe(data => this.order_drink = data);
+    }
+
+    this.router.navigate(['../waiter/orders']);
   }
 
   loadSelect(): void{
@@ -93,6 +105,7 @@ export class AddOrderView implements OnInit{
   addDrink(id: string): void{
     var listOfDrinks = document.getElementById("drinks_id");
     listOfDrinks.innerHTML = listOfDrinks.innerHTML + "<li class=\"list-group-item\">"+ id + "<div class=\"pull-right action-buttons\">     <button type=\"button\" class=\"btn btn-success btn-xs\" aria-label=\"Left Align\" (click) = \"addFood(food.name)\" ><span class=\"glyphicon glyphicon-pencil\"></span></button> </div> </li>";
+    this.selectedDrinks.push(this.findDrink(id));
   }
 
 
@@ -101,6 +114,18 @@ export class AddOrderView implements OnInit{
     this.foods.forEach(function(food) {
       if(food.name.localeCompare(data) === 0) {
         f = food;
+        return f;
+      }
+    });
+    return f;
+
+  }
+
+  findDrink(data: string): Drink{
+    var f = null;
+    this.drinks.forEach(function(drink) {
+      if(drink.name.localeCompare(data) === 0) {
+        f = drink;
         return f;
       }
     });

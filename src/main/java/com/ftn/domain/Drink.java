@@ -25,41 +25,34 @@ public class Drink {
     @Column(name = "price")
     private double price;
 
-    @ManyToMany()
-    @JoinTable(name="ORDER_DRINK",
-            joinColumns = {@JoinColumn(name = "drink_id")}, inverseJoinColumns = {@JoinColumn(name = "id")})
-    private Set<Order> order;
+    @OneToMany(mappedBy = "drink")
+    private Set<Order_Drink> order_drinks;
 
-    public Drink(){ order = new HashSet<>();}
+    public Drink(){ order_drinks = new HashSet<>();}
 
     public Drink(String name, String drinkDescription, double price) {
+        this();
         this.name = name;
         this.drinkDescription = drinkDescription;
         this.price = price;
     }
 
-    public Drink(String name, String drinkDescription, double price, HashSet<Order> order) {
+    public Drink(String name, String drinkDescription, double price, HashSet<Order_Drink> order) {
         this.name = name;
         this.drinkDescription = drinkDescription;
         this.price = price;
-        this.order = order;
+        this.order_drinks = order;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public String getFoodDescription() {
-        return drinkDescription;
-    }
 
     public String getName() {
         return name;
     }
 
-    public void setFoodDescription(String foodDescription) {
-        this.drinkDescription = foodDescription;
-    }
 
     public void setName(String name) {
         this.name = name;
@@ -67,5 +60,21 @@ public class Drink {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getDrinkDescription() {
+        return drinkDescription;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setDrinkDescription(String drinkDescription) {
+        this.drinkDescription = drinkDescription;
     }
 }

@@ -223,3 +223,10 @@ export class OrderFood
               public  food: Food,
               public order: Order) {}
 }
+
+export class OrderDrink
+{
+  constructor(public order_drink_id: number,
+              public  drink: Drink,
+              public order: Order) {}
+}

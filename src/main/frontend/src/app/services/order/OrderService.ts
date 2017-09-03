@@ -4,7 +4,7 @@ import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/do'
 import 'rxjs/add/operator/catch'
-import {Drink, Food, Order, OrderFood} from "../../models";
+import {Drink, Food, Order, OrderFood, OrderDrink} from "../../models";
 
 @Injectable()
 export class OrderService
@@ -14,6 +14,7 @@ export class OrderService
   private getOrdersLink = 'http://localhost:8090/orders';
   private addOrderLink = 'http://localhost:8090/add_order';
   private addOrderFoodLink = 'http://localhost:8090/add_order_food';
+  private addOrderDrinkLink = 'http://localhost:8090/add_order_drink'
 
   constructor(private http: Http) { }
 
@@ -57,10 +58,25 @@ export class OrderService
     var newOrderFood = {order_food_id: null, order: order_food.order, food: order_food.food };
     var params = JSON.stringify(newOrderFood);
 
+
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
 
     return this.http.post(this.addOrderFoodLink,params, options).map(this.extractOrderFood)
+      .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+
+  }
+
+  addOrderDrink(order_drink: OrderDrink): Observable<OrderDrink>{
+
+    var newOrderDrink = {order_drink_id: null, order: order_drink.order, drink: order_drink.drink };
+    var params = JSON.stringify(newOrderDrink);
+
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post(this.addOrderDrinkLink,params, options).map(this.extractOrderDrink)
       .do(data => console.log(JSON.stringify(data)))
       .catch(this.handleError);
 
@@ -93,6 +109,11 @@ export class OrderService
 
   private extractOrderFood(res: Response) {
     let body = <OrderFood> res.json();
+    return body || { };
+  }
+
+  private extractOrderDrink(res: Response) {
+    let body = <OrderDrink> res.json();
     return body || { };
   }
 
