@@ -69,4 +69,12 @@ public class Food {
     public void setPrice(double price) {
         this.price = price;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 }

@@ -25,11 +25,11 @@ public class Order_Food {
         this.order_food_id = id;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "id")
     private Order order;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name = "food_id")
     private Food food;
 

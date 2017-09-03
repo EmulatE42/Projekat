@@ -1,7 +1,6 @@
 package com.ftn.repository;
 
 import com.ftn.domain.Order;
-import com.ftn.domain.Waiter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

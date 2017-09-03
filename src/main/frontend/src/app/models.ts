@@ -216,3 +216,10 @@ export class Order
               public nazivRestorana: string,
               public vreme: string) {}
 }
+
+export class OrderFood
+{
+  constructor(public order_food_id: number,
+              public  food: Food,
+              public order: Order) {}
+}
