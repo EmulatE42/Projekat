@@ -33,6 +33,12 @@ public class Order_Food {
     @JoinColumn(name = "food_id")
     private Food food;
 
+    @Column(name = "accept" , nullable = true)
+    private boolean accept;
+
+    @Column(name = "ready" , nullable = true)
+    private boolean ready;
+
     public Order_Food()
     {
 
@@ -57,5 +63,21 @@ public class Order_Food {
 
     public void setFood(Food food) {
         this.food = food;
+    }
+
+    public boolean isAccept() {
+        return accept;
+    }
+
+    public boolean isReady() {
+        return ready;
+    }
+
+    public void setAccept(boolean accept) {
+        this.accept = accept;
+    }
+
+    public void setReady(boolean ready) {
+        this.ready = ready;
     }
 }

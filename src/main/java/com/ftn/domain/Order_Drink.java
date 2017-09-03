@@ -33,6 +33,9 @@ public class Order_Drink {
     @JoinColumn(name = "drink_id")
     private Drink drink;
 
+    @Column(name = "ready" , nullable = true)
+    private boolean ready;
+
     public Order_Drink()
     {
 
@@ -57,6 +60,14 @@ public class Order_Drink {
 
     public void setDrink(Drink drink) {
         this.drink = drink;
+    }
+
+    public boolean isReady() {
+        return ready;
+    }
+
+    public void setReady(boolean ready) {
+        this.ready = ready;
     }
 }
 

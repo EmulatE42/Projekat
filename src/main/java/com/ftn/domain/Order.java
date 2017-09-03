@@ -40,6 +40,13 @@ public class Order implements Serializable{
     @Column(name = "vreme" , nullable = true)
     private String vreme;
 
+    @Column(name = "accept" , nullable = true)
+    private boolean accept;
+
+    @Column(name = "ready" , nullable = true)
+    private boolean ready;
+
+
     public Order()
     {
 
@@ -75,5 +82,37 @@ public class Order implements Serializable{
 
     public Set<Order_Drink> getOrder_drinks() {
         return order_drinks;
+    }
+
+    public boolean isAccept() {
+        return accept;
+    }
+
+    public boolean isReady() {
+        return ready;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setBrojStola(List<Integer> brojStola) {
+        this.brojStola = brojStola;
+    }
+
+    public void setNazivRestorana(String nazivRestorana) {
+        this.nazivRestorana = nazivRestorana;
+    }
+
+    public void setVreme(String vreme) {
+        this.vreme = vreme;
+    }
+
+    public void setAccept(boolean accept) {
+        this.accept = accept;
+    }
+
+    public void setReady(boolean ready) {
+        this.ready = ready;
     }
 }
