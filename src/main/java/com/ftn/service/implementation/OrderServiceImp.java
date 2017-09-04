@@ -20,8 +20,19 @@ import java.util.Set;
 @Service
 public class OrderServiceImp implements OrderService {
 
+
     @Autowired
     private OrderRepository orderRepository;
+
+    @Override
+    public void updateOrderReady(int id) {
+        orderRepository.updateReady(id);
+    }
+
+    @Override
+    public void updateOrderAccept(int id) {
+        orderRepository.updateAccept(id);
+    }
 
     @Override
     public Set<Food> getFoods() {

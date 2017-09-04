@@ -142,7 +142,7 @@ export class ReserveRestComponent implements OnInit {
 
 
   addOrderItem(): void{
-    let order = new Order(null, [6,9], this.imeRestorana, this.konacnoVreme);
+    let order = new Order(null, [6,9], this.imeRestorana, this.konacnoVreme,false,false);
     this.orderService.addOrder(order).subscribe(data => this.order = data,
       error => console.log("Error: ", error),
       () => this.addOrderFood());
@@ -153,7 +153,7 @@ export class ReserveRestComponent implements OnInit {
   {
     for(var i = 0; i < this.selectedFoods.length; i++)
     {
-      var order_food = new OrderFood(null, this.selectedFoods[i], this.order);
+      var order_food = new OrderFood(null, this.selectedFoods[i], this.order,false,false);
       this.orderService.addOrderFood(order_food).subscribe(data => this.order_food = data);
     }
     this.addOrderDrink();
@@ -163,7 +163,7 @@ export class ReserveRestComponent implements OnInit {
   {
     for(var i = 0; i < this.selectedDrinks.length; i++)
     {
-      var order_drink = new OrderDrink(null, this.selectedDrinks[i], this.order);
+      var order_drink = new OrderDrink(null, this.selectedDrinks[i], this.order,false);
       this.orderService.addOrderDrink(order_drink).subscribe(data => this.order_drink = data);
     }
 

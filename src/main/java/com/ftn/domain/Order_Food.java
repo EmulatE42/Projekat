@@ -17,13 +17,7 @@ public class Order_Food {
     @Column(name = "order_food_id")
     private Integer order_food_id;
 
-    public Integer getId() {
-        return order_food_id;
-    }
 
-    public void setId(Integer id) {
-        this.order_food_id = id;
-    }
 
     @ManyToOne()
     @JoinColumn(name = "id")
@@ -79,5 +73,13 @@ public class Order_Food {
 
     public void setReady(boolean ready) {
         this.ready = ready;
+    }
+
+    public Integer getOrder_food_id() {
+        return order_food_id;
+    }
+
+    public void setOrder_food_id(Integer order_food_id) {
+        this.order_food_id = order_food_id;
     }
 }

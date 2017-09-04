@@ -14,5 +14,7 @@ public interface OrderService {
     Set<Drink> getDrinks();
     Set<Order> getOrders();
     void saveOrder(Order order);
+    void updateOrderReady(int id);
+    void updateOrderAccept(int id);
 
 }

@@ -15,6 +15,13 @@ export class OrderService
   private addOrderLink = 'http://localhost:8090/add_order';
   private addOrderFoodLink = 'http://localhost:8090/add_order_food';
   private addOrderDrinkLink = 'http://localhost:8090/add_order_drink'
+  private getOrderFoodsLink = 'http://localhost:8090/order_foods';
+  private updateOrderFoodsReadyLink = 'http://localhost:8090/update_order_food_ready';
+  private updateOrderReadyLink = 'http://localhost:8090/update_order_ready';
+  private updateOrderFoodsAcceptLink = 'http://localhost:8090/update_order_food_accept'
+  private getOrderDrinksLink = 'http://localhost:8090/order_drinks';
+  private updateOrderDrinksReadyLink = 'http://localhost:8090/update_order_drink_ready'
+  private updateOrderAcceptLink = 'http://localhost:8090/update_order_accept';
 
   constructor(private http: Http) { }
 
@@ -39,9 +46,23 @@ export class OrderService
       .catch(this.handleError);
   }
 
+  getOrderFoods(): Observable<OrderFood[]>{
+
+    return this.http.get(this.getOrderFoodsLink).map(this.extractOrderFoods)
+      .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+  }
+
+  getOrderDrinks(): Observable<OrderDrink[]>{
+
+    return this.http.get(this.getOrderDrinksLink).map(this.extractOrderDrinks)
+      .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+  }
+
   addOrder(order: Order): Observable<Order>{
 
-    var newOrder = {id: null, nazivRestorana: "Domaciniski", vreme: "18:20", brojStola: [1]};
+    var newOrder = {id: null, nazivRestorana: order.nazivRestorana, vreme: order.vreme, brojStola: order.brojStola,accept : order.accept, ready: order.ready };
     var params = JSON.stringify(newOrder);
 
     let headers = new Headers({ 'Content-Type': 'application/json'});
@@ -82,6 +103,80 @@ export class OrderService
 
   }
 
+  updateOrderFoodReady(order_food: OrderFood): Observable<OrderFood>{
+
+    var newOrderFood = {order_food_id: order_food.order_food_id, order: order_food.order, food: order_food.food };
+    var params = JSON.stringify(newOrderFood);
+
+
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put(this.updateOrderFoodsReadyLink,params, options).map(this.extractOrderFood)
+      .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+
+  }
+
+  updateOrderDrinkReady(order_drink: OrderDrink): Observable<OrderDrink>{
+
+    var newOrderDrink = {order_drink_id: order_drink.order_drink_id, order: order_drink.order, drink: order_drink.drink };
+    var params = JSON.stringify(newOrderDrink);
+
+
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put(this.updateOrderDrinksReadyLink,params, options).map(this.extractOrderDrink)
+      .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+
+  }
+
+  updateOrderFoodAccept(order_food: OrderFood): Observable<OrderFood>{
+
+    var newOrderFood = {order_food_id: order_food.order_food_id, order: order_food.order, food: order_food.food };
+    var params = JSON.stringify(newOrderFood);
+
+
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put(this.updateOrderFoodsAcceptLink,params, options).map(this.extractOrderFood)
+      .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+
+  }
+
+  updateOrderReady(order: Order): Observable<Order>{
+
+    var newOrder = {id: order.id};
+    var params = JSON.stringify(newOrder);
+
+
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put(this.updateOrderReadyLink,params, options).map(this.extractOrder)
+      .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+
+  }
+
+  updateOrderAccept(order: Order): Observable<Order>{
+
+    var newOrder = {id: order.id};
+    var params = JSON.stringify(newOrder);
+
+
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put(this.updateOrderAcceptLink,params, options).map(this.extractOrder)
+      .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+
+  }
 
 
   private extractFood(res: Response) {
@@ -98,6 +193,18 @@ export class OrderService
 
   private extractOrders(res: Response) {
     let body = <Order[]> res.json();
+    console.log(body);
+    return body || { };
+  }
+
+  private extractOrderFoods(res: Response) {
+    let body = <OrderFood[]> res.json();
+    console.log(body);
+    return body || { };
+  }
+
+  private extractOrderDrinks(res: Response) {
+    let body = <OrderDrink[]> res.json();
     console.log(body);
     return body || { };
   }

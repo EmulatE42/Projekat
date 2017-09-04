@@ -26,4 +26,9 @@ public class OrderDrinkServiceImpl implements OrderDrinkService {
     public void save(Order_Drink order_drink) {
         this.orderDrinkRepository.save(order_drink);
     }
+
+    @Override
+    public void updateReady(int id) {
+        orderDrinkRepository.updateReady(id);
+    }
 }

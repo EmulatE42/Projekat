@@ -19,6 +19,22 @@ export abstract class User
   ) {}
 }
 
+export class NewUser
+{
+  constructor( public id: number,
+               public first_name : string,
+               public last_name : string,
+               public email : string,
+               public password : string,
+               public role: Role,
+               public avatar: string,
+               public startTime: string,
+               public endTime: string,
+               public restaurantName: string
+
+  ) {}
+}
+
 export class Friendship {
   constructor( public id: number,
                public koSalje: string,
@@ -214,19 +230,24 @@ export class Order
   constructor(public id: number,
               public  brojStola: number[],
               public nazivRestorana: string,
-              public vreme: string) {}
+              public vreme: string,
+              public ready: boolean,
+              public accept: boolean) {}
 }
 
 export class OrderFood
 {
   constructor(public order_food_id: number,
               public  food: Food,
-              public order: Order) {}
+              public order: Order,
+              public ready: boolean,
+              public accept: boolean) {}
 }
 
 export class OrderDrink
 {
   constructor(public order_drink_id: number,
               public  drink: Drink,
-              public order: Order) {}
+              public order: Order,
+              public ready: boolean) {}
 }

@@ -8,7 +8,7 @@
 <div class="tab-content">
   <br>
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-6">
 
       <div class="panel panel-default">
         <div class="panel-heading">
@@ -26,6 +26,8 @@
               <th class="hidden-xs">Red br.</th>
               <th class="col-text">Naziv restorana</th>
               <th class="col-text">Vreme</th>
+              <th class="col-text">Prihvaceno</th>
+              <th class="col-text">Spremno</th>
             </tr>
             </thead>
             <tbody>
@@ -39,6 +41,8 @@
                   <td class="hidden-xs">{{ i + 1 }}</td>
                   <td> {{ order.nazivRestorana }}</td>
                   <td>{{ order.vreme }}</td>
+                  <td align="center"><input type="checkbox" [disabled]="true" [checked]="order.accept" class="checkthis"/></td>
+                  <td align="center"><input type="checkbox" [disabled]="true" [checked]="order.ready " class="checkthis"/></td>
                 </tr>
             </tbody>
           </table>

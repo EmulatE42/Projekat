@@ -23,7 +23,7 @@ public class OrderDrinkController {
     @CrossOrigin
     @RequestMapping(value = "/add_order_drink",  method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Order_Drink> addOrderDrink(@RequestBody Order_Drink order_drink) {
-        System.out.println("ID: " + order_drink.getId());
+        System.out.println("ID: " + order_drink.getOrder_drink_id());
         this.orderDrinkService.save(order_drink);
 
         return new ResponseEntity(order_drink != null ? order_drink : "{}", HttpStatus.OK);
@@ -38,5 +38,14 @@ public class OrderDrinkController {
 
 
         return new ResponseEntity(od != null ? od : "{}", HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/update_order_drink_ready",  method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Order_Drink> updateOrderDrinkReady(@RequestBody Order_Drink order_drink) {
+
+        this.orderDrinkService.updateReady(order_drink.getOrder_drink_id());
+
+        return new ResponseEntity("{}", HttpStatus.OK);
     }
 }

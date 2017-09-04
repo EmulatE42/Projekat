@@ -4,7 +4,7 @@ import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/do'
 import 'rxjs/add/operator/catch'
-import {Cook, Guest, User, Waiter, Bartender, Supplier} from "../../models";
+import {Cook, Guest, User, Waiter, Bartender, Supplier, NewUser} from "../../models";
 
 @Injectable()
 export class UserService
@@ -27,6 +27,8 @@ export class UserService
   public proba = 'http://localhost:8090/guest/lol/6f2ebe44-5f3a-4cc3-a335-d0b776672dde'
   //public probaUrl = 'http://localhost:8090/guest/m/a95ad0a0-caac-47e1-a129-d68dfb743228'
   private proveriUrl = 'http://localhost:8090/proveri';
+  private getRestaurantUrl = 'http://localhost:8090/get_restaurant';
+
   constructor(private http: Http) { }
 
 
@@ -38,6 +40,18 @@ export class UserService
     let headers = new Headers({ 'Content-Type': 'application/json'});
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.proveriUrl, params, options).map(res => res.toString());
+  }
+
+  getRestaurant(id: number) : Observable<NewUser> {
+
+    console.log("PRE");
+    var u = {id: id, first_name: null, last_name: null, email: null, password: null, role: null};
+    var params = JSON.stringify(u);
+    console.log("posle");
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post(this.getRestaurantUrl, params, options).map(this.extractUser);
   }
 
 
@@ -198,6 +212,12 @@ export class UserService
   console.log(body);
   return body || { };
 }
+
+  private extractUser(res: Response) {
+    let body = <NewUser> res.json();
+    console.log(body);
+    return body || { };
+  }
 
   private handleError(error: Response)
   {

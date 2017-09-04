@@ -1,21 +1,21 @@
-<div class='panel panel-default'>
-  <div class='panel-heading' style='font-size:large'>
-    <a href="#"> Raspored rada </a> &nbsp; &nbsp; &nbsp;
-    <a href="#"> Lista porudzbina pica</a> &nbsp; &nbsp; &nbsp;
-    <a [routerLink]="['/bartender/account']"> Moj nalog </a>
-  </div>
+<ul class="nav nav-tabs">
+  <li> <a [routerLink]="['/bartender/work']"> Raspored rada </a> </li>
+  <li> <a [routerLink]="['/bartender/orders']"> Lista porudzbina pica </a> </li>
+  <li class="active"> <a [routerLink]="['/bartender/account']"> Moj nalog </a> </li>
+</ul>
 
-  <div class='panel-body '>
-    <div class="row">
-      <div class="col-sm-2">
-        <div class="border-img">
-          <img [src]="avatar" alt="Profile picture" />
-        </div> <br>
-        <label class="upload-group" (change)="previewFile()">
-          Upload image
-          <input type="file" class="upload-group" id="file">
-        </label>
-      </div>
+
+<div class="tab-content">
+  <div class="row">
+    <div class="col-sm-2">
+      <div>
+        <img [src]="avatar" class="img-rounded" alt="Profile picture" />
+      </div> <br>
+      <label class="upload-group" (change)="previewFile()">
+        Upload image
+        <input type="file" class="upload-group" id="file">
+      </label>
+    </div>
 
       <div class="col-sm-4">
         <form class="form-horizontal">
@@ -73,8 +73,8 @@
       </div>
     </div>
 
-  </div>
-
 </div>
+
+
 
 

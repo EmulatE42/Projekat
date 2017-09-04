@@ -25,6 +25,7 @@ public class Cook extends User {
     @Column(name = "firstTimeLogin" , unique = false, nullable = false)
     private boolean firstTimeLogin;
 
+
     public Cook() {}
 
 
@@ -67,4 +68,5 @@ public class Cook extends User {
     public void setFirstTimeLogin(boolean firstTimeLogin) {
         this.firstTimeLogin = firstTimeLogin;
     }
+
 }
