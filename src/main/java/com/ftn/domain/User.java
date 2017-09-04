@@ -39,6 +39,15 @@ public abstract class User {
     @Column(name = "avatar" , unique = false, nullable = true)
     private String avatar;
 
+    @Column(name = "startTime" , unique = false, nullable = true)
+    private String startTime;
+
+    @Column(name = "endTime" , unique = false, nullable = true)
+    private String endTime;
+
+    @Column(name = "restaurantName" , unique = false, nullable = true)
+    private String restaurantName;
+
     public User()
     {
 
@@ -106,5 +115,29 @@ public abstract class User {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(String endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getRestaurantName() {
+        return restaurantName;
+    }
+
+    public void setRestaurantName(String restaurantName) {
+        this.restaurantName = restaurantName;
     }
 }

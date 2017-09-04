@@ -44,6 +44,8 @@ import { SentRequestsComponent } from './components/user/sent-requests/sent-requ
 import {FriendRequestService} from "./services/friend/FriendRequestService";
 import { ReceivedRequestsComponent } from './components/user/received-requests/received-requests.component';
 import {AddOrderView} from "./components/user/basicWaiterView/addOrder/addOrder.component";
+import {PrepareFood} from "./components/user/basicCookView/prepareFood/prepareFoodView.component";
+import {PrepareDrink} from "./components/user/basicBartenderView/prepareDrink/prepareDrinkView.component";
 
 
 
@@ -80,7 +82,9 @@ firebase.initializeApp(firebaseConfig);
     ReserveRestComponent,
     SentRequestsComponent,
     ReceivedRequestsComponent,
-    AddOrderView
+    AddOrderView,
+    PrepareFood,
+    PrepareDrink
   ],
   imports: [
     BrowserModule,
@@ -98,7 +102,9 @@ firebase.initializeApp(firebaseConfig);
       {path: 'waiter/orders', component: OrdersWaiterView},
       {path: 'waiter/schedule_table', component: ScheduleTableView},
       {path: 'cook/account', canActivate: [EmployeeFirstLoginGuard], component: BasicCookView},
+      {path: 'cook/orders', canActivate: [EmployeeFirstLoginGuard], component: PrepareFood},
       {path: 'bartender/account', canActivate: [EmployeeFirstLoginGuard], component: BasicBartenderView},
+      {path: 'bartender/orders', canActivate: [EmployeeFirstLoginGuard], component: PrepareDrink},
       {path: 'change/password', component: EmployeeChangePassword},
       {path: 'supplier/account', canActivate: [EmployeeFirstLoginGuard], component: BasicSupplierView},
       {path: 'guest/friends/add', component: AddFriendComponent},

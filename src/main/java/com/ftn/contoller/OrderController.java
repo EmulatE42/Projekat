@@ -73,5 +73,23 @@ public class OrderController {
         return new ResponseEntity(order != null ? order : "{}", HttpStatus.OK);
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "/update_order_ready",  method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Order> updateOrderReady(@RequestBody Order order) {
+
+        this.orderService.updateOrderReady(order.getId());
+
+        return new ResponseEntity("{}", HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/update_order_accept",  method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Order> updateOrderAccept(@RequestBody Order order) {
+
+        this.orderService.updateOrderAccept(order.getId());
+
+        return new ResponseEntity("{}", HttpStatus.OK);
+    }
+
 
 }

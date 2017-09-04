@@ -26,6 +26,7 @@ public class Waiter extends User{
     @Column(name = "firstTimeLogin" , unique = false, nullable = false)
     private boolean firstTimeLogin;
 
+
     public Waiter() {}
 
 
@@ -68,4 +69,5 @@ public class Waiter extends User{
     public void setFirstTimeLogin(boolean firstTimeLogin) {
         this.firstTimeLogin = firstTimeLogin;
     }
+
 }

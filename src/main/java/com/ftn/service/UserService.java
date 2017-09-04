@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public interface UserService {
  // ovde su moje u rep su postojece kom
-    //User findOne(Integer id);
+    User findOne(Integer id);
     Guest save(Guest guest);
     User findByEmail(String email);
     Integer deleteUserByEmail(String email);

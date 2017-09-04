@@ -40,4 +40,22 @@ public class OrderFoodController {
 
         return new ResponseEntity(of != null ? of : "{}", HttpStatus.OK);
     }
+
+    @CrossOrigin
+    @RequestMapping(value = "/update_order_food_ready",  method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Order_Food> updateOrderFoodReady(@RequestBody Order_Food order_food) {
+
+        this.orderFoodService.updateReady(order_food.getOrder_food_id());
+
+        return new ResponseEntity("{}", HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/update_order_food_accept",  method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Order_Food> updateOrderFoodAccept(@RequestBody Order_Food order_food) {
+
+        this.orderFoodService.updateAccept(order_food.getOrder_food_id());
+
+        return new ResponseEntity("{}", HttpStatus.OK);
+    }
 }

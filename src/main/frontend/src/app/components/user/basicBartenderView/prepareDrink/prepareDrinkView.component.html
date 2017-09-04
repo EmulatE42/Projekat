@@ -1,0 +1,44 @@
+<ul class="nav nav-tabs">
+  <li> <a [routerLink]="['/bartender/work']"> Raspored rada </a> </li>
+  <li class="active"> <a [routerLink]="['/bartender/orders']"> Lista porudzbina pica </a> </li>
+  <li> <a [routerLink]="['/bartender/account']"> Moj nalog </a> </li>
+</ul>
+
+<div class="tab-content">
+  <br>
+  <div class="row">
+    <div class="col-md-4">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Foods</h4>
+        </div>
+        <div id="order" class="panel-body">
+          <table id="mytable" class="table table-striped table-bordered table-list">
+            <thead>
+            <tr>
+              <th class="hidden-xs">Red. br.</th>
+              <th class="col-text">Naziv pica</th>
+              <th class="col-text">ID porudzbine</th>
+              <th class="col-text">Spremno</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-status="completed" *ngFor="let order_drink of order_drinks; let i = index" [attr.data-index]="i">
+              <td class="hidden-xs">{{ i + 1 }}</td>
+              <td> {{ order_drink.drink.name }}</td>
+              <td>{{ order_drink.order.id }}</td>
+              <td align="center"><input type="checkbox" class="checkthis" [checked]="order_drink.ready" (change)='ready( order_drink.order_drink_id )'> </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+

@@ -11,4 +11,6 @@ import java.util.Set;
 public interface OrderFoodService {
     List<Order_Food> getOrderFoods();
     void save(Order_Food order_food);
+    void updateReady(int id);
+    void updateAccept(int id);
 }

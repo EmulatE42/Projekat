@@ -29,6 +29,11 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
+    public User findOne(Integer id) {
+        return userRepository.findById(id);
+    }
+
+    @Override
     public Guest save(Guest guest)  {
         return userRepository.save(guest);
     }
@@ -60,13 +65,26 @@ public class UserServiceImpl implements UserService {
                 Waiter waiter = new Waiter("Pera", "Peric", "pera@gmail.com", "pass", Role.KONOBAR, date, 23, 45, false);
                 Cook cook = new Cook("Mika", "Mikic", "mika@gmail.com", "pass", Role.KUVAR, date, 23, 45, false);
                 Bartender bartender = new Bartender("Laza", "Lazic", "laza@gmail.com", "pass", Role.SANKER, date, 23, 45, false);
-                Supplier supplier = new Supplier("Paja", "Patak", "paja@gmail.com", "pass", Role.PONUDJAC, date, false);
+                //Supplier supplier = new Supplier("Paja", "Patak", "paja@gmail.com", "pass", Role.PONUDJAC, date, false);
+
+                waiter.setStartTime("08:00");
+                waiter.setEndTime("15:00");
+                waiter.setRestaurantName("Kineski");
+
+
+                cook.setStartTime("08:00");
+                cook.setEndTime("15:00");
+                cook.setRestaurantName("Kineski");
+
+                bartender.setStartTime("08:00");
+                bartender.setEndTime("15:00");
+                bartender.setRestaurantName("Kineski");
 
 
                 this.userRepository.save(waiter);
                 this.userRepository.save(cook);
                 this.userRepository.save(bartender);
-                this.userRepository.save(supplier);
+                //this.userRepository.save(supplier);
 
                 List<Integer> tables = new ArrayList<>();
                 tables.add(1);

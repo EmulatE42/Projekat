@@ -28,4 +28,14 @@ public class OrderFoodServiceImpl implements OrderFoodService {
     public void save(Order_Food order_food) {
         this.orderFoodRepository.save(order_food);
     }
+
+    @Override
+    public void updateReady(int id) {
+        orderFoodRepository.updateReady(id);
+    }
+
+    @Override
+    public void updateAccept(int id) {
+        orderFoodRepository.updateAccept(id);
+    }
 }

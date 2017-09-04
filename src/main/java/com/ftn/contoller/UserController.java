@@ -172,6 +172,15 @@ public class UserController {
         return new ResponseEntity(supplier, HttpStatus.OK);
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "/get_restaurant", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<User> get_restaurant(@RequestBody UserDTO user) {
+
+        User u = this.userService.findOne(user.getId());
+        System.out.println("USAOOOOOOOOOOOOOOOOOO " + user.getId());
+        return new ResponseEntity(u != null ? u : "{}", HttpStatus.OK);
+    }
+
     public UserDTO converte(User user)
     {
         UserDTO userDTO = null;
