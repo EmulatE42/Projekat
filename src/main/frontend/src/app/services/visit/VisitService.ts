@@ -19,7 +19,7 @@ export class VisitService {
       .catch(this.handleError);
   }
 
-  dodajPosetu(prvi: string, drugi: string, treci: string): Observable<Visit>{ // OVO SU SVI USERI, pa cu onda od ovih da oduzmem prijatelje plus samog sebe
+  dodajPosetu(prvi: string, drugi: string, treci: string): Observable<Visit>{
     var fr = {id: null, email: prvi, nazivRestorana: drugi, datum : treci};
     //var params =  JSON.stringify(fr);
     var t = prvi + ";" + drugi + ";" + treci;

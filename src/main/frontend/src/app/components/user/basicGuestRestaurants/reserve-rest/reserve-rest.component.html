@@ -1,102 +1,99 @@
-<div class='panel panel-default'>
+
   <div class='panel-heading' style='font-size:large'>
     <a [routerLink]="['/guest/restaurants']"> Restorani </a>
-
   </div>
+  <label> Odabrali ste restoran :  {{imeRestorana}}  </label> <br>
+  <label > Datum: </label>
+  <input #myDatePicker
+         type="date"
+         value='{{ myDate }}'
+         (input)="onInput(myDatePicker.value)" />
 
-  <div  id = "p1" class="col-md-8">
-    <label> Odabrali ste restoran :  {{imeRestorana}}  </label>
-    <p > Datum: <input  [(ngModel)]="dat"  value type="text" placeholder="Unesite datum"> </p>
-  <div clas="row">
-    <div class="col-md-6">
-    <div class="panel panel-default">
-      <div  class="panel-heading">
-        <h4>Hrana</h4>
+  <input #myTimePicker
+         type="time"
+         value='{{ myTime }}'
+         (input)="onInputTime(myTimePicker.value)" />
+  <div class ="s" >
+    <label for="asd">Sati:</label>
+    <input type="text" id="textInput" value={{myHour}}>
+    <input #myR
+           id ="asd"
+           value='{{ myHour }}'
+           data-show-value="true"
+           type="range"
+           min = "1"
+           value="1"
+           max = "5"
+           (input)="onChange(myR.value)" />
+  </div >
+  <div display = "inline" id = "LOL"></div>
+
+
+  <div class="col-md-8">
+    <div clas="row">
+      <div class="col-md-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4>Hrana</h4>
+          </div>
+          <div id="p1" class="panel-body">
+            <ul class="list-group" *ngFor="let food of foods">
+              <li class="list-group-item">{{ food.name }}
+                <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" (click) = "addFood(food.name)" ><span class="glyphicon glyphicon-plus"></span></button>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <div  class="panel-body">
-        <ul class="list-group" *ngFor="let food of hrana">
-          <li class="list-group-item">{{ food.name }}
-            <div class="pull-right action-buttons">
-              <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" (click) = "dodajFood(food)" ><span class="glyphicon glyphicon-plus"></span></button>
-            </div>
+      <div class="col-md-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4>Pice</h4>
+          </div>
+          <div id="p2" class="panel-body">
+            <ul class="list-group" *ngFor="let drink of drinks">
+              <li class="list-group-item">{{ drink.name }}
+                <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" (click) = "addDrink(drink.name)" ><span class="glyphicon glyphicon-plus"></span></button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4>Selektovana hrana</h4>
+          </div>
+          <div id="p3" class="panel-body">
+          <ul id="foods_id" class="list-group">
+            <li class="list-group-item" *ngFor="let food of selectedFoods">{{ food.name }}
+            </li>
+          </ul>
+        </div>
+        </div>
+      </div>
+
+    <div class="col-md-5">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4>Selektovano pice</h4>
+        </div>
+        <div id="p4" class="panel-body">
+        <ul id="drinks_id" class="list-group">
+          <li class="list-group-item" *ngFor="let food of selectedDrinks">{{ food.name }}
           </li>
         </ul>
       </div>
-    </div>
-    </div>
-  </div>
-
-</div>
-  <div  id = "p2" class="col-md-8">
-    <div clas="row">
-      <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4>Pice</h4>
-        </div>
-        <div  class="panel-body">
-          <ul class="list-group" *ngFor="let drink of pica">
-            <li class="list-group-item">{{ drink.name }}
-              <div class="pull-right action-buttons">
-                <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" (click) = "dodajDrink(drink)" ><span class="glyphicon glyphicon-plus"></span></button>
-              </div>
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
     </div>
-
-  </div>
-
-  <div  id = "p3" class="col-md-8">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4>Selected foods</h4>
-        </div>
-        <div  class="panel-body">
-          <ul id="foods_id" class="list-group">
-            <li class="list-group-item" *ngFor="let food of odabranaHrana">{{ food.name }}
-              <div class="pull-right action-buttons">
-                <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" ><span class="glyphicon glyphicon-plus"></span></button>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-    <div  id = "p4" class="col-md-8">
-    <div  class="col-md-6">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4>Selected drinks</h4>
-        </div>
-        <div  class="panel-body">
-          <ul id="drinks_id" class="list-group">
-
-            <li class="list-group-item" *ngFor="let food of odabranaPica">{{ food.name }}
-              <div class="pull-right action-buttons">
-                <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" ><span class="glyphicon glyphicon-plus"></span></button>
-              </div>
-            </li>
+  </div >
 
 
-
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-    <button type="submit" (click) = "zavrsiPorudzbinu()">Zavrsi</button>
-  </div>
-
-
-
-
-
-
-</div>
+  <button type="submit" (click) = "zavrsiPorudzbinu()">Zavrsi</button>
+  <br>
+  <br>
+  <div  id = "naKraju"></div>
 

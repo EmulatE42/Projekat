@@ -36,7 +36,6 @@ import {FriendService} from "./services/friend/FriendService";
 import { ReserveRestComponent } from './components/user/basicGuestRestaurants/reserve-rest/reserve-rest.component';
 import {FoodService} from "./services/food/FoodService";
 import {DrinkService} from "./services/drink/DrinkService";
-import {DrinkItemService} from "./services/drink/DrinkItemService";
 import {VisitService} from "./services/visit/VisitService";
 import {ScheduleTableView} from "./components/user/basicWaiterView/scheduleTableView/scheduleTableView.component";
 import {SchedulerWorkService} from "./services/scheduler_work/SchedulerWorkService";
@@ -44,6 +43,7 @@ import { SentRequestsComponent } from './components/user/sent-requests/sent-requ
 import {FriendRequestService} from "./services/friend/FriendRequestService";
 import { ReceivedRequestsComponent } from './components/user/received-requests/received-requests.component';
 import {AddOrderView} from "./components/user/basicWaiterView/addOrder/addOrder.component";
+import {OrderService} from "./services/order/OrderService";
 
 
 
@@ -111,7 +111,7 @@ firebase.initializeApp(firebaseConfig);
     ImageUploadModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [GuestLoginGuard, EmployeeFirstLoginGuard,UserService,FriendService,FoodService,DrinkService,DrinkItemService,VisitService, SchedulerWorkService,FriendRequestService],
+  providers: [GuestLoginGuard, EmployeeFirstLoginGuard,UserService,FriendService,FoodService,DrinkService,OrderService,VisitService, SchedulerWorkService,FriendRequestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
