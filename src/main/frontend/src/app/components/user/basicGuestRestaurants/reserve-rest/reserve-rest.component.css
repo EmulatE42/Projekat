@@ -1,12 +1,15 @@
 .list-group { margin-bottom:0px; }
 .list-group-item:hover, a.list-group-item:focus {text-decoration: none;background-color: rgb(245, 245, 245);}
 
-
+canvas {
+  border: 3px solid #ccc;
+  margin: 30px;
+}
 
 #order.panel-body {
   /* height: 480px; */
   padding:0px;
-  height: calc(100vh - 250px);
+  /*height: calc(100vh - 250px);*/
   overflow-y: auto;
 }
 #p1.panel-body {

@@ -1,7 +1,9 @@
-<div class='panel panel-default'>
+<div class='panel-default'>
   <div class='panel-heading' style='font-size:large'>
     <a [routerLink]="['/guest/restaurants']"> Restorani </a>
   </div>
+  <canvas id="myCanvas" width="425" height="425" ></canvas>
+  <canvas id="myCanvas2" width="300" height="250" ></canvas> <br>
   <label> Odabrali ste restoran :  {{imeRestorana}}  </label> <br>
   <label > Datum: </label>
   <input #myDatePicker
@@ -11,6 +13,8 @@
 
   <input #myTimePicker
          type="time"
+         min = "06:00"
+         max = "21:00"
          value='{{ myTime }}'
          (input)="onInputTime(myTimePicker.value)" />
   <div class ="s" >
@@ -22,7 +26,6 @@
            data-show-value="true"
            type="range"
            min = "1"
-           value="1"
            max = "5"
            (input)="onChange(myR.value)" />
   </div >
@@ -90,7 +93,6 @@
     </div>
     </div>
   </div >
-
 
   <button type="submit" (click) = "zavrsiPorudzbinu()">Zavrsi</button>
   <br>
