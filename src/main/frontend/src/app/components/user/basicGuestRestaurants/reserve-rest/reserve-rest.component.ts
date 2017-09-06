@@ -465,9 +465,16 @@ public kraj () : void
       obradjenDan = "0"+dan.toString();
 
     }
+    else
+    {
+      obradjenDan = dan.toString();
+    }
     if (mesec < 10)
     {
       obradjenMesec= "0"+mesec.toString();
+    }
+    else {
+      obradjenMesec= mesec.toString();
     }
 
 
