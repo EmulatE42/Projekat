@@ -6,14 +6,16 @@
     <a [routerLink]="['/guest/receivedRequests']"> Zahtevi za prijateljstvo </a>
 
   </div>
+  <div class="col-md-5">
     <div class='panel-body'>
       <form >
         <label> Broj dobijenih zahteva:  {{dobijeni.length}}  </label>
-        <table class='table table-striped' *ngIf='dobijeni && dobijeni.length'>
+        <table class='table table-striped table-bordered' *ngIf='dobijeni && dobijeni.length'>
           <thead>
           <tr>
             <th>Ime Prijatelja</th>
             <th>Prezime</th>
+            <th></th>
           </tr>
           </thead>
           <tbody>
@@ -23,15 +25,17 @@
             </td>
             <td>{{ guest.last_name}}</td>
             <td>
-              <button (click)="prihvati(guest)" type="button" >Prihvati</button>
-              <button (click)="obrisi(guest)" type="button" >Odbi</button>
+              <div class="field col-md-6 col-md-offset-3">
+              <button class="btn btn-primary  " (click)="prihvati(guest)" type="button" >Prihvati</button>
+              <button class="btn btn-primary  " (click)="obrisi(guest)" type="button" >Odbi</button>
+              </div>
             </td>
 
           </tr>
           </tbody>
         </table>
       </form>
-
+    </div>
     </div>
 
 </div>

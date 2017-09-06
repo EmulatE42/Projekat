@@ -3,14 +3,16 @@
     <a [routerLink]="['/guest/friends/add']"> Nazad </a>
 
   </div>
+  <div class="col-md-5">
   <div class='panel-body'>
     <form >
       <label> Broj poslatih zahteva:  {{poslatiZahtevi.length}}  </label>
-      <table class='table table-striped' *ngIf='poslatiZahtevi && poslatiZahtevi.length'>
+      <table class='table table-striped table-bordered ' *ngIf='poslatiZahtevi && poslatiZahtevi.length'>
         <thead>
         <tr>
           <th>Ime Prijatelja</th>
           <th>Prezime</th>
+          <th>Status</th>
         </tr>
         </thead>
         <tbody>
@@ -27,7 +29,7 @@
         </tbody>
       </table>
     </form>
-
+  </div>
   </div>
 
 </div>

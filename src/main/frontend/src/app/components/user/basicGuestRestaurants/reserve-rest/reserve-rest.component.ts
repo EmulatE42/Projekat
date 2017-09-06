@@ -11,9 +11,11 @@ import {OrderService} from "../../../../services/order/OrderService";
   templateUrl: './reserve-rest.component.html',
   styleUrls: ['./reserve-rest.component.css']
 })
+
 export class ReserveRestComponent implements OnInit {
 
 
+  public timer: any;
   public myDate: Date;
   public myTime: number = -1;
   public myHour: number;
@@ -23,8 +25,9 @@ export class ReserveRestComponent implements OnInit {
   private foods : Food[];
   private drinks : Drink[];
 
-  private selectedFoods = new Array<Food>();
-  private selectedDrinks = new Array<Drink>();
+  private selectedFoods  = new Array<Food>();
+  private selectedDrinks= new Array<Drink>();
+
   private order: Order;
   private order_food: OrderFood;
   private order_drink: OrderDrink;
@@ -59,6 +62,18 @@ export class ReserveRestComponent implements OnInit {
 
    this.myHour = 1;
   }
+
+
+  obrisano ( id : number) : void{
+  this.selectedDrinks.splice(id,1);
+
+}
+
+  obrisano2 ( n : number) : void{
+    this.selectedFoods.splice(n,1);
+
+  }
+
 
   public renderuj () : void{
     var elem = <HTMLCanvasElement>document.getElementById('myCanvas');
@@ -120,7 +135,7 @@ export class ReserveRestComponent implements OnInit {
   public onChange(n : number) : void
   {
     this.myHour = n;
-    this.promena();
+   // this.promena();
   }
 
   public onInputTime(v : number) : void {
@@ -141,7 +156,7 @@ export class ReserveRestComponent implements OnInit {
       element.setAttribute("max", "5");
     }
     this.dobarVreme = true;
-    this.promena();
+    //this.promena();
   console.log("UNELI aaa STE VREME " + (this.myTime) );
 
 }
@@ -167,14 +182,34 @@ export class ReserveRestComponent implements OnInit {
     else
     {
       this.dobar = true;
-      this.promena();
+     // this.promena();
       document.getElementById("LOL").innerHTML ="";
 
     }
 
   }
+ ngOnDestroy()
+ {
+   clearInterval(this.timer);
+   console.log("UNISTIO XD");
+ }
 
   ngOnInit() {
+
+
+    this.timer = setInterval(() => {
+
+
+      this.promena();
+
+
+      /*var inputElement = <HTMLInputElement>document.getElementById('asd');
+      console.log("Vrednost je " + inputElement.value);
+      inputElement.value = "4";
+      console.log("Posle setovanja vrednost je " + inputElement.value);*/
+
+
+    }, 1000);
 
     var elem2 = <HTMLCanvasElement>document.getElementById('myCanvas2');
     var context2 = elem2.getContext('2d');
@@ -316,7 +351,8 @@ export class ReserveRestComponent implements OnInit {
 
 
   addFood(id: string): void{
- this.selectedFoods.push(this.findFood(id));
+
+    this.selectedFoods.push(this.findFood(id));
 
   }
 
@@ -325,7 +361,7 @@ export class ReserveRestComponent implements OnInit {
   }
 
   zavrsiPorudzbinu() : void{
-    if (this.dobar && !(this.myTime == -1)) {
+    if (this.dobar && !(this.myTime == -1) && (this.selectedFoods.length != 0 || this.selectedDrinks.length !=0) && this.odabrao()) {
       document.getElementById("naKraju").innerHTML = "<div class=\" alert alert-success col-sm-1\"> Uspesan unos </div>";
 
 
@@ -335,6 +371,18 @@ export class ReserveRestComponent implements OnInit {
 
     }
 
+  }
+
+  odabrao() :boolean
+  {
+    for (var i = 0 ; i < this.elements.length;i++)
+    {
+      if (this.elements[i].colour == "#FF0000" && this.elements[i].tudjiSto == 0)
+      {
+        return true;
+      }
+    }
+    return false;
   }
 public obrada(vreme: number) : string
 {
@@ -494,14 +542,14 @@ public kraj () : void
   }
 
   private cekiraj() : void {
-    this.napuniListu();
-    this.renderuj();
+   // console.log("PROVERAVAM XD");
 
+    var nemaPromena = true;
     if (this.orders.length == 0) //nema nijedan order sve ostaje isto
     {
       return;
     }
-    var zauzetiStoloviOdDrugih = []
+    var zauzetiStoloviOdDrugih = [];
     for (var i = 0 ; i < this.orders.length;i++)
     {
       var dobijeni = this.dajPocetakIKrajiDatum(this.orders[i].vreme);
@@ -519,15 +567,23 @@ public kraj () : void
 
         for( var j = 0; j <  this.orders[i].brojStola.length ; j++)
         {
-
+          nemaPromena = false;
           this.elements[this.orders[i].brojStola[j]-1].tudjiSto = 1;
           zauzetiStoloviOdDrugih.push(this.orders[i].brojStola[j]);
         }
 
-        this.renderuj();
+
 
       }
       }
+      if (nemaPromena && ! this.nekiStoJeCrven())
+      {
+         this.napuniListu(); // ovde je reset
+
+      }
+    this.renderuj();
+      console.log("ovoliko stolova je zauzeto " + zauzetiStoloviOdDrugih.length);
+
     return;
 
   }
@@ -560,6 +616,19 @@ public kraj () : void
     var godina = parseInt(s1[2], 10);
     return dan * 100 + mesec * 10000 + godina * 1000000;
   }
+
+  public nekiStoJeCrven() : boolean
+  {
+    for (var i = 0 ; i < this.elements.length;i++)
+    {
+      if (this.elements[i].colour == "#FF0000")
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
 }
 
 

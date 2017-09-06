@@ -70,32 +70,37 @@
             <h4>Selektovana hrana</h4>
           </div>
           <div id="p3" class="panel-body">
-          <ul id="foods_id" class="list-group">
-            <li class="list-group-item" *ngFor="let food of selectedFoods">{{ food.name }}
-            </li>
-          </ul>
-        </div>
+            <ul id="foods_id" class="list-group" *ngFor="let food of selectedFoods; let j = index" >
+              <li class="list-group-item" >{{ food.name }}
+                <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" (click) = "obrisano2(j)"><span class="glyphicon glyphicon-minus"></span></button>
+
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 
-    <div class="col-md-5">
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4>Selektovano pice</h4>
+      <div class="col-md-5">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4>Selektovano pice</h4>
+          </div>
+          <div id="p4" class="panel-body">
+            <ul id="drinks_id" class="list-group" *ngFor="let drink of selectedDrinks; let i = index">
+              <li class="list-group-item" >{{ drink.name }}
+                <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" (click) = "obrisano(i)"><span class="glyphicon glyphicon-minus"></span></button>
+
+              </li>
+            </ul>
+          </div>
         </div>
-        <div id="p4" class="panel-body">
-        <ul id="drinks_id" class="list-group">
-          <li class="list-group-item" *ngFor="let food of selectedDrinks">{{ food.name }}
-          </li>
-        </ul>
       </div>
-      </div>
-    </div>
     </div>
   </div >
 
-  <button type="submit" (click) = "zavrsiPorudzbinu()">Zavrsi</button>
+  <button type="submit" class="btn btn-primary" (click) = "zavrsiPorudzbinu()">Zavrsi</button>
   <br>
   <br>
   <div  id = "naKraju"></div>
+
 </div >

@@ -4,15 +4,16 @@
     <a [routerLink]="['/guest/friends/sentRequests']"> Poslati zahtevi </a>
 
   </div>
-
+  <div class="col-md-5">
   <div class='panel-body'>
     <form >
       <label> Broj prijatelja za dodavanje:  {{potencijalni.length}}  </label>
-      <table class='table table-striped' *ngIf='potencijalni && potencijalni.length'>
+      <table class='table table-striped table-bordered ' *ngIf='potencijalni && potencijalni.length'>
         <thead>
         <tr>
           <th>Ime Prijatelja</th>
           <th>Prezime</th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
@@ -22,7 +23,7 @@
           </td>
           <td>{{ guest.last_name}}</td>
           <td>
-            <button (click)="dodaj(guest)" type="button" >Posalji zahtev</button>
+            <button class="btn btn-primary center-block" (click)="dodaj(guest)" type="button" >Posalji zahtev</button>
           </td>
 
         </tr>
@@ -31,5 +32,5 @@
     </form>
 
   </div>
-
+  </div>
 </div>
