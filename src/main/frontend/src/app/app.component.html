@@ -1,14 +1,14 @@
-<nav class="navbar navbar-light" style="background-color: #00BFFF;">
+<nav class="navbar navbar-light" style="background-color: #347ab6;">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Restaurants</a>
+      <a style="color: #ffffff;" class="navbar-brand" href="#">Restaurants</a>
     </div>
     <ul class="nav navbar-nav navbar-right" >
 
-      <li *ngIf= 'user == null'> <a [routerLink]="['/register']"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li *ngIf= 'user == null' > <a [routerLink]="['/login']"> <span class="glyphicon glyphicon-log-in"></span> Login </a></li>
-      <li *ngIf= 'user != null'> <a [routerLink]="putanja"> <span class="glyphicon glyphicon-log-in"></span> Account </a></li>
-      <li *ngIf= 'user != null' (click)="izlogovao()"> <a  [routerLink]="['/login']"> <span class="glyphicon glyphicon-log-in"></span> Log out </a></li>
+      <li *ngIf= 'user == null'> <a style="color: #ffffff;"  [routerLink]="['/register']"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li *ngIf= 'user == null' > <a style="color: #ffffff;" [routerLink]="['/login']"> <span   class="glyphicon glyphicon-log-in"></span> Login </a></li>
+      <li *ngIf= 'user != null'> <a style="color:#ffffff;"   [routerLink]="putanja"> <span  class="glyphicon glyphicon-log-in"></span> Account </a></li>
+      <li *ngIf= 'user != null' (click)="izlogovao()"> <a style="color:#ffffff;"  [routerLink]="['/login']"> <span class="glyphicon glyphicon-log-in"></span> Log out </a></li>
       {{proveriUsera()}}
      </ul>
   </div>

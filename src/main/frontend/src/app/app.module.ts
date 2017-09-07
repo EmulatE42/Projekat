@@ -88,7 +88,7 @@ firebase.initializeApp(firebaseConfig);
     ReceivedRequestsComponent,
     AddOrderView,
     ReceivedInvitesComponent,
-    AddSomethingComponent
+    AddSomethingComponent,
     AddOrderView,
     PrepareFood,
     PrepareDrink,
