@@ -5,10 +5,11 @@
     </div>
     <ul class="nav navbar-nav navbar-right" >
 
-      <li *ngIf= 'user == null'> <a style="color: #ffffff;"  [routerLink]="['/register']"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li *ngIf= 'user == null' > <a style="color: #ffffff;" [routerLink]="['/login']"> <span   class="glyphicon glyphicon-log-in"></span> Login </a></li>
-      <li *ngIf= 'user != null'> <a style="color:#ffffff;"   [routerLink]="putanja"> <span  class="glyphicon glyphicon-log-in"></span> Account </a></li>
-      <li *ngIf= 'user != null' (click)="izlogovao()"> <a style="color:#ffffff;"  [routerLink]="['/login']"> <span class="glyphicon glyphicon-log-in"></span> Log out </a></li>
+      <li  *ngIf= 'user == null'> <a id = "hed" style="color: #ffffff;"  [routerLink]="['/register']"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li  *ngIf= 'user == null' > <a id = "hed1"  style="color: #ffffff;" [routerLink]="['/login']"> <span   class="glyphicon glyphicon-log-in"></span> Login </a></li>
+      <li  *ngIf= 'user != null'> <a id = "hed2"style="color:#ffffff;"   [routerLink]="putanja"> <span  class="glyphicon glyphicon-log-in"></span> Account </a></li>
+      <li  *ngIf= 'user != null' (click)="izlogovao()"> <a id = "hed3" style="color:#ffffff;"  [routerLink]="['/login']"> <span class="glyphicon glyphicon-log-in"></span> Log out </a></li>
+
       {{proveriUsera()}}
      </ul>
   </div>
