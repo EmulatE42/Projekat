@@ -47,6 +47,9 @@ import {OrderService} from "./services/order/OrderService";
 import {InviteService} from "./services/invite/InviteService";
 import { ReceivedInvitesComponent } from './components/user/received-invites/received-invites.component';
 import { AddSomethingComponent } from './components/user/received-invites/add-something/add-something.component';
+import {PrepareFood} from "./components/user/basicCookView/prepareFood/prepareFoodView.component";
+import {PrepareDrink} from "./components/user/basicBartenderView/prepareDrink/prepareDrinkView.component";
+import {EditOrderView} from "./components/user/basicWaiterView/editOrder/editOrder.component";
 
 
 
@@ -86,6 +89,10 @@ firebase.initializeApp(firebaseConfig);
     AddOrderView,
     ReceivedInvitesComponent,
     AddSomethingComponent
+    AddOrderView,
+    PrepareFood,
+    PrepareDrink,
+    EditOrderView
   ],
   imports: [
     BrowserModule,
@@ -102,6 +109,9 @@ firebase.initializeApp(firebaseConfig);
       {path: 'waiter/work', component: MyComponent},
       {path: 'waiter/orders', component: OrdersWaiterView},
       {path: 'waiter/schedule_table', component: ScheduleTableView},
+      {path: 'waiter/add_order', component: AddOrderView},
+      {path: 'cook/orders', component: PrepareFood},
+      {path: 'bartender/orders', component: PrepareDrink},
       {path: 'cook/account', canActivate: [EmployeeFirstLoginGuard], component: BasicCookView},
       {path: 'bartender/account', canActivate: [EmployeeFirstLoginGuard], component: BasicBartenderView},
       {path: 'change/password', component: EmployeeChangePassword},
@@ -110,6 +120,7 @@ firebase.initializeApp(firebaseConfig);
       {path: 'guest/restaurants/reserve', component: ReserveRestComponent},
       {path: 'guest/friends/sentRequests', component: SentRequestsComponent},
       {path: 'guest/receivedRequests', component: ReceivedRequestsComponent},
+      {path: 'waiter/edit_order/:id', component: EditOrderView},
       {path: 'waiter/add_order', component: AddOrderView},
       {path: 'guest/receivedInvites', component: ReceivedInvitesComponent},
       {path: 'guest/receivedInvites/addSomeFoodandDrinks', component: AddSomethingComponent}

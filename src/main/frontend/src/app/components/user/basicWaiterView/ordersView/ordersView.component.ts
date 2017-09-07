@@ -59,13 +59,22 @@ export class OrdersWaiterView implements OnInit{
 
   init1(): void
   {
-    this.orderService.getOrderFoods().subscribe(
-      order_foods => this.orderFoods = order_foods,
+    this.userService.getRestaurant(this.waiter.id).subscribe(
+      user => this.user = user,
       error =>  this.errorMessage = <any>error,
-      () => this.init2());
+      () => this.init2()
+    );
   }
 
   init2(): void
+  {
+    this.orderService.getOrderFoods().subscribe(
+      order_foods => this.orderFoods = order_foods,
+      error =>  this.errorMessage = <any>error,
+      () => this.init3());
+  }
+
+  init3(): void
   {
     this.orderService.getOrderDrinks().subscribe(
       order_foods => this.orderDrinks = order_foods,
@@ -97,10 +106,10 @@ export class OrdersWaiterView implements OnInit{
         }
       }
     }
-    this.init3();
+    this.init4();
   }
 
-  init3(): void
+  init4(): void
   {
 
     for(var i = 0; i < this.realOrders.length; i++)
@@ -133,19 +142,18 @@ export class OrdersWaiterView implements OnInit{
 
 
           if(exist == 1) {
-            alert("Update orderID: " + this.realOrders[i].id);
+            //alert("Update orderID: " + this.realOrders[i].id);
             this.realOrders[i].ready = true;
             this.orderService.updateOrderReady(this.realOrders[i]).subscribe(
               order => this.order = order,
               error => this.errorMessage = <any>error);
           }
     }
-    this.init4();
+    this.init5();
   }
 
-  init4(): void
+  init5(): void
   {
-
     for(var i = 0; i < this.realOrders.length; i++)
     {
       var exist = 1;
@@ -163,23 +171,13 @@ export class OrdersWaiterView implements OnInit{
       }
 
       if(exist == 1) {
-        alert("Update orderID: " + this.realOrders[i].id);
+        //alert("Update orderID: " + this.realOrders[i].id);
         this.realOrders[i].accept = true;
         this.orderService.updateOrderAccept(this.realOrders[i]).subscribe(
           order => this.order = order,
           error => this.errorMessage = <any>error);
       }
     }
-    this.init5();
-  }
-
-  init5(): void
-  {
-    this.userService.getRestaurant(this.waiter.id).subscribe(
-      user => this.user = user,
-      error =>  this.errorMessage = <any>error,
-      () => this.initOrder()
-    );
   }
 
 

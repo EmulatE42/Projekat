@@ -24,4 +24,9 @@ public interface OrderFoodRepository extends JpaRepository<Order_Food,Integer> {
     @Transactional
     @Query("Update Order_Food order_food SET order_food.accept=true WHERE order_food.order_food_id=:id")
     void updateAccept(@Param("id") int id);
+
+    @Modifying
+    @Transactional
+    @Query("DELETE FROM Order_Food order_food WHERE order_food.id=:id")
+    void delteOrderFoods(@Param("id") int id);
 }

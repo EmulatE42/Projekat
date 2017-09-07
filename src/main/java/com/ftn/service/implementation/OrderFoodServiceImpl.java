@@ -38,4 +38,9 @@ public class OrderFoodServiceImpl implements OrderFoodService {
     public void updateAccept(int id) {
         orderFoodRepository.updateAccept(id);
     }
+
+    @Override
+    public void delteOrderFoods(int orderID) {
+        orderFoodRepository.delteOrderFoods(orderID);
+    }
 }

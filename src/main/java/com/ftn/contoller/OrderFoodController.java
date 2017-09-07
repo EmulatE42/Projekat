@@ -58,4 +58,13 @@ public class OrderFoodController {
 
         return new ResponseEntity("{}", HttpStatus.OK);
     }
+
+    @CrossOrigin
+    @RequestMapping(value = "/delete_order_foods",  method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Order_Food> updateOrderFoodAccept(@RequestBody Order order) {
+
+        this.orderFoodService.delteOrderFoods(order.getId());
+
+        return new ResponseEntity("{}", HttpStatus.OK);
+    }
 }
