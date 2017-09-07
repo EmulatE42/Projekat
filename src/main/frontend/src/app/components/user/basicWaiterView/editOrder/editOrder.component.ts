@@ -40,6 +40,10 @@ export class EditOrderView implements OnInit{
   add_order: boolean = false;
   brHrane: number;
   brPica: number;
+  index: number;
+  index1: number;
+  canAdd1: boolean;
+  canAdd2: boolean;
 
   constructor(private userService: UserService, private orderService: OrderService, private _route: ActivatedRoute, private foodService: FoodService, private drinkService: DrinkService, private router: Router, private componentFactoryResolver: ComponentFactoryResolver, private compiler: Compiler)
   {}
@@ -48,6 +52,17 @@ export class EditOrderView implements OnInit{
   ngOnInit(): void {
 
     var id = +this._route.snapshot.paramMap.get('id');
+    this.brHrane = 0;
+    this.brPica = 0;
+    this.index = 0;
+    this.index1 = 0;
+    this.canAdd1 = true;
+    this.canAdd2 = true;
+
+    this.orderService.getOrders().subscribe(
+      orders => this.orders = orders,
+      error =>  this.errorMessage = <any>error,
+      () => this.setOrder(id));
 
     this.foodService.getAllFood().subscribe(
       foods => this.foods = foods,
@@ -67,10 +82,6 @@ export class EditOrderView implements OnInit{
       error =>  this.errorMessage = <any>error,
       () => this.initOrderDrinks(id));
 
-    this.orderService.getOrders().subscribe(
-      orders => this.orders = orders,
-      error =>  this.errorMessage = <any>error,
-      () => this.setOrder(id));
 
 
     this.selectedFoods = new Array<Food>();
@@ -85,6 +96,7 @@ export class EditOrderView implements OnInit{
     {
       if(this.orders[i].id == id)
         this.order = this.orders[i];
+        break;
     }
   }
 
@@ -94,6 +106,7 @@ export class EditOrderView implements OnInit{
     {
       if(this.orderFoods[i].order.id == id)
       {
+        this.brHrane++;
         this.selectedFoods.push(this.orderFoods[i].food);
       }
 
@@ -106,30 +119,76 @@ export class EditOrderView implements OnInit{
     {
       if(this.orderDrinks[i].order.id == id)
       {
+        this.brPica++;
         this.selectedDrinks.push(this.orderDrinks[i].drink);
       }
 
     }
   }
 
+  editOrder(): void
+  {
+    this.deleteOrderFoods();
+    this.deleteOrderDrinks();
+  }
+
   deleteOrderFoods(): void
   {
-    alert("Brisanje");
-    this.orderService.deleteOrderFoods(this.order).subscribe(
+    for(var i = this.index; i < this.orderFoods.length; i++)
+    {
+      this.index++;
+      if(this.orderFoods[i].order.id == this.order.id)
+      {
+        this.deleteOrderFoodItem(this.orderFoods[i]);
+      }
+    }
+    if(this.index == this.orderFoods.length && this.canAdd1 == true) {
+      this.canAdd1 = false;
+      this.addOrderFood();
+    }
+  }
+
+  deleteOrderFoodItem(of: OrderFood): void
+  {
+
+    this.orderService.deleteOrderFood(of).subscribe(
       order_food => this.order_food = order_food,
       error =>  this.errorMessage = <any>error,
-      () => this.addOrderFood());
+      () => this.deleteOrderFoods());
+  }
+
+  deleteOrderDrinks(): void
+  {
+    for(var i = this.index1; i < this.orderDrinks.length; i++)
+    {
+      this.index1++;
+      if(this.orderDrinks[i].order.id == this.order.id)
+      {
+        this.deleteOrderDrinkItem(this.orderDrinks[i]);
+      }
+    }
+    if(this.index1 == this.orderDrinks.length && this.canAdd2 == true) {
+      this.canAdd2 = false;
+      this.addOrderDrink();
+    }
+  }
+
+  deleteOrderDrinkItem(od: OrderDrink): void
+  {
+
+    this.orderService.deleteOrderDrink(od).subscribe(
+      order_drink => this.order_drink = order_drink,
+      error =>  this.errorMessage = <any>error,
+      () => this.deleteOrderDrinks());
   }
 
   addOrderFood(): void
   {
     for(var i = 0; i < this.selectedFoods.length; i++)
     {
-        //var order_food = new OrderFood(null, this.selectedFoods[i], this.order, false, false);
-        //this.orderService.addOrderFood(order_food).subscribe(data => this.order_food = data);
+        var order_food = new OrderFood(null, this.selectedFoods[i], this.order, false, false);
+        this.orderService.addOrderFood(order_food).subscribe(data => this.order_food = data);
     }
-    this.router.navigate(['../waiter/orders']);
-    //this.addOrderDrink();
   }
 
   addOrderDrink(): void
