@@ -13,4 +13,5 @@ public interface OrderFoodService {
     void save(Order_Food order_food);
     void updateReady(int id);
     void updateAccept(int id);
+    void delteOrderFoods(int orderID);
 }

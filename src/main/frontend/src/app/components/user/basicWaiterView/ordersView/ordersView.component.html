@@ -26,6 +26,7 @@
               <th class="hidden-xs">Red br.</th>
               <th class="col-text">Naziv restorana</th>
               <th class="col-text">Vreme</th>
+              <th class="col-text">Rezervisani stolovi</th>
               <th class="col-text">Prihvaceno</th>
               <th class="col-text">Spremno</th>
             </tr>
@@ -33,7 +34,7 @@
             <tbody>
                 <tr data-status="completed" *ngFor="let order of orders; let i = index" [attr.data-index]="i">
                   <td align="center">
-                    <a class="btn btn-default"><span class="glyphicon glyphicon-pencil"
+                    <a class="btn btn-default" [routerLink]="['/waiter/edit_order', order.id]"><span class="glyphicon glyphicon-pencil"
                                                      aria-hidden="true"></span></a>
                     <a class="btn btn-danger"><span class="glyphicon glyphicon-trash"
                                                     aria-hidden="true"></span></a>
@@ -41,6 +42,7 @@
                   <td class="hidden-xs">{{ i + 1 }}</td>
                   <td> {{ order.nazivRestorana }}</td>
                   <td>{{ order.vreme }}</td>
+                  <td> <div style="display:inline" *ngFor="let sto of order.brojStola"> {{ sto }}; </div> </td>
                   <td align="center"><input type="checkbox" [disabled]="true" [checked]="order.accept" class="checkthis"/></td>
                   <td align="center"><input type="checkbox" [disabled]="true" [checked]="order.ready " class="checkthis"/></td>
                 </tr>

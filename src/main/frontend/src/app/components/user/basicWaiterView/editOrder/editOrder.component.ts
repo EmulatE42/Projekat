@@ -2,7 +2,7 @@ import {
   AfterViewInit, Component, ElementRef, Inject, OnInit, ViewChild, ComponentRef, Input,
   ViewContainerRef, Compiler, ComponentFactoryResolver, Type
 } from "@angular/core";
-import { Router } from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import * as firebase from 'firebase'
 import {UserService} from "../../../../services/user/UserService";
 import {Drink, Food, Order, Waiter, OrderFood, OrderDrink, NewUser} from "../../../../models";
@@ -14,12 +14,12 @@ import {DrinkService} from "../../../../services/drink/DrinkService";
 
 
 @Component({
-  templateUrl: './addOrder.component.html',
-  styleUrls: ['./addOrder.component.css'],
+  templateUrl: './editOrder.component.html',
+  styleUrls: ['./editOrder.component.css'],
   providers: [UserService, OrderService]
 })
 
-export class AddOrderView implements OnInit{
+export class EditOrderView implements OnInit{
 
   waiter: Waiter = JSON.parse(sessionStorage.getItem("loginUser"));
 
@@ -34,17 +34,21 @@ export class AddOrderView implements OnInit{
   order_food: OrderFood;
   order_drink: OrderDrink;
   user: NewUser;
-  listOfFoods: any;
+  orderFoods: OrderFood[] = null;
+  orderDrinks: OrderDrink[] = null;
 
   add_order: boolean = false;
   brHrane: number;
   brPica: number;
 
-  constructor(private userService: UserService, private orderService: OrderService, private foodService: FoodService, private drinkService: DrinkService, private router: Router, private componentFactoryResolver: ComponentFactoryResolver, private compiler: Compiler)
+  constructor(private userService: UserService, private orderService: OrderService, private _route: ActivatedRoute, private foodService: FoodService, private drinkService: DrinkService, private router: Router, private componentFactoryResolver: ComponentFactoryResolver, private compiler: Compiler)
   {}
 
   //neki komentar
   ngOnInit(): void {
+
+    var id = +this._route.snapshot.paramMap.get('id');
+
     this.foodService.getAllFood().subscribe(
       foods => this.foods = foods,
       error =>  this.errorMessage = <any>error);
@@ -53,14 +57,21 @@ export class AddOrderView implements OnInit{
       drinks => this.drinks = drinks,
       error =>  this.errorMessage = <any>error);
 
+    this.orderService.getOrderFoods().subscribe(
+      drinks => this.orderFoods = drinks,
+      error =>  this.errorMessage = <any>error,
+      () => this.initOrderFoods(id));
+
+    this.orderService.getOrderDrinks().subscribe(
+      drinks => this.orderDrinks = drinks,
+      error =>  this.errorMessage = <any>error,
+      () => this.initOrderDrinks(id));
+
     this.orderService.getOrders().subscribe(
       orders => this.orders = orders,
-      error =>  this.errorMessage = <any>error);
+      error =>  this.errorMessage = <any>error,
+      () => this.setOrder(id));
 
-    this.userService.getRestaurant(this.waiter.id).subscribe(
-      user => this.user = user,
-      error =>  this.errorMessage = <any>error
-    );
 
     this.selectedFoods = new Array<Food>();
     this.selectedDrinks = new Array<Drink>();
@@ -68,22 +79,57 @@ export class AddOrderView implements OnInit{
     this.brPica = 0;
   }
 
-  addOrderItem(): void{
-    let order = new Order(null, null, this.user.restaurantName, "06.09.2017. 12:00 13:00", null, null);
-    this.orderService.addOrder(order).subscribe(data => this.order = data,
-      error => console.log("Error: ", error),
-      () => this.addOrderFood());
+  setOrder(id: number): void
+  {
+    for(var i = 0; i < this.orders.length; i++)
+    {
+      if(this.orders[i].id == id)
+        this.order = this.orders[i];
+    }
+  }
 
+  initOrderFoods(id: number): void
+  {
+    for(var i = 0; i < this.orderFoods.length; i++)
+    {
+      if(this.orderFoods[i].order.id == id)
+      {
+        this.selectedFoods.push(this.orderFoods[i].food);
+      }
+
+    }
+  }
+
+  initOrderDrinks(id: number): void
+  {
+    for(var i = 0; i < this.orderDrinks.length; i++)
+    {
+      if(this.orderDrinks[i].order.id == id)
+      {
+        this.selectedDrinks.push(this.orderDrinks[i].drink);
+      }
+
+    }
+  }
+
+  deleteOrderFoods(): void
+  {
+    alert("Brisanje");
+    this.orderService.deleteOrderFoods(this.order).subscribe(
+      order_food => this.order_food = order_food,
+      error =>  this.errorMessage = <any>error,
+      () => this.addOrderFood());
   }
 
   addOrderFood(): void
   {
     for(var i = 0; i < this.selectedFoods.length; i++)
     {
-      var order_food = new OrderFood(null, this.selectedFoods[i], this.order, false, false);
-      this.orderService.addOrderFood(order_food).subscribe(data => this.order_food = data);
+        //var order_food = new OrderFood(null, this.selectedFoods[i], this.order, false, false);
+        //this.orderService.addOrderFood(order_food).subscribe(data => this.order_food = data);
     }
-    this.addOrderDrink();
+    this.router.navigate(['../waiter/orders']);
+    //this.addOrderDrink();
   }
 
   addOrderDrink(): void
@@ -95,6 +141,16 @@ export class AddOrderView implements OnInit{
     }
 
     this.router.navigate(['../waiter/orders']);
+  }
+
+  findOrderFood(id: number): boolean
+  {
+    for(var i = 0; i < this.orderFoods.length; i++)
+    {
+      if(this.orderFoods[i].order_food_id == id)
+        return false;
+    }
+    return true;
   }
 
   loadSelect(): void{

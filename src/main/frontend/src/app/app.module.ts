@@ -44,6 +44,9 @@ import {FriendRequestService} from "./services/friend/FriendRequestService";
 import { ReceivedRequestsComponent } from './components/user/received-requests/received-requests.component';
 import {AddOrderView} from "./components/user/basicWaiterView/addOrder/addOrder.component";
 import {OrderService} from "./services/order/OrderService";
+import {PrepareFood} from "./components/user/basicCookView/prepareFood/prepareFoodView.component";
+import {PrepareDrink} from "./components/user/basicBartenderView/prepareDrink/prepareDrinkView.component";
+import {EditOrderView} from "./components/user/basicWaiterView/editOrder/editOrder.component";
 
 
 
@@ -80,7 +83,10 @@ firebase.initializeApp(firebaseConfig);
     ReserveRestComponent,
     SentRequestsComponent,
     ReceivedRequestsComponent,
-    AddOrderView
+    AddOrderView,
+    PrepareFood,
+    PrepareDrink,
+    EditOrderView
   ],
   imports: [
     BrowserModule,
@@ -97,6 +103,9 @@ firebase.initializeApp(firebaseConfig);
       {path: 'waiter/work', component: MyComponent},
       {path: 'waiter/orders', component: OrdersWaiterView},
       {path: 'waiter/schedule_table', component: ScheduleTableView},
+      {path: 'waiter/add_order', component: AddOrderView},
+      {path: 'cook/orders', component: PrepareFood},
+      {path: 'bartender/orders', component: PrepareDrink},
       {path: 'cook/account', canActivate: [EmployeeFirstLoginGuard], component: BasicCookView},
       {path: 'bartender/account', canActivate: [EmployeeFirstLoginGuard], component: BasicBartenderView},
       {path: 'change/password', component: EmployeeChangePassword},
@@ -105,7 +114,7 @@ firebase.initializeApp(firebaseConfig);
       {path: 'guest/restaurants/reserve', component: ReserveRestComponent},
       {path: 'guest/friends/sentRequests', component: SentRequestsComponent},
       {path: 'guest/receivedRequests', component: ReceivedRequestsComponent},
-      {path: 'waiter/add_order', component: AddOrderView},
+      {path: 'waiter/edit_order/:id', component: EditOrderView},
 
     ]),
     ImageUploadModule.forRoot(),
