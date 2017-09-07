@@ -16,5 +16,7 @@ public interface OrderService {
     void saveOrder(Order order);
     void updateOrderReady(int id);
     void updateOrderAccept(int id);
+    Integer getMaxId();
+    Order dajIdJBt(Integer id);
 
 }

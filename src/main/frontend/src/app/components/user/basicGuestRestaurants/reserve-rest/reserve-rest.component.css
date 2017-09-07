@@ -68,3 +68,7 @@ canvas {
   margin-left: 40px;
   width: 100px;
 }
+tbody div{
+  overflow:scroll;
+  height:150px;
+}

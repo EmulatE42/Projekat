@@ -56,6 +56,17 @@ export class Visit {
 
 }
 
+export class Invite {
+
+  constructor( public id: number,
+               public poslao: string,
+               public primio: string,
+               public imeRestorana: string,
+               public datum: string,
+               public idPorudzbine: number) {}
+
+}
+
 
 export class SuperUser
 {

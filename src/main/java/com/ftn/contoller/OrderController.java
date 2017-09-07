@@ -92,4 +92,25 @@ public class OrderController {
     }
 
 
+    @CrossOrigin
+    @RequestMapping(value = "/getMaxID",  method = RequestMethod.GET )
+    public ResponseEntity<Integer> getMax() {
+
+        Integer i = this.orderService.getMaxId();
+
+
+        return new ResponseEntity(i != null ? i :  null , HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/getOrderByID",  method = RequestMethod.POST )
+    public ResponseEntity<Order> getOrderById(@RequestBody String id) {
+
+        System.out.println("OVO SAM DOBIO SA FRONTA " + id);
+        Order i = this.orderService.dajIdJBt(Integer.parseInt(id));
+        System.out.println("KONJU GLUPI " + i.getNazivRestorana() + " ovde id " + i.getId());
+
+        return new ResponseEntity(i != null ? i :  null , HttpStatus.OK);
+    }
+
 }

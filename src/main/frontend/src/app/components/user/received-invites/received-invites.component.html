@@ -1,0 +1,51 @@
+<div class='panel panel-default'>
+  <div class='panel-heading' style='font-size:large'>
+    <a [routerLink]="['/guest/account']"> Moj nalog  </a> &nbsp; &nbsp; &nbsp;
+    <a [routerLink]="['/guest/friends']"> Prijatelji </a> &nbsp; &nbsp; &nbsp;
+    <a [routerLink]="['/guest/restaurants']"> Restorani </a> &nbsp; &nbsp; &nbsp;
+    <a [routerLink]="['/guest/receivedRequests']"> Zahtevi za prijateljstvo </a> &nbsp; &nbsp; &nbsp;
+    <a [routerLink]="['/guest/receivedInvites']"> Pozivi za restoran </a>
+
+  </div>
+
+  <div class="col-md-5">
+    <div class='panel-body'>
+      <form >
+        <label> Broj poslatih poziva:  {{poslatiPozivi.length}}  </label>
+        <table class='table table-striped table-bordered ' *ngIf='poslatiPozivi && poslatiPozivi.length'>
+          <thead>
+          <tr>
+            <th>Ime </th>
+            <th>Prezime</th>
+            <th>Datum</th>
+            <th>Restoran</th>
+            <th width="48%" ></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor='let invite of poslatiPozivi'>
+            <td>
+              {{invite.imeRestorana.split(";")[1]}}
+            </td>
+            <td>{{invite.imeRestorana.split(";")[2]}}</td>
+            <td>
+              {{invite.datum}}
+            </td>
+            <td>
+              {{invite.imeRestorana.split(";")[0]}}
+            </td>
+            <td>
+              <div class="field col-md-6 col-md-offset-3">
+              <button class="btn btn-primary  " (click)="prihvatiPoziv(invite.poslao,invite.primio,invite.idPorudzbine, invite.imeRestorana, invite.datum)" type="button" >Prihvati</button>
+              <button class="btn btn-primary  " (click)="odbijPoziv(invite.poslao,invite.primio,invite.idPorudzbine)" type="button" >Odbij</button>
+              </div>
+            </td>
+
+          </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+  </div>
+
+</div>

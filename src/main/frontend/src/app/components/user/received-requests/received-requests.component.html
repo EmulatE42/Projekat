@@ -3,7 +3,8 @@
     <a [routerLink]="['/guest/account']"> Moj nalog  </a> &nbsp; &nbsp; &nbsp;
     <a [routerLink]="['/guest/friends']"> Prijatelji </a> &nbsp; &nbsp; &nbsp;
     <a [routerLink]="['/guest/restaurants']"> Restorani </a> &nbsp; &nbsp; &nbsp;
-    <a [routerLink]="['/guest/receivedRequests']"> Zahtevi za prijateljstvo </a>
+    <a [routerLink]="['/guest/receivedRequests']"> Zahtevi za prijateljstvo </a> &nbsp; &nbsp; &nbsp;
+    <a [routerLink]="['/guest/receivedInvites']"> Pozivi za restoran </a>
 
   </div>
   <div class="col-md-5">
@@ -27,7 +28,7 @@
             <td>
               <div class="field col-md-6 col-md-offset-3">
               <button class="btn btn-primary  " (click)="prihvati(guest)" type="button" >Prihvati</button>
-              <button class="btn btn-primary  " (click)="obrisi(guest)" type="button" >Odbi</button>
+              <button class="btn btn-primary  " (click)="obrisi(guest)" type="button" >Odbij</button>
               </div>
             </td>
 

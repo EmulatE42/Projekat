@@ -1,70 +1,8 @@
-<div class='panel-default'>
+<div class='panel panel-default'>
   <div class='panel-heading' style='font-size:large'>
-    <a [routerLink]="['/guest/restaurants']"> Restorani </a>
-  </div>
-
-  <canvas id="myCanvas" width="425" height="425" ></canvas>
-  <canvas id="myCanvas2" width="300" height="250" ></canvas><br>
-
-  <div class="col-md-4">
-    <div style="overflow:auto;">
-      <table style="table-layout:fixed" class='table table-striped table-bordered   ' *ngIf='prijatelji && prijatelji.length'>
-        <thead>
-        <tr>
-          <th>Ime Prijatelja</th>
-          <th>Prezime</th>
-          <th></th>
-        </tr>
-        </thead>
-        <tbody>
-
-
-        <tr *ngFor='let guest of prijatelji ; let k = index' >
-          <td >
-            {{guest.first_name}}
-          </td>
-          <td>{{ guest.last_name}}</td>
-          <td>
-            <button (click)="pozvan(guest,k)" class="btn btn-primary center-block" type="button" >Pozovi</button>
-          </td>
-
-        </tr>
-
-
-        </tbody>
-      </table>
+    <a [routerLink]="['/guest/receivedInvites']"> Nazad </a>
 
   </div>
-  </div>
-  <p id="razmak"></p>
-  <label> Odabrali ste restoran :  {{imeRestorana}}  </label> <br>
-  <label > Datum: </label>
-  <input #myDatePicker
-         type="date"
-         value='{{ myDate }}'
-         (input)="onInput(myDatePicker.value)" />
-
-  <input #myTimePicker
-         type="time"
-         min = "06:00"
-         max = "21:00"
-         value='{{ myTime }}'
-         (input)="onInputTime(myTimePicker.value)" />
-  <div class ="s" >
-    <label for="asd">Sati:</label>
-    <input type="text" id="textInput" value={{myHour}}>
-    <input #myR
-           id ="asd"
-           value='{{ myHour }}'
-           data-show-value="true"
-           type="range"
-           min = "1"
-           max = "5"
-           (input)="onChange(myR.value)" />
-  </div >
-  <div display = "inline" id = "LOL"></div>
-
-
 
 
   <div class="col-md-8">
@@ -131,11 +69,11 @@
         </div>
       </div>
     </div>
+    <button type="submit" class="btn btn-primary" (click) = "zavrsiPorudzbinu()">Zavrsi</button>
+    <br>
+    <br>
+    <div  id = "naKraju"></div>
   </div >
 
-  <button type="submit" class="btn btn-primary" (click) = "zavrsiPorudzbinu()">Zavrsi</button>
-  <br>
-  <br>
-  <div  id = "naKraju"></div>
 
-</div >
+</div>

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import {Router, ActivatedRoute} from "@angular/router";
 import {FoodService} from "../../../../services/food/FoodService";
-import {Drink, Food, Order, OrderDrink, OrderDrinkItem, OrderFood, Visit} from "../../../../models";
+import {Drink, Food, Order, OrderDrink, OrderDrinkItem, OrderFood, Visit, Guest, Invite} from "../../../../models";
 import {DrinkService} from "../../../../services/drink/DrinkService";
 import {VisitService} from "../../../../services/visit/VisitService";
 import {OrderService} from "../../../../services/order/OrderService";
+import {FriendService} from "app/services/friend/FriendService";
+import {InviteService} from "../../../../services/invite/InviteService";
 
 @Component({
   selector: 'app-reserve-rest',
@@ -28,12 +30,15 @@ export class ReserveRestComponent implements OnInit {
   private selectedFoods  = new Array<Food>();
   private selectedDrinks= new Array<Drink>();
 
+  private poslednjiInvite: Invite;
+  private prijatelji : Guest[] = [];
   private order: Order;
   private order_food: OrderFood;
   private order_drink: OrderDrink;
   errorMessage: string;
   private orders: Order[] = [];
   private poseta: Visit;
+  private pozivi: Invite[] = [];
   private uneti : number[] = [];
   private danasnji : number[] = [];
   private dobar: boolean = false;
@@ -43,16 +48,19 @@ export class ReserveRestComponent implements OnInit {
   public size : number = 75;
   public razmak : number =50;
   public elements : any[] = [];
-  public redniBroj : number = 1;
+  public redniBroj : number = -1;
 
   public bojeStolova : string[] = [];
   public asd : number = 0;
-  constructor(private r: Router,private vs : VisitService, private drinkService: DrinkService, private  foodService : FoodService, private router: ActivatedRoute,private orderService: OrderService) {
+  constructor(private inviteService : InviteService, private friendService:FriendService, private r: Router,private vs : VisitService, private drinkService: DrinkService, private  foodService : FoodService, private router: ActivatedRoute,private orderService: OrderService) {
     this.foodService.getAllFood()
     .subscribe(h => this.foods = h );
 
     this.drinkService.getAllDrink()
       .subscribe(h => this.drinks = h );
+    this.friendService.getAllFR()
+      .subscribe(h =>this.prijatelji = h,error => console.log("Error: ", error),
+        () => this.izmeniRazmak());
 
     for (var i = 0 ; i < 9 ; i++)
     {
@@ -61,9 +69,37 @@ export class ReserveRestComponent implements OnInit {
     this.napuniListu();
 
    this.myHour = 1;
+
+
+
+
+
   }
 
+  izmeniRazmak (): void{
+    var x = "";
+    if (this.prijatelji.length == 1) {
+      document.getElementById('razmak').innerHTML = "<br/><br/><br/><br/><br/>";
+      return;
+    }
 
+    for (var i = 0 ; i < this.prijatelji.length; i++)
+    {
+
+      x+="<br/><br/><br/><br/>";
+    }
+    document.getElementById('razmak').innerHTML = x ;
+  }
+  pozvan (gost : Guest, mesto : number) : void{
+    if (this.dobar && !(this.myTime == -1))
+    {
+      var email = JSON.parse(sessionStorage.getItem("loginUser")).email;
+      var x = new Invite(null,email,gost.email,this.imeRestorana,null,null);
+      this.pozivi.push(x);
+      this.prijatelji.splice(mesto,1);
+    }
+
+  }
   obrisano ( id : number) : void{
   this.selectedDrinks.splice(id,1);
 
@@ -197,6 +233,7 @@ export class ReserveRestComponent implements OnInit {
   ngOnInit() {
 
 
+
     this.timer = setInterval(() => {
 
 
@@ -282,6 +319,8 @@ export class ReserveRestComponent implements OnInit {
 
     });
     console.log("SELEKTOVAO SI INIIIT " + this.imeRestorana);
+
+
 
     this.renderuj();
 
@@ -399,11 +438,41 @@ public obrada(vreme: number) : string
   var rez = v+":"+a[1];
   return rez;
 }
+
+bla() : void
+{
+  for ( var i = 0 ; i < this.pozivi.length;i++)
+  {
+    this.pozivi[i].idPorudzbine = this.redniBroj;
+    this.pozivi[i].datum = this.konacanSamoDatum;
+    if (i == this.pozivi.length - 1) {
+      this.inviteService.dodajPoziv(this.pozivi[i]).subscribe(
+        orders => this.poslednjiInvite = orders,
+        error => this.errorMessage = <any>error, () => this.konacanKrajxD());
+    }
+    else
+    {
+      this.inviteService.dodajPoziv(this.pozivi[i]).subscribe(
+        orders => this.poslednjiInvite = orders);
+    }
+  }
+  this.konacanKrajxD();
+
+
+}
+  konacanKrajxD() : void{
+    this.sleep(2);
+
+    this.r.navigate(['../']);
+  }
 public kraj () : void
 {
 
-  this.sleep(2);
-  this.r.navigate(['../']);
+  this.orderService.getMaxID().subscribe(
+    orders => this.redniBroj = orders,
+    error => this.errorMessage = <any>error,() => this.bla());
+
+
 }
   public sleep(seconds) : void
 {

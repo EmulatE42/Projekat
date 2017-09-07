@@ -22,6 +22,7 @@ export class OrderService
   private getOrderDrinksLink = 'http://localhost:8090/order_drinks';
   private updateOrderDrinksReadyLink = 'http://localhost:8090/update_order_drink_ready'
   private updateOrderAcceptLink = 'http://localhost:8090/update_order_accept';
+  private getMaxId = 'http://localhost:8090/getMaxID';
 
   constructor(private http: Http) { }
 
@@ -178,6 +179,23 @@ export class OrderService
 
   }
 
+  getMaxID(): Observable<number> {
+
+    return this.http.get(this.getMaxId).map(this.num)
+      .do(data => console.log(data));
+
+  }
+  getById(br : string): Observable<Order> {
+
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.post('http://localhost:8090/getOrderByID',br, options).map(this.extractOrder)
+      .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+
+  }
+
 
   private extractFood(res: Response) {
     let body = <Food[]> res.json();
@@ -221,6 +239,11 @@ export class OrderService
 
   private extractOrderDrink(res: Response) {
     let body = <OrderDrink> res.json();
+    return body || { };
+  }
+
+  private num(res: Response) {
+    let body = <number> res.json();
     return body || { };
   }
 

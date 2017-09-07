@@ -44,6 +44,9 @@ import {FriendRequestService} from "./services/friend/FriendRequestService";
 import { ReceivedRequestsComponent } from './components/user/received-requests/received-requests.component';
 import {AddOrderView} from "./components/user/basicWaiterView/addOrder/addOrder.component";
 import {OrderService} from "./services/order/OrderService";
+import {InviteService} from "./services/invite/InviteService";
+import { ReceivedInvitesComponent } from './components/user/received-invites/received-invites.component';
+import { AddSomethingComponent } from './components/user/received-invites/add-something/add-something.component';
 
 
 
@@ -64,11 +67,11 @@ firebase.initializeApp(firebaseConfig);
     BasicGuestRestaurants,
     BasicGuestFriendsComponent,
     BasicSupplierView,
-        MyComponent,
-        CalendarComponent,
-        FilterPipe,
-        Filter2Pipe,
-        AddFriendComponent,
+    MyComponent,
+    CalendarComponent,
+    FilterPipe,
+    Filter2Pipe,
+    AddFriendComponent,
 
 
 
@@ -80,7 +83,9 @@ firebase.initializeApp(firebaseConfig);
     ReserveRestComponent,
     SentRequestsComponent,
     ReceivedRequestsComponent,
-    AddOrderView
+    AddOrderView,
+    ReceivedInvitesComponent,
+    AddSomethingComponent
   ],
   imports: [
     BrowserModule,
@@ -106,12 +111,15 @@ firebase.initializeApp(firebaseConfig);
       {path: 'guest/friends/sentRequests', component: SentRequestsComponent},
       {path: 'guest/receivedRequests', component: ReceivedRequestsComponent},
       {path: 'waiter/add_order', component: AddOrderView},
+      {path: 'guest/receivedInvites', component: ReceivedInvitesComponent},
+      {path: 'guest/receivedInvites/addSomeFoodandDrinks', component: AddSomethingComponent}
+
 
     ]),
     ImageUploadModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
-  providers: [GuestLoginGuard, EmployeeFirstLoginGuard,UserService,FriendService,FoodService,DrinkService,OrderService,VisitService, SchedulerWorkService,FriendRequestService],
+  providers: [GuestLoginGuard, EmployeeFirstLoginGuard,UserService,FriendService,FoodService,DrinkService,OrderService,VisitService, SchedulerWorkService,FriendRequestService,InviteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

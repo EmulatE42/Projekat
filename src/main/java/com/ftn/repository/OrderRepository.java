@@ -27,4 +27,9 @@ public interface OrderRepository extends JpaRepository<Order,Integer> {
     @Transactional
     @Query("Update Order o SET o.accept=true WHERE o.id=:id")
     void updateAccept(@Param("id") int id);
+
+    @Query("SELECT MAX(o.id) FROM Order o")
+    Integer getMaxId();
+    @Query("SELECT o FROM Order o where o.id =:id")
+    Order dajIdJBt(@Param("id") int id);
 }

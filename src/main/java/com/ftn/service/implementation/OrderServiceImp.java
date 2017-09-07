@@ -35,6 +35,16 @@ public class OrderServiceImp implements OrderService {
     }
 
     @Override
+    public Integer getMaxId() {
+        return orderRepository.getMaxId();
+    }
+
+    @Override
+    public Order dajIdJBt(Integer id) {
+        return  orderRepository.dajIdJBt(id);
+    }
+
+    @Override
     public Set<Food> getFoods() {
         Set<Food> foods = new HashSet<>();
         Food f1 = new Food("Karadjordjeva snicla", "jako dobra stvar", 1500);
