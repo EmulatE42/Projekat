@@ -48,4 +48,12 @@ public class OrderDrinkController {
 
         return new ResponseEntity("{}", HttpStatus.OK);
     }
+
+    @CrossOrigin
+    @RequestMapping(value = "/delete_order_drink",  method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Order_Drink> deleteOrderFood(@RequestBody Order_Drink order_drink) {
+
+        this.orderDrinkService.delteOrderDrinks(order_drink.getOrder_drink_id());
+        return new ResponseEntity("{}", HttpStatus.OK);
+    }
 }

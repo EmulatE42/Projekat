@@ -11,4 +11,5 @@ public interface OrderDrinkService {
     List<Order_Drink> getOrderDrinks();
     void save(Order_Drink order_drink);
     void updateReady(int id);
+    void delteOrderDrinks(int id);
 }

@@ -1,7 +1,7 @@
 <div #target>
   <ul class="nav nav-tabs">
     <li class="active"> <a  [routerLink]="['/waiter/add_order']"> Izmeni porudzbinu </a> </li>
-    <button (click)="deleteOrderFoods()" class="btn btn-success">Add order</button>
+    <button (click)="editOrder()" class="btn btn-success">Add order</button>
   </ul>
 
   <div class="tab-content">
@@ -54,7 +54,7 @@
             <div id="p3" class="panel-body">
               <ul class="list-group" *ngFor="let food of selectedFoods; let i = index" [attr.data-index]="i">
                 <li class="list-group-item">{{ food.name }}
-                  <div class="pull-right action-buttons">
+                  <div class="pull-right action-buttons" *ngIf="brHrane <= i || order.accept == false">
                     <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" (click) = "removeFood(i)" ><span class="glyphicon glyphicon-pencil"></span></button>
                   </div>
                 </li>
@@ -71,7 +71,7 @@
             <div id="p4" class="panel-body">
               <ul class="list-group" *ngFor="let drink of selectedDrinks; let i = index" [attr.data-index]="i">
                 <li class="list-group-item">{{ drink.name }}
-                  <div class="pull-right action-buttons">
+                  <div class="pull-right action-buttons" *ngIf="brPica <= i || order.accept == false">
                     <button type="button" class="btn btn-success btn-xs" aria-label="Left Align" (click) = "removeDrink(i)" ><span class="glyphicon glyphicon-pencil"></span></button>
                   </div>
                 </li>

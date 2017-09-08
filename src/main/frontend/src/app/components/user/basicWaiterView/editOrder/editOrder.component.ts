@@ -44,6 +44,7 @@ export class EditOrderView implements OnInit{
   index1: number;
   canAdd1: boolean;
   canAdd2: boolean;
+  id: number;
 
   constructor(private userService: UserService, private orderService: OrderService, private _route: ActivatedRoute, private foodService: FoodService, private drinkService: DrinkService, private router: Router, private componentFactoryResolver: ComponentFactoryResolver, private compiler: Compiler)
   {}
@@ -51,7 +52,7 @@ export class EditOrderView implements OnInit{
   //neki komentar
   ngOnInit(): void {
 
-    var id = +this._route.snapshot.paramMap.get('id');
+    this.id = +this._route.snapshot.paramMap.get('id');
     this.brHrane = 0;
     this.brPica = 0;
     this.index = 0;
@@ -62,7 +63,7 @@ export class EditOrderView implements OnInit{
     this.orderService.getOrders().subscribe(
       orders => this.orders = orders,
       error =>  this.errorMessage = <any>error,
-      () => this.setOrder(id));
+      () => this.setOrder(this.id));
 
     this.foodService.getAllFood().subscribe(
       foods => this.foods = foods,
@@ -75,12 +76,12 @@ export class EditOrderView implements OnInit{
     this.orderService.getOrderFoods().subscribe(
       drinks => this.orderFoods = drinks,
       error =>  this.errorMessage = <any>error,
-      () => this.initOrderFoods(id));
+      () => this.initOrderFoods(this.id));
 
     this.orderService.getOrderDrinks().subscribe(
       drinks => this.orderDrinks = drinks,
       error =>  this.errorMessage = <any>error,
-      () => this.initOrderDrinks(id));
+      () => this.initOrderDrinks(this.id));
 
 
 
@@ -94,9 +95,10 @@ export class EditOrderView implements OnInit{
   {
     for(var i = 0; i < this.orders.length; i++)
     {
-      if(this.orders[i].id == id)
+      if(this.orders[i].id == id) {
         this.order = this.orders[i];
         break;
+      }
     }
   }
 
@@ -128,8 +130,16 @@ export class EditOrderView implements OnInit{
 
   editOrder(): void
   {
-    this.deleteOrderFoods();
-    this.deleteOrderDrinks();
+    if(!this.order.accept)
+    {
+      this.deleteOrderFoods();
+      this.deleteOrderDrinks();
+    }
+    else {
+      this.addOrderFood();
+      this.addOrderDrink();
+    }
+
   }
 
   deleteOrderFoods(): void
@@ -137,7 +147,7 @@ export class EditOrderView implements OnInit{
     for(var i = this.index; i < this.orderFoods.length; i++)
     {
       this.index++;
-      if(this.orderFoods[i].order.id == this.order.id)
+      if(this.orderFoods[i].order.id == this.id)
       {
         this.deleteOrderFoodItem(this.orderFoods[i]);
       }
@@ -162,7 +172,7 @@ export class EditOrderView implements OnInit{
     for(var i = this.index1; i < this.orderDrinks.length; i++)
     {
       this.index1++;
-      if(this.orderDrinks[i].order.id == this.order.id)
+      if(this.orderDrinks[i].order.id == this.id)
       {
         this.deleteOrderDrinkItem(this.orderDrinks[i]);
       }
@@ -186,8 +196,10 @@ export class EditOrderView implements OnInit{
   {
     for(var i = 0; i < this.selectedFoods.length; i++)
     {
+      if(this.brHrane <= i || this.order.accept == false) {
         var order_food = new OrderFood(null, this.selectedFoods[i], this.order, false, false);
         this.orderService.addOrderFood(order_food).subscribe(data => this.order_food = data);
+      }
     }
   }
 
@@ -195,8 +207,10 @@ export class EditOrderView implements OnInit{
   {
     for(var i = 0; i < this.selectedDrinks.length; i++)
     {
-      var order_drink = new OrderDrink(null, this.selectedDrinks[i], this.order, null);
-      this.orderService.addOrderDrink(order_drink).subscribe(data => this.order_drink = data);
+      if(this.brPica <= i || this.order.accept == false) {
+        var order_drink = new OrderDrink(null, this.selectedDrinks[i], this.order, null);
+        this.orderService.addOrderDrink(order_drink).subscribe(data => this.order_drink = data);
+      }
     }
 
     this.router.navigate(['../waiter/orders']);

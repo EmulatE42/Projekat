@@ -40,7 +40,8 @@ public class OrderFoodServiceImpl implements OrderFoodService {
     }
 
     @Override
-    public void delteOrderFoods(int orderID) {
-        orderFoodRepository.delteOrderFoods(orderID);
+    public void delteOrderFoods(int id) {
+
+        orderFoodRepository.delete(id);
     }
 }

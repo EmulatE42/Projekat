@@ -31,4 +31,9 @@ public class OrderDrinkServiceImpl implements OrderDrinkService {
     public void updateReady(int id) {
         orderDrinkRepository.updateReady(id);
     }
+
+    @Override
+    public void delteOrderDrinks(int id) {
+        orderDrinkRepository.delete(id);
+    }
 }

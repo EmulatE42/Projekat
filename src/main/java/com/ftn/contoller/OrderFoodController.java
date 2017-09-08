@@ -60,11 +60,10 @@ public class OrderFoodController {
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/delete_order_foods",  method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Order_Food> updateOrderFoodAccept(@RequestBody Order order) {
+    @RequestMapping(value = "/delete_order_food",  method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Order_Food> deleteOrderFood(@RequestBody Order_Food order_food) {
 
-        this.orderFoodService.delteOrderFoods(order.getId());
-
+        this.orderFoodService.delteOrderFoods(order_food.getOrder_food_id());
         return new ResponseEntity("{}", HttpStatus.OK);
     }
 }
