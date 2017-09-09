@@ -50,6 +50,7 @@ import { AddSomethingComponent } from './components/user/received-invites/add-so
 import {PrepareFood} from "./components/user/basicCookView/prepareFood/prepareFoodView.component";
 import {PrepareDrink} from "./components/user/basicBartenderView/prepareDrink/prepareDrinkView.component";
 import {EditOrderView} from "./components/user/basicWaiterView/editOrder/editOrder.component";
+import {StarRatingModule} from "angular-star-rating";
 
 
 
@@ -128,6 +129,7 @@ firebase.initializeApp(firebaseConfig);
 
     ]),
     ImageUploadModule.forRoot(),
+    StarRatingModule.forRoot(),
     AngularFireModule.initializeApp(firebaseConfig)
   ],
   providers: [GuestLoginGuard, EmployeeFirstLoginGuard,UserService,FriendService,FoodService,DrinkService,OrderService,VisitService, SchedulerWorkService,FriendRequestService,InviteService],

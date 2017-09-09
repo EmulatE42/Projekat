@@ -5,7 +5,7 @@ import {UserService} from "../../../../services/user/UserService";
 import {Drink, Food, Order, Waiter, OrderFood, OrderDrink, NewUser} from "../../../../models";
 import {OrderService} from "../../../../services/order/OrderService";
 import {forEach} from "@angular/router/src/utils/collection";
-
+import { StarRatingModule } from 'angular-star-rating';
 
 
 @Component({
