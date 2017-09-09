@@ -84,6 +84,33 @@ public class UserServiceImpl implements UserService {
                 this.userRepository.save(waiter);
                 this.userRepository.save(cook);
                 this.userRepository.save(bartender);
+
+
+
+
+
+                Waiter waiter1 = new Waiter("Nikola", "Nikolic", "nikola@gmail.com", "pass", Role.KONOBAR, date, 23, 45, false);
+                Cook cook1 = new Cook("Nemanja", "Nemanjic", "nemanja@gmail.com", "pass", Role.KUVAR, date, 23, 45, false);
+                Bartender bartender1 = new Bartender("Jovan", "Jovanov", "jovan@gmail.com", "pass", Role.SANKER, date, 23, 45, false);
+                //Supplier supplier = new Supplier("Paja", "Patak", "paja@gmail.com", "pass", Role.PONUDJAC, date, false);
+
+                waiter1.setStartTime("15:00");
+                waiter1.setEndTime("22:00");
+                waiter1.setRestaurantName("Aman");
+
+
+                cook1.setStartTime("15:00");
+                cook1.setEndTime("22:00");
+                cook1.setRestaurantName("Aman");
+
+                bartender1.setStartTime("15:00");
+                bartender1.setEndTime("22:00");
+                bartender1.setRestaurantName("Aman");
+
+
+                this.userRepository.save(waiter1);
+                this.userRepository.save(cook1);
+                this.userRepository.save(bartender1);
                 //this.userRepository.save(supplier);
 
                 List<Integer> tables = new ArrayList<>();
@@ -91,7 +118,7 @@ public class UserServiceImpl implements UserService {
                 tables.add(2);
                 tables.add(3);
 
-                User user = this.userRepository.findByEmail("pera@gmail.com");
+                User user = this.userRepository.findByEmail("nikola@gmail.com");
                 SchedulerWork sw = new SchedulerWork(user.getId(), "07:00:00", "16:00:00", tables);
                 this.schedulerWorkRepository.save(sw);
 

@@ -6,6 +6,34 @@
 
 <div class="tab-content">
   <br>
+  <canvas id="myCanvas" width="425" height="425" ></canvas>
+  <canvas id="myCanvas2" width="300" height="250" ></canvas><br>
+  <label > Datum: </label>
+  <input #myDatePicker
+         type="date"
+         value='{{ myDate }}'
+         (input)="onInput(myDatePicker.value)" />
+
+  <input #myTimePicker
+         type="time"
+         min = "06:00"
+         max = "21:00"
+         value='{{ myTime }}'
+         (input)="onInputTime(myTimePicker.value)" />
+  <div class ="s" >
+    <label for="asd">Sati:</label>
+    <input type="text" id="textInput" value={{myHour}}>
+    <input #myR
+           id ="asd"
+           value='{{ myHour }}'
+           data-show-value="true"
+           type="range"
+           min = "1"
+           max = "5"
+           (input)="onChange(myR.value)" />
+  </div >
+  <div display = "inline" id = "LOL"></div>
+  <br>
     <div class="col-md-8">
       <div clas="row">
 

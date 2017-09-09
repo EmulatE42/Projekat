@@ -52,6 +52,7 @@ export class ReserveRestComponent implements OnInit {
 
   public bojeStolova : string[] = [];
   public asd : number = 0;
+
   constructor(private inviteService : InviteService, private friendService:FriendService, private r: Router,private vs : VisitService, private drinkService: DrinkService, private  foodService : FoodService, private router: ActivatedRoute,private orderService: OrderService) {
     this.foodService.getAllFood()
     .subscribe(h => this.foods = h );

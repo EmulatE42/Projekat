@@ -98,7 +98,7 @@ export class OrdersWaiterView implements OnInit{
 
 
 
-        if(time.localeCompare(this.user.startTime) > 0 && time.localeCompare(this.user.endTime) < 0)
+        if(time.localeCompare(this.user.startTime) >= 0 && time.localeCompare(this.user.endTime) <= 0)
         {
 
           this.realOrders.push(this.orders[i]);

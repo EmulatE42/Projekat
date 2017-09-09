@@ -10,27 +10,27 @@
 #p1.panel-body {
   /* height: 480px; */
   padding:0px;
-  height: calc(100vh - 500px);
+  height: calc(100vh - 700px);
   overflow-y: auto;
 }
 
 #p2.panel-body {
   /* height: 480px; */
   padding:0px;
-  height: calc(100vh - 500px);
+  height: calc(100vh - 700px);
   overflow-y: auto;
 }
 #p3.panel-body {
   /* height: 480px; */
   padding:0px;
-  height: calc(100vh - 500px);
+  height: calc(100vh - 700px);
   overflow-y: auto;
 }
 
 #p4.panel-body {
   /* height: 480px; */
   padding:0px;
-  height: calc(100vh - 500px);
+  height: calc(100vh - 700px);
   overflow-y: auto;
 }
 
@@ -46,4 +46,24 @@
   left: initial;
 }
 
+canvas {
+  border: 3px solid #ccc;
+  margin: 30px;
+}
+
+.s{
+  display: inline-block;
+  width: 150px;
+  height: 75px;
+  padding: 0;
+}
+#textInput
+{
+  width: 20px;
+}
+#LOL
+{
+  margin-left: 40px;
+  width: 100px;
+}
 
