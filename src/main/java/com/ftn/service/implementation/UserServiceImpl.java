@@ -69,16 +69,16 @@ public class UserServiceImpl implements UserService {
 
                 waiter.setStartTime("08:00");
                 waiter.setEndTime("15:00");
-                waiter.setRestaurantName("Kineski");
+                waiter.setRestaurantName("Aman");
 
 
                 cook.setStartTime("08:00");
                 cook.setEndTime("15:00");
-                cook.setRestaurantName("Kineski");
+                cook.setRestaurantName("Aman");
 
                 bartender.setStartTime("08:00");
                 bartender.setEndTime("15:00");
-                bartender.setRestaurantName("Kineski");
+                bartender.setRestaurantName("Aman");
 
 
                 this.userRepository.save(waiter);

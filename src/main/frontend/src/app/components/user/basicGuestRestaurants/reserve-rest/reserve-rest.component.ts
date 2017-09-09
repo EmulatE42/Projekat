@@ -441,6 +441,7 @@ public obrada(vreme: number) : string
 
 bla() : void
 {
+
   for ( var i = 0 ; i < this.pozivi.length;i++)
   {
     this.pozivi[i].idPorudzbine = this.redniBroj;

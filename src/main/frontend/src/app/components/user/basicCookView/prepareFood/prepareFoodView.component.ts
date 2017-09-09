@@ -40,7 +40,10 @@ export class PrepareFood implements OnInit{
   redBroj: number;
 
   constructor(private userService: UserService, private orderService: OrderService, private foodService: FoodService, private drinkService: DrinkService, private router: Router)
-  {}
+  {
+
+
+  }
 
   //neki komentar
   ngOnInit(): void {
@@ -80,12 +83,13 @@ export class PrepareFood implements OnInit{
       if(this.orders[i].nazivRestorana.localeCompare(this.user.restaurantName) == 0)
       {
         var str = this.orders[i].vreme.split(" ");
+        alert(str);
         var time = "10:00";
         if(str != null)
           time = str[1];
 
-
-
+        alert(time);
+        alert(this.user.startTime + " " + this.user.endTime);
         if(time.localeCompare(this.user.startTime) > 0 && time.localeCompare(this.user.endTime) < 0)
         {
           for(var j = 0; j < this.orderFoods.length; j++)
