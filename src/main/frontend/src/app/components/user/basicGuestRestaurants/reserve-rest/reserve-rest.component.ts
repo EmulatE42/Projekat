@@ -172,7 +172,7 @@ export class ReserveRestComponent implements OnInit {
   public onChange(n : number) : void
   {
     this.myHour = n;
-   // this.promena();
+    this.promena();
   }
 
   public onInputTime(v : number) : void {
@@ -193,7 +193,7 @@ export class ReserveRestComponent implements OnInit {
       element.setAttribute("max", "5");
     }
     this.dobarVreme = true;
-    //this.promena();
+    this.promena();
   console.log("UNELI aaa STE VREME " + (this.myTime) );
 
 }
@@ -219,35 +219,15 @@ export class ReserveRestComponent implements OnInit {
     else
     {
       this.dobar = true;
-     // this.promena();
+      this.promena();
       document.getElementById("LOL").innerHTML ="";
 
     }
 
   }
- ngOnDestroy()
- {
-   clearInterval(this.timer);
-   console.log("UNISTIO XD");
- }
 
   ngOnInit() {
 
-
-
-    this.timer = setInterval(() => {
-
-
-      this.promena();
-
-
-      /*var inputElement = <HTMLInputElement>document.getElementById('asd');
-      console.log("Vrednost je " + inputElement.value);
-      inputElement.value = "4";
-      console.log("Posle setovanja vrednost je " + inputElement.value);*/
-
-
-    }, 1000);
 
     var elem2 = <HTMLCanvasElement>document.getElementById('myCanvas2');
     var context2 = elem2.getContext('2d');
@@ -291,17 +271,20 @@ export class ReserveRestComponent implements OnInit {
         this.imeRestorana = params['ime_Restorana'];
       });
 
+
     elem.addEventListener('click', (event: Event) => {
       var x = (event as any).pageX - elemLeft;
       var y  = (event as any).pageY - elemTop;
       var z = x + " " + y;
+      this.promena();
+      this.renderuj();
       for (var i = 0; i < this.elements.length;i++)
       {
 
       var element = this.elements[i];
-        if (!element.tudjiSto && y > element.top && y < element.top + element.height && x > element.left && x < element.left + element.width) {
+        if ( y > element.top && y < element.top + element.height && x > element.left && x < element.left + element.width) {
 
-          console.log("LISTENER "+ ( Math.random() * (10 - 1) + 1) + "ID JE  "+ element.id); // dva puta udje o.0
+         // console.log("LISTENER "+ ( Math.random() * (10 - 1) + 1) + "ID JE  "+ element.id); // dva puta udje o.0
          // alert(element.left);
           if (element.colour == "#00ff00") {
             element.colour = "#FF0000";
@@ -610,6 +593,7 @@ public kraj () : void
         error => this.errorMessage = <any>error,
         () => this.cekiraj());
     }
+
   }
 
   private cekiraj() : void {
