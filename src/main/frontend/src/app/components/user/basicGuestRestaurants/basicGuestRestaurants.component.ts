@@ -16,21 +16,21 @@ export class BasicGuestRestaurants implements OnInit{
   private restaurants: Restaurant[];
   private temp : Food;
 
-  constructor( private restaurantService: RestaurantService, private router: Router) { }
 
-  ngOnInit(): void {
+
+  constructor( private restaurantService: RestaurantService, private router: Router) {
     this.restaurantService.getAll()
       .subscribe(restaurants => this.restaurants = restaurants,
-        error => this.errorMessage = <any>error ); //, () => this.ajde());
+        error => this.errorMessage = <any>error );
 
 
   }
 
-
-  onRatingClicked(message: string): void {
-    this.message = 'Product List: ' + message;
+  ngOnInit(): void {
+    //
 
   }
+
   sortiraj() : void
   {
   for (var i = 0; i < this.restaurants.length;i++)

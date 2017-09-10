@@ -70,19 +70,32 @@
     <br>
   <div class="col-md-5">
   <label > Broj posete restoranima {{posete.length}}</label>
-  <table class='table table-striped table-bordered'>
+  <table class='table table-striped '>
     <thead>
     <tr>
       <th>Ime restorana</th>
       <th>Datum</th>
+      <th>Ocena</th>
+      <th></th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor='let visit of posete'>
+    <tr *ngFor='let visit of posete;let i = index'>
       <td>
         {{visit.nazivRestorana}}
       </td>
       <td>{{ visit.datum}}</td>
+
+
+      <td >
+        <ai-star  id="PERA{{i}}" [restoran]="false" [mvp]='menjanje[i]' [rating]='visit.ocena' [editable] ='visit.gotov' (click) = "un(i)"  > </ai-star>
+      </td>
+
+      <td *ngIf= 'visit.gotov == 0 && visit.ocena !=0'>
+        <button type="submit" class="btn btn-primary  btn-sm" (click) = "uneoOcenu(i)">Oceni</button>
+      </td>
+
+
     </tr>
     </tbody>
   </table>

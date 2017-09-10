@@ -43,6 +43,8 @@ public class VisitController {
         a.setEmail(elemetni[0]);
         a.setNazivRestorana(elemetni[1]);
         a.setDatum(elemetni[2]);
+        a.setGotov(0);
+        a.setGotov(0);
 
         System.out.println('\n' + "DOBIO SAM  " + elemetni[0] + " " + elemetni[1] + '\n');
 
@@ -50,6 +52,17 @@ public class VisitController {
 
         return new ResponseEntity(t != null ? t : "{}", HttpStatus.CREATED);
 
+    }
+    @CrossOrigin
+    @RequestMapping(value = "/izmeniVisit",  method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Visit> updateOrderDrinkReady(@RequestBody String f) {
+
+        String temp[] = f.split(";");
+        int i = Integer.parseInt(temp[0]);
+        double o = Double.parseDouble(temp[1]);
+        visitRepository.updateVisit(i,o);
+
+        return new ResponseEntity("{}", HttpStatus.OK);
     }
 
 

@@ -30,16 +30,41 @@ export class BasicGuestView implements OnInit{
   edit: boolean = true;
   avatar: string;
 
-
+  poseta : Visit;
   posete : Visit[] = [];
+  rating : number = 0;
+  menjanje : boolean[] = [];
+  trenutni : number ;
 
   constructor(private visitService : VisitService, private userService: UserService, private router: Router) {
     this.visitService.getAllVisitForOne()
-      .subscribe(guests => this.posete = guests);
+      .subscribe(guests => this.posete = guests,error => console.log("Error: ", error),() =>this.vidi());
 
 
   }
+  vidi () : void
+  {
+    for (var i = 0 ; i < this.posete.length;i++)
+    {
+     // alert("PETLJAAAA");
+      if (this.posete[i].ocena == 0)
+      {
+       // alert("OVAJ ID DOBIO TRUE " + i);
+        this.menjanje[i] = true;
+      }
+      else {
+       // alert("OVAJ ID DOBIO false " + i);
+        this.menjanje[i] = false;
+      }
+    }
+  }
+  un (b : number) : void
+  {
+    //alert("MOJEEE");
+    this.trenutni = b;
+  }
   ngOnInit(): void {
+
     this.firstname = this.guest.first_name;
     this.lastname = this.guest.last_name;
     this.adresa = this.guest.adresa;
@@ -56,12 +81,79 @@ export class BasicGuestView implements OnInit{
 
     this.saveData();
 
+    addEventListener('click', (event: Event) => {
+
+     // alert("CLICK xD");
+      var logo = document.getElementById('PERA'+this.trenutni);
+      var logoTextRectangle = logo.getBoundingClientRect();
+
+     // alert("logo's left pos.:" + logoTextRectangle.left);
+     // alert("logo's right pos.:" + logoTextRectangle.top);
+      var x = (event as any).pageX ;
+      var y  = (event as any).pageY;
+      var
+        z = x + " " + y;
+      //if ( y > element.top && y < element.top + element.height && x > element.left && x < element.left + element.width) {
+      //alert("Y JE " + y + " X JE " + x + " logoTextRectangle.top je " + logoTextRectangle.top + " logoTextRectangle.left je " + logoTextRectangle.left);
+      if ( y > logoTextRectangle.top && y < logoTextRectangle.top + 20 && x > logoTextRectangle.left && x < logoTextRectangle.left + 86)
+      {
+
+        //17.2 + 34.4 + 51.6 + 68.8 + 86
+        var razlika = x - logoTextRectangle.left;
+      //  alert("RAZ JE " + razlika);
+        if (razlika < 17.2)
+        {
+          this.posete[this.trenutni].ocena = 1;
+        }
+        else if ( razlika < 34.4)
+        {
+          this.posete[this.trenutni].ocena = 2;
+        }
+        else if ( razlika < 51.6)
+        {
+          this.posete[this.trenutni].ocena = 3;
+        }
+        else if ( razlika < 68.8)
+        {
+          this.posete[this.trenutni].ocena = 4;
+        }
+        else
+        {
+          this.posete[this.trenutni].ocena = 5;
+        }
+
+      }
+      else
+      {
+       // alert("NIJE");
+      }
+    });
+
+    //alert("GOTOV INIT");
   }
   saveData(): void
   {
     this.firstname_save = this.firstname;
     this.lastname_save = this.lastname;
     this.adresa_save = this.adresa;
+  }
+  uneoOcenu(broj : number) : void
+  {
+    console.log("USAO SAM " + broj);
+    for ( var i = 0 ; i < this.posete.length; i++)
+    {
+      if (i == broj)
+      {
+        console.log("USAO SAM BAS BAS" + i);
+        this.posete[i].gotov = 1;
+        this.menjanje[i] = false;
+        this.visitService.izmeniPosetu(this.posete[i].id,this.posete[i].ocena).subscribe(h => this.poseta = h,error => console.log("Error: ", error),() =>this.aaa());
+        var element = document.getElementById('PERA'+broj);
+        element.setAttribute("mvp", "2");
+      }
+    }
+
+
   }
 
 
@@ -134,5 +226,10 @@ export class BasicGuestView implements OnInit{
       }});
 
     }
+  }
+
+  private aaa() {
+    this.visitService.getAllVisitForOne()
+      .subscribe(guests => this.posete = guests,error => console.log("Error: ", error),() =>this.vidi());
   }
 }

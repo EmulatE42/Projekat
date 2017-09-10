@@ -52,7 +52,9 @@ export class Visit {
   constructor( public id: number,
                public email: string,
                public nazivRestorana: string,
-                public datum: string) {}
+                public datum: string,
+               public ocena :number,
+                public gotov : number) {}
 
 }
 

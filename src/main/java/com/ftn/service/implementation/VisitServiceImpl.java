@@ -27,4 +27,15 @@ public class VisitServiceImpl implements VisitService {
     public List<Visit> getVisitsByEmail(String ko) {
         return visitRepository.findVisitsByEmail(ko);
     }
+
+    @Override
+    public List<Visit> getAll() {
+        return visitRepository.getAll();
+    }
+
+    @Override
+    public void updateVisit(int id, double ocena) {
+        visitRepository.updateVisit(id,ocena);
+
+    }
 }

@@ -1,12 +1,23 @@
-<div class="crop" 
+<div class="crop"
     [style.width.px]="starWidth"
-    [title]="rating"
-    (click)='onClick()'>
+    [title]="rating">
     <div style="width: 86px">
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
+      <span *ngIf= 'lista[0] == true && restoran != true' class="glyphicon glyphicon-star"></span>
+      <span *ngIf= 'lista[0] != true && restoran != true' class="glyphicon glyphicon-star-empty"></span>
+      <span *ngIf= 'lista[1] == true && restoran != true' class="glyphicon glyphicon-star"></span>
+      <span *ngIf= 'lista[1] != true && restoran != true' class="glyphicon glyphicon-star-empty"></span>
+      <span *ngIf= 'lista[2] == true && restoran != true' class="glyphicon glyphicon-star"></span>
+      <span *ngIf= 'lista[2] != true && restoran != true' class="glyphicon glyphicon-star-empty"></span>
+      <span *ngIf= 'lista[3] == true && restoran != true' class="glyphicon glyphicon-star"></span>
+      <span *ngIf= 'lista[3] != true && restoran != true' class="glyphicon glyphicon-star-empty"></span>
+      <span *ngIf= 'lista[4] == true && restoran != true' class="glyphicon glyphicon-star"></span>
+      <span *ngIf= 'lista[4] != true && restoran != true' class="glyphicon glyphicon-star-empty"></span>
+      <span *ngIf= 'restoran == true' class="glyphicon glyphicon-star"></span>
+      <span *ngIf= 'restoran == true' class="glyphicon glyphicon-star"></span>
+      <span *ngIf= 'restoran == true' class="glyphicon glyphicon-star"></span>
+      <span *ngIf= 'restoran == true' class="glyphicon glyphicon-star"></span>
+      <span *ngIf= 'restoran == true' class="glyphicon glyphicon-star"></span>
+
+
     </div>
 </div>

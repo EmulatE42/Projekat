@@ -22,42 +22,67 @@ public class Visit {
     @Column(name = "datum", nullable = false)
     private String datum;
 
+    @Column(name = "ocena", nullable = false)
+    private double ocena;
+
+    @Column(name = "gotov", nullable = false)
+    private int gotov;
+
     public Visit() {}
 
-    public Visit(String a, String b, String c)
-    {
-        this.email = a;
-        this.nazivRestorana = b;
-        this.datum = c;
-    }
-    public String getEmail()
-    {
-        return this.email;
+    public Visit(String email, String nazivRestorana, String datum, double ocena, int gotov) {
+        this.email = email;
+        this.nazivRestorana = nazivRestorana;
+        this.datum = datum;
+        this.ocena = ocena;
+        this.gotov = gotov;
     }
 
-    public void setEmail(String t)
-    {
-        this.email = t;
+    public Integer getId() {
+        return id;
     }
 
-    public String getNazivRestorana()
-    {
-        return this.nazivRestorana;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setNazivRestorana(String t)
-    {
-        this.nazivRestorana = t;
+    public String getEmail() {
+        return email;
     }
 
-    public String getDatum()
-    {
-        return this.datum;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setDatum(String t)
-    {
-        this.datum = t;
+    public String getNazivRestorana() {
+        return nazivRestorana;
     }
 
+    public void setNazivRestorana(String nazivRestorana) {
+        this.nazivRestorana = nazivRestorana;
+    }
+
+    public String getDatum() {
+        return datum;
+    }
+
+    public void setDatum(String datum) {
+        this.datum = datum;
+    }
+
+    public double getOcena() {
+        return ocena;
+    }
+
+    public void setOcena(double ocena) {
+        this.ocena = ocena;
+    }
+
+    public int getGotov() {
+        return gotov;
+    }
+
+    public void setGotov(int gotov) {
+        this.gotov = gotov;
+    }
 }

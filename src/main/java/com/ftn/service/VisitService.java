@@ -12,4 +12,6 @@ public interface VisitService {
     Visit save(Visit f);
 
     List<Visit> getVisitsByEmail(String ko);
+    List<Visit> getAll();
+    void updateVisit(int id,double ocena);
 }

@@ -34,6 +34,20 @@ export class VisitService {
   }
 
 
+  izmeniPosetu(prvi: number,drugi :number): Observable<Visit>{
+
+    var v = prvi + ";" + drugi;
+
+
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put('http://localhost:8090/izmeniVisit',v, options).map(this.extractVisit)
+      .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+  }
+
+
 
 
   private extractVisit(res: Response) {

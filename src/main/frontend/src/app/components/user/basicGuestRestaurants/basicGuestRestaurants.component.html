@@ -33,12 +33,12 @@
           <td>{{ restaurant.description}}</td>
           <td>{{ restaurant.distance}}</td>
           <td>
-            <ai-star [rating]='restaurant.rating' (ratingClicked)='onRatingClicked($event)'>
+            <ai-star [restoran]="true" [rating]='restaurant.rating' >
             </ai-star>
           </td>
 
           <td>
-            <ai-star [rating]='restaurant.friendRating' (ratingClicked)='onRatingClicked($event)'>
+            <ai-star [restoran]="true" [rating]='restaurant.friendRating' >
             </ai-star>
           </td>
           <td>
