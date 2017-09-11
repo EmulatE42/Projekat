@@ -51,6 +51,8 @@ import {PrepareFood} from "./components/user/basicCookView/prepareFood/prepareFo
 import {PrepareDrink} from "./components/user/basicBartenderView/prepareDrink/prepareDrinkView.component";
 import {EditOrderView} from "./components/user/basicWaiterView/editOrder/editOrder.component";
 import {StarRatingModule} from "angular-star-rating";
+import {ScheduleWorkCook} from "./components/user/basicCookView/scheduleWork/scheduleWorkView.component";
+import {ScheduleWorkBartender} from "./components/user/basicBartenderView/scheduleWork/scheduleWorkView.component";
 
 
 
@@ -93,7 +95,9 @@ firebase.initializeApp(firebaseConfig);
     AddOrderView,
     PrepareFood,
     PrepareDrink,
-    EditOrderView
+    EditOrderView,
+    ScheduleWorkCook,
+    ScheduleWorkBartender
   ],
   imports: [
     BrowserModule,
@@ -112,7 +116,9 @@ firebase.initializeApp(firebaseConfig);
       {path: 'waiter/schedule_table', component: ScheduleTableView},
       {path: 'waiter/add_order', component: AddOrderView},
       {path: 'cook/orders', component: PrepareFood},
+      {path: 'cook/work', component: ScheduleWorkCook},
       {path: 'bartender/orders', component: PrepareDrink},
+      {path: 'bartender/work', component: ScheduleWorkBartender},
       {path: 'cook/account', canActivate: [EmployeeFirstLoginGuard], component: BasicCookView},
       {path: 'bartender/account', canActivate: [EmployeeFirstLoginGuard], component: BasicBartenderView},
       {path: 'change/password', component: EmployeeChangePassword},
