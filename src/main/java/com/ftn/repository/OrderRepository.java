@@ -18,6 +18,8 @@ public interface OrderRepository extends JpaRepository<Order,Integer> {
     @Query("SELECT o FROM Order o")
     Set<Order> getOrders();
 
+    Order findById(int id);
+
     @Modifying
     @Transactional
     @Query("Update Order o SET o.ready=true WHERE o.id=:id")
