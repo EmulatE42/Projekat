@@ -211,7 +211,7 @@ export class ReserveRestComponent implements OnInit {
     var danasnji = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
     this.uneti = this.napraviDatum(uneo);
     this.danasnji = this.napraviDatum(danasnji);
-    if ( this.pogresanUnos(this.uneti,this.danasnji))
+    /*if ( this.pogresanUnos(this.uneti,this.danasnji))
     {
       document.getElementById("LOL").innerHTML = "<div class=\"alert alert-danger \">  <p >Los datum</p>  </div>";
       this.dobar = false;
@@ -222,12 +222,20 @@ export class ReserveRestComponent implements OnInit {
       this.promena();
       document.getElementById("LOL").innerHTML ="";
 
-    }
+    }*/
 
+    this.dobar = true;
+    this.promena();
   }
 
   ngOnInit() {
 
+    var date = new Date();
+    var danasnji = date.getFullYear() + '-' + ('0' + (date.getMonth() + 1)).slice(-2) + '-' + ('0' + date.getDate()).slice(-2);
+
+
+    var element = document.getElementById("dat");
+    element.setAttribute("min", danasnji);
 
     var elem2 = <HTMLCanvasElement>document.getElementById('myCanvas2');
     var context2 = elem2.getContext('2d');
