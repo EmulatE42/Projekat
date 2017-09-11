@@ -52,6 +52,7 @@ export class CreateBill implements OnInit{
   elements2: ShopingCartDrinkItem[];
   nazivRestorana: string;
   cena: number = 0;
+  date: string = '';
 
   constructor(private userService: UserService, private orderService: OrderService, private _route: ActivatedRoute, private foodService: FoodService, private drinkService: DrinkService, private router: Router, private componentFactoryResolver: ComponentFactoryResolver, private compiler: Compiler)
   {}
@@ -233,8 +234,10 @@ export class CreateBill implements OnInit{
 
   curretDate(): string
   {
-    var date = (new Date()).toLocaleString();
-    return date.toString();
+    if(this.date == '') {
+      this.date = (new Date()).toLocaleString().toString();
+    }
+    return this.date;
   }
 
   deleteOrder(): void

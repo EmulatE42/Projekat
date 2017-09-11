@@ -86,7 +86,7 @@ export class PrepareDrink implements OnInit{
 
 
 
-        if(time.localeCompare(this.user.startTime) > 0 && time.localeCompare(this.user.endTime) < 0)
+        if(time.localeCompare(this.user.startTime) >= 0 && time.localeCompare(this.user.endTime) <= 0)
         {
           for(var j = 0; j < this.orderDrinks.length; j++)
           {
@@ -148,7 +148,6 @@ export class PrepareDrink implements OnInit{
   ready(id: string): void
   {
     var orderDrink = this.findOrderDrink(<any> id);
-    alert("ID: " + id);
     this.orderService.updateOrderDrinkReady(orderDrink).subscribe(
       order_drink => this.order_drink = order_drink,
       error =>  this.errorMessage = <any>error);

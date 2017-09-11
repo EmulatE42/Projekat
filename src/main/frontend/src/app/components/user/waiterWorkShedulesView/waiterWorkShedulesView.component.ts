@@ -41,6 +41,7 @@ export class MyComponent implements OnInit{
       defaultDate: '2017-05-03',
       events: [
 
+
       ]
     };
 
