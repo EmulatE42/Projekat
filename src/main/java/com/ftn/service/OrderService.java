@@ -18,5 +18,6 @@ public interface OrderService {
     void updateOrderAccept(int id);
     Integer getMaxId();
     Order dajIdJBt(Integer id);
+    void delete(int id);
 
 }

@@ -53,6 +53,7 @@ import {EditOrderView} from "./components/user/basicWaiterView/editOrder/editOrd
 import {StarRatingModule} from "angular-star-rating";
 import {ScheduleWorkCook} from "./components/user/basicCookView/scheduleWork/scheduleWorkView.component";
 import {ScheduleWorkBartender} from "./components/user/basicBartenderView/scheduleWork/scheduleWorkView.component";
+import {CreateBill} from "./components/user/basicWaiterView/createBill/createBill.component";
 
 
 
@@ -97,7 +98,8 @@ firebase.initializeApp(firebaseConfig);
     PrepareDrink,
     EditOrderView,
     ScheduleWorkCook,
-    ScheduleWorkBartender
+    ScheduleWorkBartender,
+    CreateBill
   ],
   imports: [
     BrowserModule,
@@ -130,7 +132,8 @@ firebase.initializeApp(firebaseConfig);
       {path: 'waiter/edit_order/:id', component: EditOrderView},
       {path: 'waiter/add_order', component: AddOrderView},
       {path: 'guest/receivedInvites', component: ReceivedInvitesComponent},
-      {path: 'guest/receivedInvites/addSomeFoodandDrinks', component: AddSomethingComponent}
+      {path: 'guest/receivedInvites/addSomeFoodandDrinks', component: AddSomethingComponent},
+      {path: 'waiter/create_bill/:id', component: CreateBill},
 
 
     ]),

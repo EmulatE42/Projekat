@@ -61,7 +61,7 @@ export class ScheduleWorkBartender implements OnInit{
 
     var startTime = this.newUser.startTime + ":00";
     var endTime = this.newUser.endTime + ":00";
-    
+
 
     this.events.push({id:0,title:"Work",start:startTime, end:endTime, day:1});
 

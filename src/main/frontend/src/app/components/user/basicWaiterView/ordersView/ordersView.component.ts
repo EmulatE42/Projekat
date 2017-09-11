@@ -39,6 +39,10 @@ export class OrdersWaiterView implements OnInit{
 
   //neki komentar
   ngOnInit(): void {
+
+    this.selectedFoods = new Array<Food>();
+    this.selectedDrinks = new Array<Drink>();
+
     this.orderService.getFoods().subscribe(
         foods => this.foods = foods,
         error =>  this.errorMessage = <any>error);
@@ -52,8 +56,6 @@ export class OrdersWaiterView implements OnInit{
       error =>  this.errorMessage = <any>error,
       () => this.init1());
 
-    this.selectedFoods = new Array<Food>();
-    this.selectedDrinks = new Array<Drink>();
     this.redBroj = 0;
   }
 

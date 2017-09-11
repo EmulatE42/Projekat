@@ -264,3 +264,15 @@ export class OrderDrink
               public order: Order,
               public ready: boolean) {}
 }
+
+export class ShopingCartFoodItem
+{
+  constructor(public  food: Food,
+              public size: number) {}
+}
+
+export class ShopingCartDrinkItem
+{
+  constructor(public  drink: Drink,
+              public size: number) {}
+}

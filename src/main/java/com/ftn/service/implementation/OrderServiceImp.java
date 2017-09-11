@@ -45,6 +45,11 @@ public class OrderServiceImp implements OrderService {
     }
 
     @Override
+    public void delete(int id) {
+        this.orderRepository.delete(id);
+    }
+
+    @Override
     public Set<Food> getFoods() {
         Set<Food> foods = new HashSet<>();
         Food f1 = new Food("Karadjordjeva snicla", "jako dobra stvar", 1500);

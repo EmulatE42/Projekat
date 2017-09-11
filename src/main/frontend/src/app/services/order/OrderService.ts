@@ -162,6 +162,20 @@ export class OrderService
       .catch(this.handleError);
   }
 
+  deleteOrder(order: Order): Observable<Order>{
+
+    var newOrder = {id: order.id};
+    var params = JSON.stringify(newOrder);
+
+
+    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers: headers });
+
+    return this.http.put('http://localhost:8090/delete_order',params, options).map(this.extractOrder)
+      .do(data => console.log(JSON.stringify(data)))
+      .catch(this.handleError);
+  }
+
   updateOrderFoodAccept(order_food: OrderFood): Observable<OrderFood>{
 
     var newOrderFood = {order_food_id: order_food.order_food_id, order: order_food.order, food: order_food.food };

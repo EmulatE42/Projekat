@@ -1,0 +1,31 @@
+<br> <br> <br>
+<div class="row">
+  <div class="col-sm-4"></div>
+  <div class="col-sm-4">
+    <h2 align="center"> {{ nazivRestorana }}</h2>
+    <p>================================================================</p>
+    <div class="row" *ngFor="let element of elements">
+      <div class="col-sm-6">
+        <h4> {{element.food.name}}  x {{element.size}}</h4>
+      </div>
+      <div class="col-sm-6">
+        <h4 align="right"> {{element.food.price * element.size}},00 </h4>
+      </div>
+    </div>
+
+    <div class="row" *ngFor="let element of elements2">
+      <div class="col-sm-6">
+        <h4> {{element.drink.name}}  x {{element.size}}</h4>
+      </div>
+      <div class="col-sm-6">
+        <h4 align="right"> {{element.drink.price * element.size}},00 </h4>
+      </div>
+    </div>
+    <p>================================================================</p>
+    <h4> Za uplatu: {{cena}},00</h4>
+    <h4> Konobar: {{waiter.first_name}} {{ waiter.last_name}}</h4>
+    <h4> Datum: {{ curretDate() }}</h4>
+    <button class="btn-block btn-primary" (click) = "deleteOrder()"> Zavrsi porudzbinu </button>
+  </div>
+  <div class="col-sm-4"></div>
+</div>

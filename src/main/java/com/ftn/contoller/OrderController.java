@@ -113,4 +113,12 @@ public class OrderController {
         return new ResponseEntity(i != null ? i :  null , HttpStatus.OK);
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "/delete_order",  method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Order> deleteOrder(@RequestBody Order order) {
+
+        this.orderService.delete(order.getId());
+        return new ResponseEntity("{}", HttpStatus.OK);
+    }
+
 }

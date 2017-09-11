@@ -40,13 +40,7 @@ export class MyComponent implements OnInit{
       columnFormat: 'dddd',
       defaultDate: '2017-05-03',
       events: [
-        {
-          id: 999,
-          title: 'Work',
-          day: 1,
-          start: '08:00:00',
-          end: '18:00:00'
-        }
+
       ]
     };
 
